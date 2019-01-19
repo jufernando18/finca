@@ -2,13 +2,19 @@
 //Verificamos si se está usando GET o  POST para la comunicacion de la informacion
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 //Obtener los valores de las variables
-    $id = $_GET['id'];
-    $nombre = $_GET['nombre'];//en Bundle se debia usar una llave que era nombre(creo)
-    $vistas = $_GET['vistas'];
-    $descargas = $_GET['descargas'];
+    $nombre = $_GET['nombre'];
+    $cantidad = $_GET['cantidad'];//en Bundle se debia usar una llave que era nombre(creo)
+    $unidad = $_GET['unidad'];
+    $valor = $_GET['valor'];
+    $fecha = $_GET['fecha'];
+    $tipo = $_GET['tipo'];
 
     //Crear una sentensia SQL
-    $sql = "INSERT INTO books (id, nombre, vistas, descargas ) VALUES ('$id','$nombre','$vistas','$descargas')";//Como el id es incremental, se pone ese NULL
+    $sql = "INSERT INTO tabla2019ingresos (nombre, cantidad, unidad, valor, fecha ) VALUES ('$nombre','$cantidad','$unidad','$valor','$fecha')";//Como el id es incremental, se pone ese NULL
+    if ($tipo == 'gasto') {
+        $sql = "INSERT INTO tabla2019gastos (nombre, cantidad, unidad, valor, fecha ) VALUES ('$nombre','$cantidad','$unidad','$valor','$fecha')";//Como el id es incremental, se pone ese NULL
+    }
+    
 
     //Importamos la conexion
     require_once('db_connect.php');
@@ -16,13 +22,14 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     //Ejecutamos el query
     $resultado_enviar=array();
     if(mysqli_query($con, $sql)){
-        $resultado_enviar['id']=$id;
-        $resultado_enviar['nombre']=substr($nombre,1,-1);
-        $resultado_enviar['vistas']=substr($vistas,1,-1);
-        $resultado_enviar['descargas']=substr($descargas,1,-1);
+        /*$resultado_enviar['nombre']=$nombre
+        $resultado_enviar['cantidad']=$cantidad;
+        $resultado_enviar['unidad']=$unidad;
+        $resultado_enviar['valor']=$valor;
+        $resultado_enviar['fecha']=$fecha;*/
 
     } else {
-        $resultado_enviar['error']='No se pudo agregar el libro';
+        $resultado_enviar['error']='No se pudo hacer el registro';
     }
         
     header('Content-type: application/json; charset=utf-8');
