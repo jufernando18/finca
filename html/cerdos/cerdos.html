@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--<script src="https://unpkg.com/vue"></script>-->
+		<title>Finca</title>
+	</head>
+	<body>
+		<h1>Finca de Jhon Fernando</h1>
+		<h3>Cerdos</h3>
+		 <nav>
+			<a href="../../">Principal</a>
+			<a href="../../html/cafe/cafe.html">Café</a> |
+			<a href="../../html/ganado/ganado.html">Ganado</a> |
+			<a href="../../html/cerdos/cerdos.html">Cerdos</a> |
+			<a href="../../html/revuelto/revuelto.html">Revuelto</a>
+			<a href="../../html/otros/otros.html">Otros</a>
+		</nav> 
+		<p>
+			Ingresos: <br>
+			<input type="text" value="" id="ingresoProducto_nombre" placeholder="nombre">
+			<input type="text" value="" id="ingresoProducto_cantidad" placeholder="cantidad">
+			<input type="text" value="" id="ingresoProducto_unidad" placeholder="unidad">
+			<input type="text" value="" id="ingresoProducto_valor" placeholder="valor">
+			<input type="date" id ="datePicker_ingreso" name="fecha">
+			<input type="button" value="agregar ingreso" id="ingresarIngreso">			
+		</p>
+		<p>
+			Gasto: <br>
+			<input type="text" value="" id="gastoProducto_nombre" placeholder="nombre">
+			<input type="text" value="" id="gastoProducto_cantidad" placeholder="cantidad">
+			<input type="text" value="" id="gastoProducto_unidad" placeholder="unidad">
+			<input type="text" value="" id="gastoProducto_valor" placeholder="valor">
+			<input type="date" id ="datePicker_gasto" name="fecha">
+			<input type="button" value="agregar gasto" id="ingresarGasto">	
+		</p>		
+		<script type="text/javascript">
+			document.getElementById('datePicker_ingreso').valueAsDate = new Date();
+			document.getElementById('datePicker_gasto').valueAsDate = new Date();
+		</script>
+	</body>
+</html>
