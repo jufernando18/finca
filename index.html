@@ -22,25 +22,28 @@
 		  <a href="html/cafe/cafe.html">Café</a> |
 		  <a href="html/ganado/ganado.html">Ganado</a> |
 		  <a href="html/cerdos/cerdos.html">Cerdos</a> |
-		  <a href="html/revuelto/revuelto.html">Revuelto</a>
+		  <a href="html/revuelto/revuelto.html">Revuelto</a>|
 		  <a href="html/otros/otros.html">Otros</a>
 		</nav> 
-		<input type="button" value="buscar" onclick="buscar('Agenda/buscar.php')">
+		<!--<input type="button" value="buscar" onclick="buscar('Agenda/buscar.php','')">-->
 		<div id="resultadosBusqueda_ingresos">
 			<h3>Ingresos</h3>
 			<table style="width: 100%">
-				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th></tr>
-				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td></tr>
+				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
+				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>
 		<div id="resultadosBusqueda_gastos" style="margin-top: 1em">
 			<h3>Gastos</h3>
 			<table style="width: 100%">
-				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th></tr>
-				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td></tr>
+				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
+				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>		
 		<script type="text/javascript">
+			window.onload = function(){
+				buscar('Agenda/buscar.php','');
+			}			
 			document.getElementById('datePicker_ingreso').valueAsDate = new Date();
 			document.getElementById('datePicker_gasto').valueAsDate = new Date();
 			function ingresar(DataBase,tipo){
@@ -57,9 +60,10 @@
 			        dataType: "json"
 			    });				
 			}
-			function buscar(DataBase){
+			function buscar(DataBase, busqueda){
 			    $.ajax({
-			        data: {"tipo" : 'ingresos'},
+			        data: {"dinero" : 'ingresos',
+			    			"busqueda" : busqueda},
 			        type:'get',
 			        url:DataBase,
 			        dataType: "json",
@@ -73,7 +77,8 @@
 			        }
 			    });
 			    $.ajax({
-			        data: {"tipo" : 'gastos'},
+			        data: {"dinero" : 'gastos',
+			    			"busqueda" : busqueda},
 			        type:'get',
 			        url:DataBase,
 			        dataType: "json",

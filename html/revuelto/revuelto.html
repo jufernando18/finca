@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<script src="js/jquery-3.3.1.min.js"></script>
-		<script src="js/vue-2.5.22.js"></script>
+		<script src="../../js/jquery-3.3.1.min.js"></script>
+		<script src="../../js/vue-2.5.22.js"></script>
 		<style type="text/css">
 			tr{
 				text-align: justify;
@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<h1>Finca de Jhon Fernando</h1>
-		<h3>Principal</h3>
+		<h3>Revuelto</h3>
 		 <nav>
 			<a href="../../">Principal</a>
 			<a href="../../html/cafe/cafe.html">Café</a> |
@@ -32,7 +32,7 @@
 			<input type="text" value="" class="ingreso" id="ingresoProducto_unidad" placeholder="unidad">
 			<input type="text" value="" class="ingreso" id="ingresoProducto_valor" placeholder="valor">
 			<input type="date" class="ingreso" id ="datePicker_ingreso" name="fecha">
-			<input type="button" value="agregar ingreso" id="ingresarIngreso" onclick="ingresar('Agenda/crear.php','ingreso')">			
+			<input type="button" value="agregar ingreso" id="ingresarIngreso" onclick="ingresar('../../Agenda/crear.php','ingreso')">			
 		</p>
 		<p>
 			Gasto: <br>
@@ -41,33 +41,36 @@
 			<input type="text" value="" class="gasto" id="gastoProducto_unidad" placeholder="unidad">
 			<input type="text" value="" class="gasto" id="gastoProducto_valor" placeholder="valor">
 			<input type="date" class="gasto" id ="datePicker_gasto" name="fecha">
-			<input type="button" value="agregar gasto" id="ingresarGasto" onclick="ingresar('Agenda/crear.php','gasto')">	
+			<input type="button" value="agregar gasto" id="ingresarGasto" onclick="ingresar('../../Agenda/crear.php','gasto')">	
 		</p>	
-		<input type="button" value="buscar" onclick="buscar('Agenda/buscar.php')">
+		<!--<input type="button" value="buscar" onclick="buscar('../../Agenda/buscar.php','revuelto')">-->
 		<div id="resultadosBusqueda_ingresos">
 			<h3>Ingresos</h3>
 			<table style="width: 100%">
-				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th></tr>
-				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td></tr>
+				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
+				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>
 		<div id="resultadosBusqueda_gastos" style="margin-top: 1em">
 			<h3>Gastos</h3>
 			<table style="width: 100%">
-				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th></tr>
-				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td></tr>
+				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
+				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>		
 		<script type="text/javascript">
+			window.onload = function(){
+				buscar('../../Agenda/buscar.php','revuelto');
+			}
 			document.getElementById('datePicker_ingreso').valueAsDate = new Date();
 			document.getElementById('datePicker_gasto').valueAsDate = new Date();
-			function ingresar(DataBase,tipo){
+			function ingresar(DataBase,dinero){
 				var datos;
 				var ingresos = document.getElementsByClassName("ingreso");
-				if (tipo == 'gasto') {
+				if (dinero == 'gasto') {
 					ingresos = document.getElementsByClassName("gasto");
 				}
-				datos = {"nombre" : ingresos[0].value,"cantidad" : ingresos[1].value,"unidad" : ingresos[2].value,"valor" : ingresos[3].value,"fecha" : ingresos[4].value,"tipo" : tipo};
+				datos = {"nombre" : ingresos[0].value,"cantidad" : ingresos[1].value,"unidad" : ingresos[2].value,"valor" : ingresos[3].value,"fecha" : ingresos[4].value,"tipo" : 'otros', "dinero" : dinero};
 			    $.ajax({
 			        data: datos,
 			        type:'get',
@@ -75,9 +78,10 @@
 			        dataType: "json"
 			    });				
 			}
-			function buscar(DataBase){
+			function buscar(DataBase, busqueda){
 			    $.ajax({
-			        data: {"tipo" : 'ingresos'},
+			        data: {"dinero" : 'ingresos',
+			    			"busqueda" : busqueda},
 			        type:'get',
 			        url:DataBase,
 			        dataType: "json",
@@ -91,7 +95,8 @@
 			        }
 			    });
 			    $.ajax({
-			        data: {"tipo" : 'gastos'},
+			        data: {"dinero" : 'gastos',
+			    			"busqueda" : busqueda},			        
 			        type:'get',
 			        url:DataBase,
 			        dataType: "json",

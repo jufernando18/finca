@@ -8,11 +8,12 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $valor = $_GET['valor'];
     $fecha = $_GET['fecha'];
     $tipo = $_GET['tipo'];
+    $dinero = $_GET['dinero'];
 
     //Crear una sentensia SQL
-    $sql = "INSERT INTO tabla2019ingresos (nombre, cantidad, unidad, valor, fecha ) VALUES ('$nombre','$cantidad','$unidad','$valor','$fecha')";//Como el id es incremental, se pone ese NULL
-    if ($tipo == 'gasto') {
-        $sql = "INSERT INTO tabla2019gastos (nombre, cantidad, unidad, valor, fecha ) VALUES ('$nombre','$cantidad','$unidad','$valor','$fecha')";//Como el id es incremental, se pone ese NULL
+    $sql = "INSERT INTO tabla2019ingresosT (nombre, cantidad, unidad, valor, fecha, tipo) VALUES ('$nombre','$cantidad','$unidad','$valor','$fecha','$tipo')";//Como el id es incremental, se pone ese NULL
+    if ($dinero == 'gasto') {
+        $sql = "INSERT INTO tabla2019gastosT (nombre, cantidad, unidad, valor, fecha, tipo) VALUES ('$nombre','$cantidad','$unidad','$valor','$fecha','$tipo')";//Como el id es incremental, se pone ese NULL
     }
     
 
