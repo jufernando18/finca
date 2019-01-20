@@ -14,6 +14,12 @@
 			div{
 				border: solid 1px;
 			}
+			.em6{
+				width: 6em!important;
+			}
+			.em8{
+				width: 9em!important;
+			}			
 		</style>
 		<title>Finca</title>
 	</head>
@@ -31,21 +37,32 @@
 		<p>
 			Ingresos: <br>
 			<input type="text" value="" class="ingreso" id="ingresoProducto_nombre" placeholder="nombre">
-			<input type="text" value="" class="ingreso" id="ingresoProducto_cantidad" placeholder="cantidad">
+			<input type="text" value="" class="ingreso em6" id="ingresoProducto_cantidad" placeholder="cantidad">
 			<input type="text" value="" class="ingreso" id="ingresoProducto_unidad" placeholder="unidad">
 			<input type="text" value="" class="ingreso" id="ingresoProducto_valor" placeholder="valor">
-			<input type="date" class="ingreso" id ="datePicker_ingreso" name="fecha">
+			<input type="date" class="ingreso em8" id ="datePicker_ingreso" name="fecha">
 			<input type="button" value="agregar ingreso" id="ingresarIngreso" onclick="ingresar('../../Agenda/crear.php','ingreso')">			
 		</p>
 		<p>
 			Gasto: <br>
 			<input type="text" value="" class="gasto" id="gastoProducto_nombre" placeholder="nombre">
-			<input type="text" value="" class="gasto" id="gastoProducto_cantidad" placeholder="cantidad">
+			<input type="text" value="" class="gasto em6" id="gastoProducto_cantidad" placeholder="cantidad">
 			<input type="text" value="" class="gasto" id="gastoProducto_unidad" placeholder="unidad">
 			<input type="text" value="" class="gasto" id="gastoProducto_valor" placeholder="valor">
-			<input type="date" class="gasto" id ="datePicker_gasto" name="fecha">
+			<input type="date" class="gasto em8" id ="datePicker_gasto" name="fecha">
 			<input type="button" value="agregar gasto" id="ingresarGasto" onclick="ingresar('../../Agenda/crear.php','gasto')">	
 		</p>	
+		<p>		
+			Busqueda: <br>
+			<input type="text" value="" class="busqueda" placeholder="nombre">
+			<input type="text" value="" class="busqueda em6" placeholder="cantidad">
+			<input type="text" value="" class="busqueda" placeholder="unidad">
+			<input type="text" value="" class="busqueda" placeholder="valor">
+			<input type="text" value="" class="busqueda" placeholder="AAAA" style="width: 4em">
+			<input type="text" value="" class="busqueda" placeholder="MM" style="width: 2em">
+			<input type="text" value="" class="busqueda" placeholder="DD" style="width: 2em">
+			<input type="button" value="Buscar" id="realizarBusqueda" onclick="buscar('../../Agenda/buscar.php','otros')">	
+		</p>		
 		<!--<input type="button" value="buscar" onclick="buscar('../../Agenda/buscar.php','otros')">-->
 		<div id="resultadosBusqueda_ingresos">
 			<h3>Ingresos: <strong id="ingreso"></strong></h3>
@@ -62,6 +79,18 @@
 			</table>			
 		</div>		
 		<script type="text/javascript">
+	        var v_ingreso = new Vue ({
+	            el : "#resultadosBusqueda_ingresos",
+	            data : {
+	                datos: ""
+	            }
+	        });	
+	        var v_gasto = new Vue ({
+	            el : "#resultadosBusqueda_gastos",
+	            data : {
+	                datos: ""
+	            }
+	        });						
 			window.onload = function(){
 				buscar('../../Agenda/buscar.php','otros');
 			}			
@@ -85,19 +114,22 @@
 			    });				
 			}
 			function buscar(DataBase, busqueda){
+				var datosBusqueda = document.getElementsByClassName("busqueda");
 			    $.ajax({
 			        data: {"dinero" : 'ingresos',
-			    			"busqueda" : busqueda},
+			    			"busqueda" : busqueda,
+			    			"nombre" : datosBusqueda[0].value,
+			    			"cantidad" : datosBusqueda[1].value,
+			    			"unidad" : datosBusqueda[2].value,
+			    			"valor" : datosBusqueda[3].value,
+			    			"ano" : datosBusqueda[4].value,
+			    			"mes" : datosBusqueda[5].value,
+			    			"dia" : datosBusqueda[6].value},
 			        type:'get',
 			        url:DataBase,
 			        dataType: "json",
 			        success: function (resultado){
-			            var v_ingreso = new Vue ({
-			                el : "#resultadosBusqueda_ingresos",
-			                data : {
-			                    datos: resultado
-			                }
-			            });
+			        	v_ingreso.datos = resultado;
 			            var total=0;
 			            for (var i = 0; i < resultado.length; i++) {
 			            	total+=parseInt(resultado[i].valor);
@@ -107,17 +139,19 @@
 			    });
 			    $.ajax({
 			        data: {"dinero" : 'gastos',
-			    			"busqueda" : busqueda},
+			    			"busqueda" : busqueda,
+			    			"nombre" : datosBusqueda[0].value,
+			    			"cantidad" : datosBusqueda[1].value,
+			    			"unidad" : datosBusqueda[2].value,
+			    			"valor" : datosBusqueda[3].value,
+			    			"ano" : datosBusqueda[4].value,
+			    			"mes" : datosBusqueda[5].value,
+			    			"dia" : datosBusqueda[6].value},
 			        type:'get',
 			        url:DataBase,
 			        dataType: "json",
 			        success: function (resultado){
-			            var v_gasto = new Vue ({
-			                el : "#resultadosBusqueda_gastos",
-			                data : {
-			                    datos: resultado
-			                }
-			            });
+			        	v_gasto.datos = resultado;
 			            var total=0;
 			            for (var i = 0; i < resultado.length; i++) {
 			            	total+=parseInt(resultado[i].valor);

@@ -14,6 +14,12 @@
 			div{
 				border: solid 1px;
 			}
+			.em6{
+				width: 6em!important;
+			}
+			.em8{
+				width: 9em!important;
+			}			
 		</style>
 		<title>Finca</title>
 	</head>
@@ -28,6 +34,18 @@
 		  <a href="html/revuelto/revuelto.html">Revuelto</a> |
 		  <a href="html/otros/otros.html">Otros</a>
 		</nav> 
+		<p>		
+			Busqueda: <br>
+			<input type="text" value="" class="busqueda" placeholder="nombre">
+			<input type="text" value="" class="busqueda em6" placeholder="cantidad">
+			<input type="text" value="" class="busqueda" placeholder="unidad">
+			<input type="text" value="" class="busqueda" placeholder="valor">
+			<input type="text" value="" class="busqueda" placeholder="AAAA" style="width: 4em">
+			<input type="text" value="" class="busqueda" placeholder="MM" style="width: 2em">
+			<input type="text" value="" class="busqueda" placeholder="DD" style="width: 2em">
+			<input type="text" value="" class="busqueda" placeholder="tipo" style="width: 6em;">
+			<input type="button" value="Buscar" id="realizarBusqueda" onclick="buscar('Agenda/buscar.php','')">	
+		</p>		
 		<!--<input type="button" value="buscar" onclick="buscar('Agenda/buscar.php','')">-->
 		<div id="resultadosBusqueda_ingresos">
 			<h3>Ingresos: <strong id="ingreso"></strong></h3>
@@ -44,11 +62,21 @@
 			</table>			
 		</div>		
 		<script type="text/javascript">
+	        var v_ingreso = new Vue ({
+	            el : "#resultadosBusqueda_ingresos",
+	            data : {
+	                datos: ""
+	            }
+	        });	
+	        var v_gasto = new Vue ({
+	            el : "#resultadosBusqueda_gastos",
+	            data : {
+	                datos: ""
+	            }
+	        });						
 			window.onload = function(){
 				buscar('Agenda/buscar.php','');
 			}			
-			document.getElementById('datePicker_ingreso').valueAsDate = new Date();
-			document.getElementById('datePicker_gasto').valueAsDate = new Date();
 			function ingresar(DataBase,tipo){
 				var datos;
 				var ingresos = document.getElementsByClassName("ingreso");
@@ -67,19 +95,22 @@
 			    });				
 			}
 			function buscar(DataBase, busqueda){
+				var datosBusqueda = document.getElementsByClassName("busqueda");
 			    $.ajax({
 			        data: {"dinero" : 'ingresos',
-			    			"busqueda" : busqueda},
+			    			"busqueda" : datosBusqueda[7].value,
+			    			"nombre" : datosBusqueda[0].value,
+			    			"cantidad" : datosBusqueda[1].value,
+			    			"unidad" : datosBusqueda[2].value,
+			    			"valor" : datosBusqueda[3].value,
+			    			"ano" : datosBusqueda[4].value,
+			    			"mes" : datosBusqueda[5].value,
+			    			"dia" : datosBusqueda[6].value},
 			        type:'get',
 			        url:DataBase,
 			        dataType: "json",
 			        success: function (resultado){
-			            var v_ingreso = new Vue ({
-			                el : "#resultadosBusqueda_ingresos",
-			                data : {
-			                    datos: resultado
-			                }
-			            });
+			        	v_ingreso.datos = resultado;
 			            var total=0;
 			            for (var i = 0; i < resultado.length; i++) {
 			            	total+=parseInt(resultado[i].valor);
@@ -89,17 +120,19 @@
 			    });
 			    $.ajax({
 			        data: {"dinero" : 'gastos',
-			    			"busqueda" : busqueda},
+			    			"busqueda" : datosBusqueda[7].value,
+			    			"nombre" : datosBusqueda[0].value,
+			    			"cantidad" : datosBusqueda[1].value,
+			    			"unidad" : datosBusqueda[2].value,
+			    			"valor" : datosBusqueda[3].value,
+			    			"ano" : datosBusqueda[4].value,
+			    			"mes" : datosBusqueda[5].value,
+			    			"dia" : datosBusqueda[6].value},
 			        type:'get',
 			        url:DataBase,
 			        dataType: "json",
 			        success: function (resultado){
-			            var v_gasto = new Vue ({
-			                el : "#resultadosBusqueda_gastos",
-			                data : {
-			                    datos: resultado
-			                }
-			            });
+			        	v_gasto.datos = resultado;
 			            var total=0;
 			            for (var i = 0; i < resultado.length; i++) {
 			            	total+=parseInt(resultado[i].valor);
