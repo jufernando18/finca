@@ -48,14 +48,14 @@
 		</p>	
 		<!--<input type="button" value="buscar" onclick="buscar('../../Agenda/buscar.php','ganado')">-->
 		<div id="resultadosBusqueda_ingresos">
-			<h3>Ingresos</h3>
+			<h3>Ingresos: <strong id="ingreso"></strong></h3>
 			<table style="width: 100%">
 				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
 				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>
 		<div id="resultadosBusqueda_gastos" style="margin-top: 1em">
-			<h3>Gastos</h3>
+			<h3>Gastos: <strong id="gasto"></strong></h3>
 			<table style="width: 100%">
 				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
 				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
@@ -98,6 +98,11 @@
 			                    datos: resultado
 			                }
 			            });
+			            var total=0;
+			            for (var i = 0; i < resultado.length; i++) {
+			            	total+=parseInt(resultado[i].valor);
+			            }
+			            document.getElementById("ingreso").innerHTML=total;			            
 			        }
 			    });
 			    $.ajax({
@@ -113,6 +118,11 @@
 			                    datos: resultado
 			                }
 			            });
+			            var total=0;
+			            for (var i = 0; i < resultado.length; i++) {
+			            	total+=parseInt(resultado[i].valor);
+			            }
+			            document.getElementById("gasto").innerHTML=total;			            
 			        }
 			    });			    
 			}		
