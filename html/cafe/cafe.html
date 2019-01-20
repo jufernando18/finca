@@ -75,7 +75,10 @@
 			        data: datos,
 			        type:'get',
 			        url:DataBase,
-			        dataType: "json"
+			        dataType: "json",
+			        success: function (resultado){
+			        	window.location.href = '';
+			        }			        
 			    });				
 			}
 			function buscar(DataBase,busqueda){
