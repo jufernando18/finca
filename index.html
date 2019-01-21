@@ -10,12 +10,12 @@
 	<body>
 		<h1>Finca de Jhon Fernando</h1>
 		 <nav>
-			<a onclick="seleccionTipo('Principal');buscar('Agenda/buscar.php','');">Principal</a> |
-			<a onclick="seleccionTipo('Café');buscar('Agenda/buscar.php','cafe');">Café</a> |
-			<a onclick="seleccionTipo('Ganado');buscar('Agenda/buscar.php','ganado');">Ganado</a> |
-			<a onclick="seleccionTipo('Cerdos');buscar('Agenda/buscar.php','cerdos');">Cerdos</a> |
-			<a onclick="seleccionTipo('Revuelto');buscar('Agenda/buscar.php','revuelto');">Revuelto</a> |
-			<a onclick="seleccionTipo('Otros');buscar('Agenda/buscar.php','otros');">Otros</a>
+			<a onclick="seleccionTipo('Principal');//buscar('Agenda/buscar.php','');">Principal</a> |
+			<a onclick="seleccionTipo('Café');//buscar('Agenda/buscar.php','cafe');">Café</a> |
+			<a onclick="seleccionTipo('Ganado');//buscar('Agenda/buscar.php','ganado');">Ganado</a> |
+			<a onclick="seleccionTipo('Cerdos');//buscar('Agenda/buscar.php','cerdos');">Cerdos</a> |
+			<a onclick="seleccionTipo('Revuelto');//buscar('Agenda/buscar.php','revuelto');">Revuelto</a> |
+			<a onclick="seleccionTipo('Otros');//buscar('Agenda/buscar.php','otros');">Otros</a>
 			<h3 id="estado">Principal</h3>					  
 		</nav> 
 		<p id="ingresos">
@@ -47,14 +47,14 @@
 		<p>		
 			Busqueda: <br>
 			<input type="text" value="" class="busqueda" placeholder="nombre">
-			<input type="text" value="" class="Busqueda" placeholder="cantidad" style="width: 6em!important;">
+			<input type="text" value="" class="busqueda" placeholder="cantidad" style="width: 6em;">
 			<input type="text" value="" class="busqueda" placeholder="unidad">
 			<input type="text" value="" class="busqueda" placeholder="valor">
 			<input type="text" value="" class="busqueda" id="ano" placeholder="AAAA" style="width: 4em">
 			<input type="text" value="" class="busqueda" id="mes" placeholder="MM" style="width: 2em">
 			<input type="text" value="" class="busqueda" placeholder="DD" style="width: 2em">
-			<input type="text" value="" class="busqueda" placeholder="tipo" style="width: 6em;">
-			<input type="button" value="Buscar" id="realizarBusqueda" onclick="buscar('Agenda/buscar.php','')">	
+			<input type="text" value="" class="busqueda" id="tipo" placeholder="tipo" style="width: 6em;">
+			<input type="button" value="Buscar" id="realizarBusqueda" onclick="buscar('Agenda/buscar.php')">	
 		</p>		
 		<div id="resultadosBusqueda_ingresos">
 			<h3>Ingresos: <strong id="ingreso"></strong></h3>
