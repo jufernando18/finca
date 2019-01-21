@@ -4,40 +4,50 @@
 		<meta charset="UTF-8">
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/vue-2.5.22.js"></script>
-		<style type="text/css">
-			tr{
-				text-align: justify;
-			}
-			th {
-			    width: 18%;
-			}			
-			div{
-				border: solid 1px;
-			}
-			.em6{
-				width: 6em!important;
-			}
-			.em8{
-				width: 9em!important;
-			}			
-		</style>
+		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 		<title>Finca</title>
 	</head>
 	<body>
 		<h1>Finca de Jhon Fernando</h1>
-		<h3>Principal</h3>
 		 <nav>
-		  <a href="">Principal</a> |
-		  <a href="html/cafe/cafe.html">Café</a> |
-		  <a href="html/ganado/ganado.html">Ganado</a> |
-		  <a href="html/cerdos/cerdos.html">Cerdos</a> |
-		  <a href="html/revuelto/revuelto.html">Revuelto</a> |
-		  <a href="html/otros/otros.html">Otros</a>
+			<a onclick="seleccionTipo('Principal');buscar('Agenda/buscar.php','');">Principal</a> |
+			<a onclick="seleccionTipo('Café');buscar('Agenda/buscar.php','cafe');">Café</a> |
+			<a onclick="seleccionTipo('Ganado');buscar('Agenda/buscar.php','ganado');">Ganado</a> |
+			<a onclick="seleccionTipo('Cerdos');buscar('Agenda/buscar.php','cerdos');">Cerdos</a> |
+			<a onclick="seleccionTipo('Revuelto');buscar('Agenda/buscar.php','revuelto');">Revuelto</a> |
+			<a onclick="seleccionTipo('Otros');buscar('Agenda/buscar.php','otros');">Otros</a>
+			<h3 id="estado">Principal</h3>					  
 		</nav> 
+		<p id="ingresos">
+			Ingresos: <br>
+			<input type="text" value="" class="ingreso ni" placeholder="nombre">
+			<input type="text" value="" class="ingreso ni" placeholder="cantidad" style="width: 6em!important;">
+			<input type="text" value="" class="ingreso ni" placeholder="unidad">
+			<input type="text" value="" class="ingreso ni" placeholder="valor">
+			<input type="date" class="ingreso ni" id ="datePicker_ingreso" name="fecha" style="width: 9em!important;">
+			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','cafe')">	
+			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','ganado')">	
+			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','cerdos')">	
+			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','revuelto')">	
+			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','otros')">															
+		</p>
+		<p id="gastos">
+			Gastos: <br>
+			<input type="text" value="" class="gasto ni" placeholder="nombre">
+			<input type="text" value="" class="gasto ni" placeholder="cantidad" style="width: 6em!important;">
+			<input type="text" value="" class="gasto ni" placeholder="unidad">
+			<input type="text" value="" class="gasto ni" placeholder="valor">
+			<input type="date" class="gasto ni" id ="datePicker_gasto" name="fecha" style="width: 9em!important;">	
+			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','cafe')">	
+			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','ganado')">	
+			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','cerdos')">	
+			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','revuelto')">	
+			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','otros')">													
+		</p>		
 		<p>		
 			Busqueda: <br>
 			<input type="text" value="" class="busqueda" placeholder="nombre">
-			<input type="text" value="" class="busqueda em6" placeholder="cantidad">
+			<input type="text" value="" class="Busqueda" placeholder="cantidad" style="width: 6em!important;">
 			<input type="text" value="" class="busqueda" placeholder="unidad">
 			<input type="text" value="" class="busqueda" placeholder="valor">
 			<input type="text" value="" class="busqueda" placeholder="AAAA" style="width: 4em">
@@ -46,7 +56,6 @@
 			<input type="text" value="" class="busqueda" placeholder="tipo" style="width: 6em;">
 			<input type="button" value="Buscar" id="realizarBusqueda" onclick="buscar('Agenda/buscar.php','')">	
 		</p>		
-		<!--<input type="button" value="buscar" onclick="buscar('Agenda/buscar.php','')">-->
 		<div id="resultadosBusqueda_ingresos">
 			<h3>Ingresos: <strong id="ingreso"></strong></h3>
 			<table style="width: 100%">
@@ -61,86 +70,6 @@
 				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>		
-		<script type="text/javascript">
-	        var v_ingreso = new Vue ({
-	            el : "#resultadosBusqueda_ingresos",
-	            data : {
-	                datos: ""
-	            }
-	        });	
-	        var v_gasto = new Vue ({
-	            el : "#resultadosBusqueda_gastos",
-	            data : {
-	                datos: ""
-	            }
-	        });						
-			window.onload = function(){
-				buscar('Agenda/buscar.php','');
-			}			
-			function ingresar(DataBase,tipo){
-				var datos;
-				var ingresos = document.getElementsByClassName("ingreso");
-				if (tipo == 'gasto') {
-					ingresos = document.getElementsByClassName("gasto");
-				}
-				datos = {"nombre" : ingresos[0].value,"cantidad" : ingresos[1].value,"unidad" : ingresos[2].value,"valor" : ingresos[3].value,"fecha" : ingresos[4].value,"tipo" : tipo};
-			    $.ajax({
-			        data: datos,
-			        type:'get',
-			        url:DataBase,
-			        dataType: "json",
-			        success: function (resultado){
-			        	window.location.href = '';
-			        }			        
-			    });				
-			}
-			function buscar(DataBase, busqueda){
-				var datosBusqueda = document.getElementsByClassName("busqueda");
-			    $.ajax({
-			        data: {"dinero" : 'ingresos',
-			    			"busqueda" : datosBusqueda[7].value,
-			    			"nombre" : datosBusqueda[0].value,
-			    			"cantidad" : datosBusqueda[1].value,
-			    			"unidad" : datosBusqueda[2].value,
-			    			"valor" : datosBusqueda[3].value,
-			    			"ano" : datosBusqueda[4].value,
-			    			"mes" : datosBusqueda[5].value,
-			    			"dia" : datosBusqueda[6].value},
-			        type:'get',
-			        url:DataBase,
-			        dataType: "json",
-			        success: function (resultado){
-			        	v_ingreso.datos = resultado;
-			            var total=0;
-			            for (var i = 0; i < resultado.length; i++) {
-			            	total+=parseInt(resultado[i].valor);
-			            }
-			            document.getElementById("ingreso").innerHTML=total;			            
-			        }
-			    });
-			    $.ajax({
-			        data: {"dinero" : 'gastos',
-			    			"busqueda" : datosBusqueda[7].value,
-			    			"nombre" : datosBusqueda[0].value,
-			    			"cantidad" : datosBusqueda[1].value,
-			    			"unidad" : datosBusqueda[2].value,
-			    			"valor" : datosBusqueda[3].value,
-			    			"ano" : datosBusqueda[4].value,
-			    			"mes" : datosBusqueda[5].value,
-			    			"dia" : datosBusqueda[6].value},
-			        type:'get',
-			        url:DataBase,
-			        dataType: "json",
-			        success: function (resultado){
-			        	v_gasto.datos = resultado;
-			            var total=0;
-			            for (var i = 0; i < resultado.length; i++) {
-			            	total+=parseInt(resultado[i].valor);
-			            }
-			            document.getElementById("gasto").innerHTML=total;			            
-			        }
-			    });			    
-			}		
-		</script>		
+		<script type="text/javascript" src="js/procesar.js"></script>
 	</body>
 </html>

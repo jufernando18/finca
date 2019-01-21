@@ -1,0 +1,19 @@
+tr{
+	text-align: justify;
+}
+th {
+    width: 18%;
+}			
+div{
+	border: solid 1px;
+}
+a{
+	color: blue;
+	cursor: pointer;
+}
+#estado{
+	text-align: center;
+}
+.ni{
+	display: none;
+}
