@@ -12,10 +12,12 @@
 	        });						
 			window.onload = function(){
 				seleccionTipo('Principal');
-				buscar('Agenda/buscar.php','');
 			}			
-			document.getElementById('datePicker_ingreso').valueAsDate = new Date();
-			document.getElementById('datePicker_gasto').valueAsDate = new Date();
+			fechaActual = new Date();
+			document.getElementById('datePicker_ingreso').valueAsDate = fechaActual;
+			document.getElementById('datePicker_gasto').valueAsDate = fechaActual;
+			document.getElementById('ano').value = fechaActual.getFullYear();
+			document.getElementById('mes').value = fechaActual.getMonth()+1;
 			function ingresar(DataBase,dinero,tipo){
 				var datos;
 				var ingresos = document.getElementsByClassName("ingreso");
