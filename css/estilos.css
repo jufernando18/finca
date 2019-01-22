@@ -11,6 +11,30 @@ a{
 	color: blue;
 	cursor: pointer;
 }
+span{
+	border-radius: 4px;
+	text-align: center;
+}
+#ingresoRevisar{
+	background-color: red;
+	display: none;
+}
+#ingresoAgregado{
+	background-color: #1ddd00;
+	display: none;
+}
+#gastoRevisar{
+	background-color: red;
+	display: none;
+}
+#gastoAgregado{
+	background-color: #1ddd00;
+	display: none;
+}
+#resultado{
+	background-color: #1ddd00;
+	display: none;
+}
 #estado{
 	text-align: center;
 }

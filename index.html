@@ -8,68 +8,76 @@
 		<title>Finca</title>
 	</head>
 	<body>
-		<h1>Finca de Jhon Fernando</h1>
-		 <nav>
-			<a onclick="seleccionTipo('Principal');//buscar('Agenda/buscar.php','');">Principal</a> |
-			<a onclick="seleccionTipo('Café');//buscar('Agenda/buscar.php','cafe');">Café</a> |
-			<a onclick="seleccionTipo('Ganado');//buscar('Agenda/buscar.php','ganado');">Ganado</a> |
-			<a onclick="seleccionTipo('Cerdos');//buscar('Agenda/buscar.php','cerdos');">Cerdos</a> |
-			<a onclick="seleccionTipo('Revuelto');//buscar('Agenda/buscar.php','revuelto');">Revuelto</a> |
-			<a onclick="seleccionTipo('Otros');//buscar('Agenda/buscar.php','otros');">Otros</a>
-			<h3 id="estado">Principal</h3>					  
-		</nav> 
-		<p id="ingresos">
-			Ingresos: <br>
-			<input type="text" value="" class="ingreso ni" placeholder="nombre">
-			<input type="text" value="" class="ingreso ni" placeholder="cantidad" style="width: 6em!important;">
-			<input type="text" value="" class="ingreso ni" placeholder="unidad">
-			<input type="text" value="" class="ingreso ni" placeholder="valor">
-			<input type="date" class="ingreso ni" id ="datePicker_ingreso" name="fecha" style="width: 9em!important;">
-			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','cafe')">	
-			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','ganado')">	
-			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','cerdos')">	
-			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','revuelto')">	
-			<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','otros')">															
-		</p>
-		<p id="gastos">
-			Gastos: <br>
-			<input type="text" value="" class="gasto ni" placeholder="nombre">
-			<input type="text" value="" class="gasto ni" placeholder="cantidad" style="width: 6em!important;">
-			<input type="text" value="" class="gasto ni" placeholder="unidad">
-			<input type="text" value="" class="gasto ni" placeholder="valor">
-			<input type="date" class="gasto ni" id ="datePicker_gasto" name="fecha" style="width: 9em!important;">	
-			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','cafe')">	
-			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','ganado')">	
-			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','cerdos')">	
-			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','revuelto')">	
-			<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','otros')">													
-		</p>		
-		<p>		
-			Busqueda: <br>
-			<input type="text" value="" class="busqueda" placeholder="nombre">
-			<input type="text" value="" class="busqueda" placeholder="cantidad" style="width: 6em;">
-			<input type="text" value="" class="busqueda" placeholder="unidad">
-			<input type="text" value="" class="busqueda" placeholder="valor">
-			<input type="text" value="" class="busqueda" id="ano" placeholder="AAAA" style="width: 4em">
-			<input type="text" value="" class="busqueda" id="mes" placeholder="MM" style="width: 2em">
-			<input type="text" value="" class="busqueda" placeholder="DD" style="width: 2em">
-			<input type="text" value="" class="busqueda" id="tipo" placeholder="tipo" style="width: 6em;">
-			<input type="button" value="Buscar" id="realizarBusqueda" onclick="buscar('Agenda/buscar.php')">	
-		</p>		
+		<div id="entrada">
+			<h1>{{datos.nombre}}</h1>
+			 <nav>
+				<a onclick="seleccionTipo('Principal');" :title=datos.principal>Principal</a> |
+				<a onclick="seleccionTipo('Café');" :title=datos.cafe>Café</a> |
+				<a onclick="seleccionTipo('Ganado');" :title=datos.ganado>Ganado</a> |
+				<a onclick="seleccionTipo('Cerdos');" :title=datos.cerdos>Cerdos</a> |
+				<a onclick="seleccionTipo('Revuelto');" :title=datos.revuelto>Revuelto</a> |
+				<a onclick="seleccionTipo('Otros');" :title=datos.otros>Otros</a>
+				<h3 id="estado" title="Está en la sección donde puede consultar toda la infromacion registrada">Principal</h3>					  
+			</nav> 
+			<p id="ingresos">
+				Ingresos:<br>
+				<input type="text" value="" class="ingreso ni" placeholder="nombre" :title=datos.nombreI>
+				<input type="text" value="" class="ingreso ni" placeholder="cantidad" :title=datos.cantidadI style="width: 6em">
+				<input type="text" value="" class="ingreso ni" placeholder="unidad" :title=datos.unidad>
+				<input type="text" value="" class="ingreso ni" placeholder="valor" :title=datos.valorGI>
+				<input type="date" class="ingreso ni" id ="datePicker_ingreso" :title=datos.fechaI style="width: 9em">
+				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','cafe')" :title=datos.botonI>	
+				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','ganado')" :title=datos.botonI>	
+				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','cerdos')" :title=datos.botonI>	
+				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','revuelto')" :title=datos.botonI>	
+				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','otros')" :title=datos.botonI>
+				<span id="ingresoRevisar">Revisar ingreso</span>
+				<span id="ingresoAgregado">Ingreso agregado</span>															
+			</p>
+			<p id="gastos">
+				Gastos:<br>
+				<input type="text" value="" class="gasto ni" placeholder="nombre" :title=datos.nombreG>
+				<input type="text" value="" class="gasto ni" placeholder="cantidad" :title=datos.cantidadG style="width: 6em">
+				<input type="text" value="" class="gasto ni" placeholder="unidad" :title=datos.unidad>
+				<input type="text" value="" class="gasto ni" placeholder="valor" :title=datos.valorGI>
+				<input type="date" class="gasto ni" id ="datePicker_gasto" :title=datos.fechaG style="width: 9em">	
+				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','cafe')" :title=datos.botonG>	
+				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','ganado')" :title=datos.botonG>	
+				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','cerdos')" :title=datos.botonG>	
+				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','revuelto')" :title=datos.botonG>	
+				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','otros')" :title=datos.botonG>	
+				<span id="gastoRevisar">Revisar gasto</span>	
+				<span id="gastoAgregado">Gasto agregado</span>											
+			</p>		
+			<p>		
+				Busqueda: <br>
+				<input type="text" value="" class="busqueda" placeholder="nombre" :title=datos.nombreB>
+				<input type="text" value="" class="busqueda" placeholder="cantidad" :title=datos.cantidadB style="width: 6em;">
+				<input type="text" value="" class="busqueda" placeholder="unidad" :title=datos.unidad>
+				<input type="text" value="" class="busqueda" placeholder="valor" :title=datos.valorB>
+				<input type="text" value="" class="busqueda" id="ano" placeholder="año" :title=datos.ano style="width: 4em">
+				<input type="text" value="" class="busqueda" id="mes" placeholder="mes" :title=datos.mes style="width: 2em">
+				<input type="text" value="" class="busqueda" placeholder="dia" :title=datos.dia style="width: 2em">
+				<input type="text" value="" class="busqueda" id="tipo" placeholder="tipo" :title=datos.tipo style="width: 6em;">
+				<input type="button" value="Buscar" id="realizarBusqueda" onclick="buscar('Agenda/buscar.php')" :title=datos.botonB>
+				<span id="resultado">Listo</span>	
+			</p>	
+		</div>	
 		<div id="resultadosBusqueda_ingresos">
-			<h3>Ingresos: <strong id="ingreso"></strong></h3>
+			<h3>Ingresos: <strong id="ingreso" title="Total que suman los ingresos en la tabla"></strong></h3>
 			<table style="width: 100%">
 				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
 				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>
 		<div id="resultadosBusqueda_gastos" style="margin-top: 1em">
-			<h3>Gastos: <strong id="gasto"></strong></h3>
+			<h3>Gastos: <strong id="gasto" title="Total que suman los gastos en la tabla"></strong></h3>
 			<table style="width: 100%">
 				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
 				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>		
+		<script type="text/javascript" src="js/es.js"></script>
 		<script type="text/javascript" src="js/procesar.js"></script>
 	</body>
 </html>

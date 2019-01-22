@@ -1,8 +1,7 @@
 <?php
 require_once('db_connect.php');//importamos la conexion
-
+    $busqueda = '';
     $dinero = $_GET['dinero'];
-    $busqueda = $_GET['busqueda'];
     $nombre = $_GET['nombre'];
     $cantidad = $_GET['cantidad'];//en Bundle se debia usar una llave que era nombre(creo)
     $unidad = $_GET['unidad'];
@@ -10,8 +9,9 @@ require_once('db_connect.php');//importamos la conexion
     $ano = $_GET['ano'];    
     $mes = $_GET['mes'];
     $dia = $_GET['dia'];
-    if($busqueda != ''){
-        $busqueda = "WHERE tipo='$busqueda'";
+    $tipo = $_GET['tipo'];
+    if($tipo != ''){
+        $busqueda = "WHERE tipo='$tipo'";
     }
     if($nombre != ''){
         if($busqueda != ''){
@@ -62,9 +62,9 @@ require_once('db_connect.php');//importamos la conexion
             $busqueda = "WHERE DAY(fecha)='$dia'";
         }
     }        
-    $sql = "SELECT * FROM tabla2019ingresosT $busqueda;";//generamos el script en sql
+    $sql = "SELECT * FROM tabla2019ingresosT $busqueda order by fecha;";//generamos el script en sql
     if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM tabla2019gastosT $busqueda;";//generamos el script en sql
+        $sql = "SELECT * FROM tabla2019gastosT $busqueda order by fecha;";//generamos el script en sql
     }
     $resultado = mysqli_query($con,$sql);//ejecutando el query
     

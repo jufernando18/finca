@@ -1,4 +1,4 @@
-var BUSCAR_AUTO =false,ACTUALIZAR_BUSQUEDA_AUTO=true,ACTUALIZAR_INGRESO_GASTO_AUTO=true;
+const BUSCAR_AUTO =false,ACTUALIZAR_BUSQUEDA_AUTO=true,ACTUALIZAR_INGRESO_GASTO_AUTO=true;
 var v_ingreso = new Vue ({
     el : "#resultadosBusqueda_ingresos",
     data : {
@@ -9,6 +9,12 @@ var v_gasto = new Vue ({
     el : "#resultadosBusqueda_gastos",
     data : {
         datos: ""
+    }
+});
+var v_entrada = new Vue ({
+    el : "#entrada",
+    data : {
+        datos: es
     }
 });						
 window.onload = function(){
@@ -28,8 +34,15 @@ if (ACTUALIZAR_BUSQUEDA_AUTO){
 function ingresar(DataBase,dinero,tipo){
 	var datos;
 	var ingresos = document.getElementsByClassName("ingreso");
-	if (dinero == 'gasto') {
-		ingresos = document.getElementsByClassName("gasto");
+	if (dinero == 'gasto')ingresos = document.getElementsByClassName("gasto");
+	if ((ingresos[0].value+ingresos[1].value+ingresos[2].value+ingresos[3].value) == "" || parseInt(ingresos[3].value) == NaN){
+		$( "#"+dinero+"Revisar" ).fadeIn( 800, function() {
+			$(this).fadeTo(800, 0,function() {
+				this.style.display = 'none';
+				this.style.opacity = '1';
+			});
+		});
+		return;
 	}
 	datos = {"nombre" : ingresos[0].value,"cantidad" : ingresos[1].value,"unidad" : ingresos[2].value,"valor" : ingresos[3].value,"fecha" : ingresos[4].value,"tipo" : tipo, "dinero" : dinero};
     $.ajax({
@@ -39,14 +52,22 @@ function ingresar(DataBase,dinero,tipo){
         dataType: "json",
         success: function (resultado){
         	if (BUSCAR_AUTO)buscar('Agenda/buscar.php',tipo);
+			$( "#"+dinero+"Agregado" ).fadeIn( 800, function() {
+				$(this).fadeTo(800, 0,function() {
+					this.style.display = 'none';
+					this.style.opacity = '1';
+				});				
+			});
         }			        
     });				
 }
 function seleccionTipo(tipo){
 	//Ocultar/Mostrar opciones según sección de interes
 	document.getElementById('estado').innerHTML=tipo;
+	document.getElementById('estado').title=v_entrada.datos.entrada + tipo;
 	var clases,i;
 	if (tipo == 'Principal') {
+		document.getElementById('estado').title=v_entrada.datos.entradaP;
 		document.getElementById("tipo").value='';
 		document.getElementById('ingresos').className="ni";		
 		document.getElementById('gastos').className="ni";
@@ -135,14 +156,14 @@ function buscar(DataBase){
 	var datosBusqueda = document.getElementsByClassName("busqueda");
     $.ajax({
         data: {"dinero" : 'ingresos',
-    			"busqueda" : datosBusqueda[7].value,
     			"nombre" : datosBusqueda[0].value,
     			"cantidad" : datosBusqueda[1].value,
     			"unidad" : datosBusqueda[2].value,
     			"valor" : datosBusqueda[3].value,
     			"ano" : datosBusqueda[4].value,
     			"mes" : datosBusqueda[5].value,
-    			"dia" : datosBusqueda[6].value},
+    			"dia" : datosBusqueda[6].value,
+    			"tipo" : datosBusqueda[7].value},
         type:'get',
         url:DataBase,
         dataType: "json",
@@ -157,14 +178,14 @@ function buscar(DataBase){
     });
     $.ajax({
         data: {"dinero" : 'gastos',
-    			"busqueda" : datosBusqueda[7].value,
     			"nombre" : datosBusqueda[0].value,
     			"cantidad" : datosBusqueda[1].value,
     			"unidad" : datosBusqueda[2].value,
     			"valor" : datosBusqueda[3].value,
     			"ano" : datosBusqueda[4].value,
     			"mes" : datosBusqueda[5].value,
-    			"dia" : datosBusqueda[6].value},
+    			"dia" : datosBusqueda[6].value,
+    			"tipo" : datosBusqueda[7].value},
         type:'get',
         url:DataBase,
         dataType: "json",
@@ -174,7 +195,14 @@ function buscar(DataBase){
             for (var i = 0; i < resultado.length; i++) {
             	total+=parseInt(resultado[i].valor);
             }
-            document.getElementById("gasto").innerHTML=total;			            
+            document.getElementById("gasto").innerHTML=total;	
+       		$( "#resultado" ).fadeIn( 800, function() {
+				//this.style.display = 'none';
+				$(this).fadeTo(800, 0,function() {
+					this.style.display = 'none';
+					this.style.opacity = '1';
+				});				
+			});		            
         }
     });			    
 }	
