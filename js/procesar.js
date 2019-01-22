@@ -1,4 +1,4 @@
-const BUSCAR_AUTO =false,ACTUALIZAR_BUSQUEDA_AUTO=true,ACTUALIZAR_INGRESO_GASTO_AUTO=true;
+const BUSCAR_AUTO =false,ACTUALIZAR_BUSQUEDA_AUTO=false,ACTUALIZAR_INGRESO_GASTO_AUTO=true, TIEMPO_NOTIFICACION=1500;
 var v_ingreso = new Vue ({
     el : "#resultadosBusqueda_ingresos",
     data : {
@@ -19,6 +19,7 @@ var v_entrada = new Vue ({
 });						
 window.onload = function(){
 	seleccionTipo('Principal');
+	autocomplete('Agenda/autocompletar.php');
 	if (BUSCAR_AUTO)buscar('Agenda/buscar.php','');
 }			
 fechaActual = new Date();
@@ -30,14 +31,13 @@ if (ACTUALIZAR_BUSQUEDA_AUTO){
 	document.getElementById('ano').value = fechaActual.getFullYear();
 	document.getElementById('mes').value = fechaActual.getMonth()+1;
 }
-
-function ingresar(DataBase,dinero,tipo){
-	var datos;
+function ingresar(DataBase,dinero){
+	var datos, tipo = v_entrada.datos.estado;
 	var ingresos = document.getElementsByClassName("ingreso");
 	if (dinero == 'gasto')ingresos = document.getElementsByClassName("gasto");
-	if ((ingresos[0].value+ingresos[1].value+ingresos[2].value+ingresos[3].value) == "" || parseInt(ingresos[3].value) == NaN){
-		$( "#"+dinero+"Revisar" ).fadeIn( 800, function() {
-			$(this).fadeTo(800, 0,function() {
+	if ((ingresos[0].value+ingresos[1].value+ingresos[2].value+ingresos[3].value) == "" || parseInt(ingresos[3].value).toString() != ingresos[3].value){
+		$( "#"+dinero+"Revisar" ).fadeIn( TIEMPO_NOTIFICACION, function() {
+			$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
 				this.style.display = 'none';
 				this.style.opacity = '1';
 			});
@@ -52,105 +52,26 @@ function ingresar(DataBase,dinero,tipo){
         dataType: "json",
         success: function (resultado){
         	if (BUSCAR_AUTO)buscar('Agenda/buscar.php',tipo);
-			$( "#"+dinero+"Agregado" ).fadeIn( 800, function() {
-				$(this).fadeTo(800, 0,function() {
+			$( "#"+dinero+"Agregado" ).fadeIn( TIEMPO_NOTIFICACION, function() {
+				$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
 					this.style.display = 'none';
 					this.style.opacity = '1';
 				});				
 			});
+			autocomplete('Agenda/autocompletar.php');
         }			        
     });				
 }
 function seleccionTipo(tipo){
-	//Ocultar/Mostrar opciones según sección de interes
-	document.getElementById('estado').innerHTML=tipo;
-	document.getElementById('estado').title=v_entrada.datos.entrada + tipo;
-	var clases,i;
-	if (tipo == 'Principal') {
-		document.getElementById('estado').title=v_entrada.datos.entradaP;
-		document.getElementById("tipo").value='';
-		document.getElementById('ingresos').className="ni";		
-		document.getElementById('gastos').className="ni";
-	}else{
+	v_entrada.datos.estado=v_entrada.datos[tipo+'_m'];
+	document.getElementById('ingresos').className="ni";		
+	document.getElementById('gastos').className="ni";
+	if (v_entrada.datos.estado!='') {
 		document.getElementById('ingresos').className="";		
 		document.getElementById('gastos').className="";
-		clases = document.getElementsByClassName('ingreso')
-		for (var i = 0; i < clases.length; i++) {
-			clases[i].className='ingreso';
-		}
-		clases = document.getElementsByClassName('gasto')
-		for (var i = 0; i < clases.length; i++) {
-			clases[i].className='gasto';
-		}					
-		switch (tipo){
-			case 'Café':
-				document.getElementById("tipo").value='cafe';
-				clases = document.getElementsByClassName('botonIngreso')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonIngreso ni';
-				}
-				clases[0].className='botonIngreso';
-				clases = document.getElementsByClassName('botonGasto')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonGasto ni';
-				}										
-				clases[0].className='botonGasto';		
-			break;
-			case 'Ganado':
-				document.getElementById("tipo").value='ganado';
-				clases = document.getElementsByClassName('botonIngreso')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonIngreso ni';
-				}
-				clases[1].className='botonIngreso';
-				clases = document.getElementsByClassName('botonGasto')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonGasto ni';
-				}		
-				clases[1].className='botonGasto';
-			break;
-			case 'Cerdos':
-				document.getElementById("tipo").value='cerdos';
-				clases = document.getElementsByClassName('botonIngreso')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonIngreso ni';
-				}
-				clases[2].className='botonIngreso';
-				clases = document.getElementsByClassName('botonGasto')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonGasto ni';
-				}			
-				clases[2].className='botonGasto';					
-			break;
-			case 'Revuelto':
-				document.getElementById("tipo").value='revuelto';
-				clases = document.getElementsByClassName('botonIngreso')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonIngreso ni';
-				}
-				clases[3].className='botonIngreso';
-				clases = document.getElementsByClassName('botonGasto')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonGasto ni';
-				}	
-				clases[3].className='botonGasto';							
-			break;
-			case 'Otros':
-				document.getElementById("tipo").value='otros';
-				clases = document.getElementsByClassName('botonIngreso')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonIngreso ni';
-				}
-				clases[4].className='botonIngreso';
-				clases = document.getElementsByClassName('botonGasto')
-				for (var i = 0; i < clases.length; i++) {
-					clases[i].className='botonGasto ni';
-				}	
-				clases[4].className='botonGasto';							
-			break;
-			default:										
-		}
 	}
+	document.getElementById('estado').innerHTML=tipo + "<hr/>" + v_entrada.datos[tipo];
+	document.getElementById("tipo").value=v_entrada.datos.estado;
 }
 function buscar(DataBase){
 	var datosBusqueda = document.getElementsByClassName("busqueda");
@@ -196,9 +117,8 @@ function buscar(DataBase){
             	total+=parseInt(resultado[i].valor);
             }
             document.getElementById("gasto").innerHTML=total;	
-       		$( "#resultado" ).fadeIn( 800, function() {
-				//this.style.display = 'none';
-				$(this).fadeTo(800, 0,function() {
+       		$( "#resultado" ).fadeIn( TIEMPO_NOTIFICACION, function() {
+				$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
 					this.style.display = 'none';
 					this.style.opacity = '1';
 				});				
@@ -206,3 +126,41 @@ function buscar(DataBase){
         }
     });			    
 }	
+function autocomplete(DataBase){
+	var nombre = document.getElementsByClassName('nombre');
+	var unidad = document.getElementsByClassName('unidad');
+	var nombreIngreso = [],unidadIngreso = [],nombreGasto = [],unidadGasto = [];
+    $.ajax({
+        type:'get',
+        url:DataBase,
+        dataType: "json",
+        success: function (resultado){
+            for(var i=0, dato=[];i<resultado.nombreIngreso.length;i++){
+                nombreIngreso.push(resultado.nombreIngreso[i]);
+                unidadIngreso.push(resultado.unidadIngreso[i]);
+            }
+            for(var i=0, dato=[];i<resultado.nombreGasto.length;i++){
+                nombreGasto.push(resultado.nombreGasto[i]);
+                unidadGasto.push(resultado.unidadGasto[i]);
+            }            
+			$(nombre[0]).autocomplete({ 
+		    	source: nombreIngreso 
+		    }); 
+			$(unidad[0]).autocomplete({ 
+		    	source: unidadIngreso
+		    });   
+			$(nombre[1]).autocomplete({ 
+		    	source: nombreGasto 
+		    });     
+			$(unidad[1]).autocomplete({ 
+		    	source: unidadGasto 
+		    });   		  
+			$(nombre[2]).autocomplete({ 
+		    	source: nombreIngreso.concat(nombreGasto)
+		    });     
+			$(unidad[2]).autocomplete({ 
+		    	source: unidadIngreso.concat(unidadGasto)
+		    });   		      
+        }
+    });	
+}

@@ -4,7 +4,13 @@
 		<meta charset="UTF-8">
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/vue-2.5.22.js"></script>
+	    <!--jQuery UI, for autocomplete use-->
+	    <link rel="stylesheet" href="css/jQueryUI1.12.1.css">
+	    <script src="js/jQueryUI1.12.1.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
+		<!--<script src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css">-->
 		<title>Finca</title>
 	</head>
 	<body>
@@ -17,43 +23,35 @@
 				<a onclick="seleccionTipo('Cerdos');" :title=datos.cerdos>Cerdos</a> |
 				<a onclick="seleccionTipo('Revuelto');" :title=datos.revuelto>Revuelto</a> |
 				<a onclick="seleccionTipo('Otros');" :title=datos.otros>Otros</a>
-				<h3 id="estado" title="Está en la sección donde puede consultar toda la infromacion registrada">Principal</h3>					  
+				<h3 id="estado"></h3>					  
 			</nav> 
 			<p id="ingresos">
 				Ingresos:<br>
-				<input type="text" value="" class="ingreso ni" placeholder="nombre" :title=datos.nombreI>
-				<input type="text" value="" class="ingreso ni" placeholder="cantidad" :title=datos.cantidadI style="width: 6em">
-				<input type="text" value="" class="ingreso ni" placeholder="unidad" :title=datos.unidad>
-				<input type="text" value="" class="ingreso ni" placeholder="valor" :title=datos.valorGI>
-				<input type="date" class="ingreso ni" id ="datePicker_ingreso" :title=datos.fechaI style="width: 9em">
-				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','cafe')" :title=datos.botonI>	
-				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','ganado')" :title=datos.botonI>	
-				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','cerdos')" :title=datos.botonI>	
-				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','revuelto')" :title=datos.botonI>	
-				<input type="button" value="agregar ingreso" class="botonIngreso ni" onclick="ingresar('Agenda/crear.php','ingreso','otros')" :title=datos.botonI>
+				<input type="text" value="" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI autocomplete="on">
+				<input type="text" value="" class="ingreso" placeholder="cantidad" :title=datos.cantidadI style="width: 6em">
+				<input type="text" value="" class="ingreso unidad" placeholder="unidad" :title=datos.unidad style="width: 9em" autocomplete="on">
+				<input type="text" value="" class="ingreso" placeholder="valor" :title=datos.valorGI>
+				<input type="date" class="ingreso" id ="datePicker_ingreso" :title=datos.fechaI style="width: 9em">
+				<input type="button" value="agregar ingreso" class="botonIngreso" onclick="ingresar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
 				<span id="ingresoRevisar">Revisar ingreso</span>
 				<span id="ingresoAgregado">Ingreso agregado</span>															
 			</p>
 			<p id="gastos">
 				Gastos:<br>
-				<input type="text" value="" class="gasto ni" placeholder="nombre" :title=datos.nombreG>
-				<input type="text" value="" class="gasto ni" placeholder="cantidad" :title=datos.cantidadG style="width: 6em">
-				<input type="text" value="" class="gasto ni" placeholder="unidad" :title=datos.unidad>
-				<input type="text" value="" class="gasto ni" placeholder="valor" :title=datos.valorGI>
-				<input type="date" class="gasto ni" id ="datePicker_gasto" :title=datos.fechaG style="width: 9em">	
-				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','cafe')" :title=datos.botonG>	
-				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','ganado')" :title=datos.botonG>	
-				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','cerdos')" :title=datos.botonG>	
-				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','revuelto')" :title=datos.botonG>	
-				<input type="button" value="agregar gasto" class="botonGasto ni" onclick="ingresar('Agenda/crear.php','gasto','otros')" :title=datos.botonG>	
+				<input type="text" value="" class="gasto nombre" placeholder="nombre" :title=datos.nombreG autocomplete="on">
+				<input type="text" value="" class="gasto" placeholder="cantidad" :title=datos.cantidadG style="width: 6em">
+				<input type="text" value="" class="gasto unidad" placeholder="unidad" :title=datos.unidad style="width: 9em" autocomplete="on">
+				<input type="text" value="" class="gasto" placeholder="valor" :title=datos.valorGI>
+				<input type="date" class="gasto" id ="datePicker_gasto" :title=datos.fechaG style="width: 9em">	
+				<input type="button" value="agregar gasto" class="botonGasto" onclick="ingresar('Agenda/crear.php','gasto')" :title=datos.botonG>	
 				<span id="gastoRevisar">Revisar gasto</span>	
 				<span id="gastoAgregado">Gasto agregado</span>											
 			</p>		
 			<p>		
 				Busqueda: <br>
-				<input type="text" value="" class="busqueda" placeholder="nombre" :title=datos.nombreB>
+				<input type="text" value="" class="busqueda nombre" placeholder="nombre" :title=datos.nombreB>
 				<input type="text" value="" class="busqueda" placeholder="cantidad" :title=datos.cantidadB style="width: 6em;">
-				<input type="text" value="" class="busqueda" placeholder="unidad" :title=datos.unidad>
+				<input type="text" value="" class="busqueda unidad" placeholder="unidad" :title=datos.unidad style="width: 9em">
 				<input type="text" value="" class="busqueda" placeholder="valor" :title=datos.valorB>
 				<input type="text" value="" class="busqueda" id="ano" placeholder="año" :title=datos.ano style="width: 4em">
 				<input type="text" value="" class="busqueda" id="mes" placeholder="mes" :title=datos.mes style="width: 2em">
