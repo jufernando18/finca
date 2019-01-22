@@ -62,9 +62,9 @@ require_once('db_connect.php');//importamos la conexion
             $busqueda = "WHERE DAY(fecha)='$dia'";
         }
     }        
-    $sql = "SELECT * FROM tabla2019ingresosT $busqueda order by fecha;";//generamos el script en sql
+    $sql = "SELECT * FROM tabla2019ingresosT $busqueda order by fecha desc;";//generamos el script en sql
     if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM tabla2019gastosT $busqueda order by fecha;";//generamos el script en sql
+        $sql = "SELECT * FROM tabla2019gastosT $busqueda order by fecha desc;";//generamos el script en sql
     }
     $resultado = mysqli_query($con,$sql);//ejecutando el query
     
