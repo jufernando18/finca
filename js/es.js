@@ -12,7 +12,7 @@ es =
 	"ano" : 'Año que quiere buscar',
 	"mes" : 'Mes que quiere buscar',
 	"dia" : 'Día que quiere buscar',
-	"tipo" : 'Puede buscar en cafe, ganado, cerdos, revuelto o en otros',
+	"tipo" : 'Seleccione la clasificación del ingreso',
 	"botonI" : 'Presione click para registrar la venta',
 	"botonG" : 'Presione click para registrar la compra',
 	"botonB" : 'Presione click para buscar',
@@ -42,4 +42,8 @@ es =
 	"nombreIG" : '',	
 	"descripcionIG" : '',
 	"fecha" : '',	
+	"opcionesIG" : [{"opcion" : 'cafe',"valor" : 'cafe'},{"opcion" : 'ganado',"valor" : 'ganado'},{"opcion" : 'cerdos',"valor" : 'cerdos'},{"opcion" : 'revuelto',"valor" : 'revuelto'},{"opcion" : 'otros',"valor" : 'otros'}],
+	"opcionesB" : [{"opcion" : 'todos',"valor" : ''},{"opcion" : 'cafe',"valor" : 'cafe'},{"opcion" : 'ganado',"valor" : 'ganado'},{"opcion" : 'cerdos',"valor" : 'cerdos'},{"opcion" : 'revuelto',"valor" : 'revuelto'},{"opcion" : 'otros',"valor" : 'otros'}],
+	"revisar" : 'Revisar',
+	"agregado" : 'Agregado',
 }

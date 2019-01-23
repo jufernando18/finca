@@ -10,25 +10,18 @@
 	<body>
 		<div id="entrada">
 			<h1>{{datos.nombre}}</h1>
-			 <nav>
-			 	<strong>Clasificación: </strong>
-				<a onclick="seleccionTipo('Principal');" :title=datos.principal>Principal</a> |
-				<a onclick="seleccionTipo('Café');" :title=datos.cafe>Café</a> |
-				<a onclick="seleccionTipo('Ganado');" :title=datos.ganado>Ganado</a> |
-				<a onclick="seleccionTipo('Cerdos');" :title=datos.cerdos>Cerdos</a> |
-				<a onclick="seleccionTipo('Revuelto');" :title=datos.revuelto>Revuelto</a> |
-				<a onclick="seleccionTipo('Otros');" :title=datos.otros>Otros</a>
-				<h3 id="estado"></h3>					  
-			</nav> 
 			<p id="ingresos">
 				Ingresos:<br>
 				<input type="text" value="" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI list="nombreI"><datalist id="nombreI"><option v-for="dato in datos.nombreIngreso">{{dato.nombre}}</option></datalist>
 				<input type="text" value="" class="ingreso descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionI"><datalist id="descripcionI"><option v-for="dato in datos.descripcionIngreso">{{dato.descripcion}}</option></datalist>
 				<input type="text" value="" class="ingreso" placeholder="costo" :title=datos.costoGI>
 				<input type="date" class="ingreso" id ="datePicker_ingreso" :title=datos.fechaI>
+				<select class="ingreso" :title=datos.tipo>
+					<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
+				</select> 								
 				<input type="button" value="agregar ingreso" onclick="ingresar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
-				<span id="ingresoRevisar">Revisar ingreso</span>
-				<span id="ingresoAgregado">Ingreso agregado</span>															
+				<span id="ingresoRevisar">{{datos.revisar}}</span>
+				<span id="ingresoAgregado">{{datos.agregado}}</span>
 			</p>
 			<p id="gastos">
 				Gastos:<br>
@@ -36,9 +29,12 @@
 				<input type="text" value="" class="gasto descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionG"><datalist id="descripcionG"><option v-for="dato in datos.descripcionGasto">{{dato.descripcion}}</option></datalist>
 				<input type="text" value="" class="gasto" placeholder="costo" :title=datos.costoGI>
 				<input type="date" class="gasto" id ="datePicker_gasto" :title=datos.fechaG>	
+				<select class="gasto" :title=datos.tipo>
+					<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
+				</select> 				
 				<input type="button" value="agregar gasto" onclick="ingresar('Agenda/crear.php','gasto')" :title=datos.botonG>	
-				<span id="gastoRevisar">Revisar gasto</span>	
-				<span id="gastoAgregado">Gasto agregado</span>											
+				<span id="gastoRevisar">{{datos.revisar}}</span>	
+				<span id="gastoAgregado">{{datos.agregado}}</span>											
 			</p>		
 			<p>		
 				Busqueda: <br>
@@ -48,17 +44,11 @@
 				<input type="text" value="" class="busqueda" id="ano" placeholder="año" :title=datos.ano style="width: 4em">
 				<input type="text" value="" class="busqueda" id="mes" placeholder="mes" :title=datos.mes style="width: 2em">
 				<input type="text" value="" class="busqueda" placeholder="dia" :title=datos.dia style="width: 2em">
-				<input type="text" value="" class="busqueda" id="tipo" placeholder="clasificación" :title=datos.tipo style="width: 6em;" list="tipos">
+				<select class="busqueda" :title=datos.tipo>
+					<option v-for="dato in datos.opcionesB" :value=dato.valor>{{dato.opcion}}</option>
+				</select> 
 				<input type="button" value="Buscar" onclick="buscar('Agenda/buscar.php')" :title=datos.botonB>
 				<span id="resultado">Listo</span>	
-				<datalist id="tipos">
-					<option value=""></option>
-					<option value="cafe"></option>
-					<option value="ganado"></option>
-					<option value="cerdos"></option>
-					<option value="revuelto"></option>
-					<option value="otros"></option>
-				</datalist> 
 			</p>	
 		</div>	
 		<div id="resultadosBusqueda_ingresos">
