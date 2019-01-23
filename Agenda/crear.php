@@ -1,19 +1,18 @@
 <?php
 //Verificamos si se está usando GET o  POST para la comunicacion de la informacion
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
-//Obtener los valores de las variables
+//Obtener los costoes de las variables
     $nombre = $_GET['nombre'];
-    $cantidad = $_GET['cantidad'];//en Bundle se debia usar una llave que era nombre(creo)
-    $unidad = $_GET['unidad'];
-    $valor = $_GET['valor'];
+    $descripcion = $_GET['descripcion'];
+    $costo = $_GET['costo'];
     $fecha = $_GET['fecha'];
     $tipo = $_GET['tipo'];
     $dinero = $_GET['dinero'];
 
     //Crear una sentensia SQL
-    $sql = "INSERT INTO tabla2019ingresosT (nombre, cantidad, unidad, valor, fecha, tipo) VALUES ('$nombre','$cantidad','$unidad','$valor','$fecha','$tipo')";//Como el id es incremental, se pone ese NULL
+    $sql = "INSERT INTO tablaIngresos (nombre, descripcion, costo, fecha, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha','$tipo')";//Como el id es incremental, se pone ese NULL
     if ($dinero == 'gasto') {
-        $sql = "INSERT INTO tabla2019gastosT (nombre, cantidad, unidad, valor, fecha, tipo) VALUES ('$nombre','$cantidad','$unidad','$valor','$fecha','$tipo')";//Como el id es incremental, se pone ese NULL
+        $sql = "INSERT INTO tablaGastos (nombre, descripcion, costo, fecha, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha','$tipo')";//Como el id es incremental, se pone ese NULL
     }
     
 
@@ -24,9 +23,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $resultado_enviar=array();
     if(mysqli_query($con, $sql)){
         /*$resultado_enviar['nombre']=$nombre
-        $resultado_enviar['cantidad']=$cantidad;
-        $resultado_enviar['unidad']=$unidad;
-        $resultado_enviar['valor']=$valor;
+        $resultado_envia
+        $resultado_enviar['descripcion']=$descripcion;
+        $resultado_enviar['costo']=$costo;
         $resultado_enviar['fecha']=$fecha;*/
 
     } else {

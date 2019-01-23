@@ -3,9 +3,8 @@ require_once('db_connect.php');//importamos la conexion
     $busqueda = '';
     $dinero = $_GET['dinero'];
     $nombre = $_GET['nombre'];
-    $cantidad = $_GET['cantidad'];//en Bundle se debia usar una llave que era nombre(creo)
-    $unidad = $_GET['unidad'];
-    $valor = $_GET['valor'];
+    $descripcion = $_GET['descripcion'];
+    $costo = $_GET['costo'];
     $ano = $_GET['ano'];    
     $mes = $_GET['mes'];
     $dia = $_GET['dia'];
@@ -20,25 +19,18 @@ require_once('db_connect.php');//importamos la conexion
             $busqueda = "WHERE nombre='$nombre'";
         }
     }
-    if($cantidad != ''){
+    if($descripcion != ''){
         if($busqueda != ''){
-            $busqueda = $busqueda." AND cantidad='$cantidad'";
+            $busqueda = $busqueda." AND descripcion LIKE '%$descripcion%'";
         }else{
-            $busqueda = "WHERE cantidad='$cantidad'";
+            $busqueda = "WHERE descripcion LIKE '%$descripcion%'";
         }
     }
-    if($unidad != ''){
+    if($costo != ''){
         if($busqueda != ''){
-            $busqueda = $busqueda." AND unidad='$unidad'";
+            $busqueda = $busqueda." AND costo='$costo'";
         }else{
-            $busqueda = "WHERE unidad='$unidad'";
-        }
-    }
-    if($valor != ''){
-        if($busqueda != ''){
-            $busqueda = $busqueda." AND valor='$valor'";
-        }else{
-            $busqueda = "WHERE valor='$valor'";
+            $busqueda = "WHERE costo='$costo'";
         }
     }
     if($ano != ''){
@@ -62,9 +54,9 @@ require_once('db_connect.php');//importamos la conexion
             $busqueda = "WHERE DAY(fecha)='$dia'";
         }
     }        
-    $sql = "SELECT * FROM tabla2019ingresosT $busqueda order by fecha desc;";//generamos el script en sql
+    $sql = "SELECT * FROM tablaIngresos $busqueda order by fecha desc;";//generamos el script en sql
     if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM tabla2019gastosT $busqueda order by fecha desc;";//generamos el script en sql
+        $sql = "SELECT * FROM tablaGastos $busqueda order by fecha desc;";//generamos el script en sql
     }
     $resultado = mysqli_query($con,$sql);//ejecutando el query
     
@@ -76,9 +68,8 @@ require_once('db_connect.php');//importamos la conexion
     $posicion=0;
     while ($row = mysqli_fetch_array($resultado)) {
         $resultado_enviar[$posicion]['nombre']=$row['nombre'];
-        $resultado_enviar[$posicion]['cantidad']=$row['cantidad'];
-        $resultado_enviar[$posicion]['unidad']=$row['unidad'];
-        $resultado_enviar[$posicion]['valor']=$row['valor'];
+        $resultado_enviar[$posicion]['descripcion']=$row['descripcion'];
+        $resultado_enviar[$posicion]['costo']=$row['costo'];
         $resultado_enviar[$posicion]['fecha']=$row['fecha'];
         $resultado_enviar[$posicion]['tipo']=$row['tipo'];
         $posicion+=1;

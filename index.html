@@ -27,52 +27,49 @@
 			</nav> 
 			<p id="ingresos">
 				Ingresos:<br>
-				<input type="text" value="" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI autocomplete="on">
-				<input type="text" value="" class="ingreso" placeholder="cantidad" :title=datos.cantidadI style="width: 6em">
-				<input type="text" value="" class="ingreso unidad" placeholder="unidad" :title=datos.unidad style="width: 9em" autocomplete="on">
-				<input type="text" value="" class="ingreso" placeholder="valor" :title=datos.valorGI>
-				<input type="date" class="ingreso" id ="datePicker_ingreso" :title=datos.fechaI style="width: 9em">
-				<input type="button" value="agregar ingreso" class="botonIngreso" onclick="ingresar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
+				<input type="text" value="" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI>
+				<input type="text" value="" class="ingreso descripcion" placeholder="descripción" :title=datos.descripcion>
+				<input type="text" value="" class="ingreso" placeholder="costo" :title=datos.costoGI>
+				<input type="date" class="ingreso" id ="datePicker_ingreso" :title=datos.fechaI>
+				<input type="button" value="agregar ingreso" onclick="ingresar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
 				<span id="ingresoRevisar">Revisar ingreso</span>
 				<span id="ingresoAgregado">Ingreso agregado</span>															
 			</p>
 			<p id="gastos">
 				Gastos:<br>
-				<input type="text" value="" class="gasto nombre" placeholder="nombre" :title=datos.nombreG autocomplete="on">
-				<input type="text" value="" class="gasto" placeholder="cantidad" :title=datos.cantidadG style="width: 6em">
-				<input type="text" value="" class="gasto unidad" placeholder="unidad" :title=datos.unidad style="width: 9em" autocomplete="on">
-				<input type="text" value="" class="gasto" placeholder="valor" :title=datos.valorGI>
-				<input type="date" class="gasto" id ="datePicker_gasto" :title=datos.fechaG style="width: 9em">	
-				<input type="button" value="agregar gasto" class="botonGasto" onclick="ingresar('Agenda/crear.php','gasto')" :title=datos.botonG>	
+				<input type="text" value="" class="gasto nombre" placeholder="nombre" :title=datos.nombreG>
+				<input type="text" value="" class="gasto descripcion" placeholder="descripción" :title=datos.descripcion>
+				<input type="text" value="" class="gasto" placeholder="costo" :title=datos.costoGI>
+				<input type="date" class="gasto" id ="datePicker_gasto" :title=datos.fechaG>	
+				<input type="button" value="agregar gasto" onclick="ingresar('Agenda/crear.php','gasto')" :title=datos.botonG>	
 				<span id="gastoRevisar">Revisar gasto</span>	
 				<span id="gastoAgregado">Gasto agregado</span>											
 			</p>		
 			<p>		
 				Busqueda: <br>
 				<input type="text" value="" class="busqueda nombre" placeholder="nombre" :title=datos.nombreB>
-				<input type="text" value="" class="busqueda" placeholder="cantidad" :title=datos.cantidadB style="width: 6em;">
-				<input type="text" value="" class="busqueda unidad" placeholder="unidad" :title=datos.unidad style="width: 9em">
-				<input type="text" value="" class="busqueda" placeholder="valor" :title=datos.valorB>
+				<input type="text" value="" class="busqueda descripcion" placeholder="descripción" :title=datos.descripcion>
+				<input type="text" value="" class="busqueda" placeholder="costo" :title=datos.costoB>
 				<input type="text" value="" class="busqueda" id="ano" placeholder="año" :title=datos.ano style="width: 4em">
 				<input type="text" value="" class="busqueda" id="mes" placeholder="mes" :title=datos.mes style="width: 2em">
 				<input type="text" value="" class="busqueda" placeholder="dia" :title=datos.dia style="width: 2em">
 				<input type="text" value="" class="busqueda" id="tipo" placeholder="tipo" :title=datos.tipo style="width: 6em;">
-				<input type="button" value="Buscar" id="realizarBusqueda" onclick="buscar('Agenda/buscar.php')" :title=datos.botonB>
+				<input type="button" value="Buscar" onclick="buscar('Agenda/buscar.php')" :title=datos.botonB>
 				<span id="resultado">Listo</span>	
 			</p>	
 		</div>	
 		<div id="resultadosBusqueda_ingresos">
 			<h3>Ingresos: <strong id="ingreso" title="Total que suman los ingresos en la tabla"></strong></h3>
 			<table style="width: 100%">
-				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
-				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
+				<tr><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
+				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td style="width: 40%">{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>
 		<div id="resultadosBusqueda_gastos">
 			<h3>Gastos: <strong id="gasto" title="Total que suman los gastos en la tabla"></strong></h3>
 			<table style="width: 100%">
-				<tr><th>Producto</th><th>Cantidad</th><th>Unidad</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
-				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td>{{dato.cantidad}}</td><td>{{dato.unidad}}</td><td>{{dato.valor}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
+				<tr><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
+				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td style="width: 40%">{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>		
 		<script type="text/javascript" src="js/es.js"></script>

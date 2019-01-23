@@ -35,7 +35,7 @@ function ingresar(DataBase,dinero){
 	var datos, tipo = v_entrada.datos.estado;
 	var ingresos = document.getElementsByClassName("ingreso");
 	if (dinero == 'gasto')ingresos = document.getElementsByClassName("gasto");
-	if ((ingresos[0].value+ingresos[1].value+ingresos[2].value+ingresos[3].value) == "" || parseInt(ingresos[3].value).toString() != ingresos[3].value){
+	if (ingresos[0].value == "" || ingresos[1].value == "" || ingresos[2].value == "" || ingresos[3].value == "" || parseInt(ingresos[2].value).toString() != ingresos[2].value){
 		$( "#"+dinero+"Revisar" ).fadeIn( TIEMPO_NOTIFICACION, function() {
 			$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
 				this.style.display = 'none';
@@ -44,7 +44,7 @@ function ingresar(DataBase,dinero){
 		});
 		return;
 	}
-	datos = {"nombre" : ingresos[0].value,"cantidad" : ingresos[1].value,"unidad" : ingresos[2].value,"valor" : ingresos[3].value,"fecha" : ingresos[4].value,"tipo" : tipo, "dinero" : dinero};
+	datos = {"nombre" : ingresos[0].value,"descripcion" : ingresos[1].value,"costo" : ingresos[2].value,"fecha" : ingresos[3].value,"tipo" : tipo, "dinero" : dinero};
     $.ajax({
         data: datos,
         type:'get',
@@ -78,13 +78,12 @@ function buscar(DataBase){
     $.ajax({
         data: {"dinero" : 'ingresos',
     			"nombre" : datosBusqueda[0].value,
-    			"cantidad" : datosBusqueda[1].value,
-    			"unidad" : datosBusqueda[2].value,
-    			"valor" : datosBusqueda[3].value,
-    			"ano" : datosBusqueda[4].value,
-    			"mes" : datosBusqueda[5].value,
-    			"dia" : datosBusqueda[6].value,
-    			"tipo" : datosBusqueda[7].value},
+    			"descripcion" : datosBusqueda[1].value,
+    			"costo" : datosBusqueda[2].value,
+    			"ano" : datosBusqueda[3].value,
+    			"mes" : datosBusqueda[4].value,
+    			"dia" : datosBusqueda[5].value,
+    			"tipo" : datosBusqueda[6].value},
         type:'get',
         url:DataBase,
         dataType: "json",
@@ -92,7 +91,7 @@ function buscar(DataBase){
         	v_ingreso.datos = resultado;
             var total=0;
             for (var i = 0; i < resultado.length; i++) {
-            	total+=parseInt(resultado[i].valor);
+            	total+=parseInt(resultado[i].costo);
             }
             document.getElementById("ingreso").innerHTML=total;			            
         }
@@ -100,13 +99,12 @@ function buscar(DataBase){
     $.ajax({
         data: {"dinero" : 'gastos',
     			"nombre" : datosBusqueda[0].value,
-    			"cantidad" : datosBusqueda[1].value,
-    			"unidad" : datosBusqueda[2].value,
-    			"valor" : datosBusqueda[3].value,
-    			"ano" : datosBusqueda[4].value,
-    			"mes" : datosBusqueda[5].value,
-    			"dia" : datosBusqueda[6].value,
-    			"tipo" : datosBusqueda[7].value},
+    			"descripcion" : datosBusqueda[1].value,
+    			"costo" : datosBusqueda[2].value,
+    			"ano" : datosBusqueda[3].value,
+    			"mes" : datosBusqueda[4].value,
+    			"dia" : datosBusqueda[5].value,
+    			"tipo" : datosBusqueda[6].value},
         type:'get',
         url:DataBase,
         dataType: "json",
@@ -114,7 +112,7 @@ function buscar(DataBase){
         	v_gasto.datos = resultado;
             var total=0;
             for (var i = 0; i < resultado.length; i++) {
-            	total+=parseInt(resultado[i].valor);
+            	total+=parseInt(resultado[i].costo);
             }
             document.getElementById("gasto").innerHTML=total;	
        		$( "#resultado" ).fadeIn( TIEMPO_NOTIFICACION, function() {
@@ -128,38 +126,42 @@ function buscar(DataBase){
 }	
 function autocomplete(DataBase){
 	var nombre = document.getElementsByClassName('nombre');
-	var unidad = document.getElementsByClassName('unidad');
-	var nombreIngreso = [],unidadIngreso = [],nombreGasto = [],unidadGasto = [];
+	var descripcion = document.getElementsByClassName('descripcion');
+	var nombreIngreso = [],descripcionIngreso = [],nombreGasto = [],descripcionGasto = [];
     $.ajax({
         type:'get',
         url:DataBase,
         dataType: "json",
         success: function (resultado){
-            for(var i=0, dato=[];i<resultado.nombreIngreso.length;i++){
-                nombreIngreso.push(resultado.nombreIngreso[i]);
-                unidadIngreso.push(resultado.unidadIngreso[i]);
-            }
-            for(var i=0, dato=[];i<resultado.nombreGasto.length;i++){
-                nombreGasto.push(resultado.nombreGasto[i]);
-                unidadGasto.push(resultado.unidadGasto[i]);
-            }            
+        	if (resultado.nombreIngreso) {
+	            for(var i=0, dato=[];i<resultado.nombreIngreso.length;i++){
+	                nombreIngreso.push(resultado.nombreIngreso[i]);
+	                descripcionIngreso.push(resultado.descripcionIngreso[i]);
+	            }        		
+        	}
+            if (resultado.nombreGasto) {
+	            for(var i=0, dato=[];i<resultado.nombreGasto.length;i++){
+	                nombreGasto.push(resultado.nombreGasto[i]);
+	                descripcionGasto.push(resultado.descripcionGasto[i]);
+	            }   
+            }         
 			$(nombre[0]).autocomplete({ 
 		    	source: nombreIngreso 
 		    }); 
-			$(unidad[0]).autocomplete({ 
-		    	source: unidadIngreso
+			$(descripcion[0]).autocomplete({ 
+		    	source: descripcionIngreso
 		    });   
 			$(nombre[1]).autocomplete({ 
 		    	source: nombreGasto 
 		    });     
-			$(unidad[1]).autocomplete({ 
-		    	source: unidadGasto 
+			$(descripcion[1]).autocomplete({ 
+		    	source: descripcionGasto 
 		    });   		  
 			$(nombre[2]).autocomplete({ 
 		    	source: nombreIngreso.concat(nombreGasto)
 		    });     
-			$(unidad[2]).autocomplete({ 
-		    	source: unidadIngreso.concat(unidadGasto)
+			$(descripcion[2]).autocomplete({ 
+		    	source: descripcionIngreso.concat(descripcionGasto)
 		    });   		      
         }
     });	

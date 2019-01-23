@@ -1,3 +1,6 @@
+input{
+	width: 9em;
+}
 tr{
 	text-align: justify;
 }
@@ -5,7 +8,7 @@ tr:nth-child(even) {
   background-color: #ededed;
 }
 th {
-    width: 18%;
+    width: 17%;
 }			
 div{
 	border: solid 1px;
@@ -17,6 +20,7 @@ a{
 span{
 	border-radius: 4px;
 	text-align: center;
+	width: 9em;
 }
 #ingresoRevisar{
 	background-color: red;
@@ -40,6 +44,9 @@ span{
 }
 #estado{
 	text-align: center;
+}
+.descripcion{
+	width: 32em;
 }
 .ni{
 	display: none;
