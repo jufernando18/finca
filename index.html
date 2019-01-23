@@ -4,19 +4,14 @@
 		<meta charset="UTF-8">
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/vue-2.5.22.js"></script>
-	    <!--jQuery UI, for autocomplete use-->
-	    <link rel="stylesheet" href="css/jQueryUI1.12.1.css">
-	    <script src="js/jQueryUI1.12.1.js"></script>
-
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
-		<!--<script src="js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="css/bootstrap.min.css">-->
 		<title>Finca</title>
 	</head>
 	<body>
 		<div id="entrada">
 			<h1>{{datos.nombre}}</h1>
 			 <nav>
+			 	<strong>Clasificación: </strong>
 				<a onclick="seleccionTipo('Principal');" :title=datos.principal>Principal</a> |
 				<a onclick="seleccionTipo('Café');" :title=datos.cafe>Café</a> |
 				<a onclick="seleccionTipo('Ganado');" :title=datos.ganado>Ganado</a> |
@@ -27,8 +22,8 @@
 			</nav> 
 			<p id="ingresos">
 				Ingresos:<br>
-				<input type="text" value="" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI>
-				<input type="text" value="" class="ingreso descripcion" placeholder="descripción" :title=datos.descripcion>
+				<input type="text" value="" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI list="nombreI"><datalist id="nombreI"><option v-for="dato in datos.nombreIngreso">{{dato.nombre}}</option></datalist>
+				<input type="text" value="" class="ingreso descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionI"><datalist id="descripcionI"><option v-for="dato in datos.descripcionIngreso">{{dato.descripcion}}</option></datalist>
 				<input type="text" value="" class="ingreso" placeholder="costo" :title=datos.costoGI>
 				<input type="date" class="ingreso" id ="datePicker_ingreso" :title=datos.fechaI>
 				<input type="button" value="agregar ingreso" onclick="ingresar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
@@ -37,8 +32,8 @@
 			</p>
 			<p id="gastos">
 				Gastos:<br>
-				<input type="text" value="" class="gasto nombre" placeholder="nombre" :title=datos.nombreG>
-				<input type="text" value="" class="gasto descripcion" placeholder="descripción" :title=datos.descripcion>
+				<input type="text" value="" class="gasto nombre" placeholder="nombre" :title=datos.nombreG list="nombreG"><datalist id="nombreG"><option v-for="dato in datos.nombreGasto">{{dato.nombre}}</option></datalist>
+				<input type="text" value="" class="gasto descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionG"><datalist id="descripcionG"><option v-for="dato in datos.descripcionGasto">{{dato.descripcion}}</option></datalist>
 				<input type="text" value="" class="gasto" placeholder="costo" :title=datos.costoGI>
 				<input type="date" class="gasto" id ="datePicker_gasto" :title=datos.fechaG>	
 				<input type="button" value="agregar gasto" onclick="ingresar('Agenda/crear.php','gasto')" :title=datos.botonG>	
@@ -47,28 +42,36 @@
 			</p>		
 			<p>		
 				Busqueda: <br>
-				<input type="text" value="" class="busqueda nombre" placeholder="nombre" :title=datos.nombreB>
-				<input type="text" value="" class="busqueda descripcion" placeholder="descripción" :title=datos.descripcion>
+				<input type="text" value="" class="busqueda nombre" placeholder="nombre" :title=datos.nombreB list="nombres"><datalist id="nombres"><option v-for="dato in datos.nombreIG">{{dato.nombre}}</option></datalist>
+				<input type="text" value="" class="busqueda descripcion" placeholder="descripción" :title=datos.descripcion list="descripciones"><datalist id="descripciones"><option v-for="dato in datos.descripcionIG">{{dato.descripcion}}</option></datalist>
 				<input type="text" value="" class="busqueda" placeholder="costo" :title=datos.costoB>
 				<input type="text" value="" class="busqueda" id="ano" placeholder="año" :title=datos.ano style="width: 4em">
 				<input type="text" value="" class="busqueda" id="mes" placeholder="mes" :title=datos.mes style="width: 2em">
 				<input type="text" value="" class="busqueda" placeholder="dia" :title=datos.dia style="width: 2em">
-				<input type="text" value="" class="busqueda" id="tipo" placeholder="tipo" :title=datos.tipo style="width: 6em;">
+				<input type="text" value="" class="busqueda" id="tipo" placeholder="clasificación" :title=datos.tipo style="width: 6em;" list="tipos">
 				<input type="button" value="Buscar" onclick="buscar('Agenda/buscar.php')" :title=datos.botonB>
 				<span id="resultado">Listo</span>	
+				<datalist id="tipos">
+					<option value=""></option>
+					<option value="cafe"></option>
+					<option value="ganado"></option>
+					<option value="cerdos"></option>
+					<option value="revuelto"></option>
+					<option value="otros"></option>
+				</datalist> 
 			</p>	
 		</div>	
 		<div id="resultadosBusqueda_ingresos">
 			<h3>Ingresos: <strong id="ingreso" title="Total que suman los ingresos en la tabla"></strong></h3>
 			<table style="width: 100%">
-				<tr><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
+				<tr><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Clasificación</th></tr>
 				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td style="width: 40%">{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>
 		<div id="resultadosBusqueda_gastos">
 			<h3>Gastos: <strong id="gasto" title="Total que suman los gastos en la tabla"></strong></h3>
 			<table style="width: 100%">
-				<tr><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Tipo</th></tr>
+				<tr><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Clasificación</th></tr>
 				<tr v-for="dato in datos"><td>{{dato.nombre}}</td><td style="width: 40%">{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>		

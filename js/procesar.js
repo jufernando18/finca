@@ -1,22 +1,7 @@
 const BUSCAR_AUTO =false,ACTUALIZAR_BUSQUEDA_AUTO=false,ACTUALIZAR_INGRESO_GASTO_AUTO=true, TIEMPO_NOTIFICACION=1500;
-var v_ingreso = new Vue ({
-    el : "#resultadosBusqueda_ingresos",
-    data : {
-        datos: ""
-    }
-});	
-var v_gasto = new Vue ({
-    el : "#resultadosBusqueda_gastos",
-    data : {
-        datos: ""
-    }
-});
-var v_entrada = new Vue ({
-    el : "#entrada",
-    data : {
-        datos: es
-    }
-});						
+var v_ingreso = new Vue ({el : "#resultadosBusqueda_ingresos",data : {datos: ""}});	
+var v_gasto = new Vue ({el : "#resultadosBusqueda_gastos",data : {datos: ""}});
+var v_entrada = new Vue ({el : "#entrada",data : {datos: es}});						
 window.onload = function(){
 	seleccionTipo('Principal');
 	autocomplete('Agenda/autocompletar.php');
@@ -109,6 +94,7 @@ function buscar(DataBase){
         url:DataBase,
         dataType: "json",
         success: function (resultado){
+        	console.log(resultado);
         	v_gasto.datos = resultado;
             var total=0;
             for (var i = 0; i < resultado.length; i++) {
@@ -127,42 +113,18 @@ function buscar(DataBase){
 function autocomplete(DataBase){
 	var nombre = document.getElementsByClassName('nombre');
 	var descripcion = document.getElementsByClassName('descripcion');
-	var nombreIngreso = [],descripcionIngreso = [],nombreGasto = [],descripcionGasto = [];
     $.ajax({
         type:'get',
         url:DataBase,
         dataType: "json",
-        success: function (resultado){
-        	if (resultado.nombreIngreso) {
-	            for(var i=0, dato=[];i<resultado.nombreIngreso.length;i++){
-	                nombreIngreso.push(resultado.nombreIngreso[i]);
-	                descripcionIngreso.push(resultado.descripcionIngreso[i]);
-	            }        		
-        	}
-            if (resultado.nombreGasto) {
-	            for(var i=0, dato=[];i<resultado.nombreGasto.length;i++){
-	                nombreGasto.push(resultado.nombreGasto[i]);
-	                descripcionGasto.push(resultado.descripcionGasto[i]);
-	            }   
-            }         
-			$(nombre[0]).autocomplete({ 
-		    	source: nombreIngreso 
-		    }); 
-			$(descripcion[0]).autocomplete({ 
-		    	source: descripcionIngreso
-		    });   
-			$(nombre[1]).autocomplete({ 
-		    	source: nombreGasto 
-		    });     
-			$(descripcion[1]).autocomplete({ 
-		    	source: descripcionGasto 
-		    });   		  
-			$(nombre[2]).autocomplete({ 
-		    	source: nombreIngreso.concat(nombreGasto)
-		    });     
-			$(descripcion[2]).autocomplete({ 
-		    	source: descripcionIngreso.concat(descripcionGasto)
-		    });   		      
+        success: function (resultado){     
+            v_entrada.datos.nombreIngreso = resultado.nombreIngreso;
+            v_entrada.datos.descripcionIngreso = resultado.descripcionIngreso;
+            v_entrada.datos.nombreGasto = resultado.nombreGasto;
+            v_entrada.datos.descripcionGasto = resultado.descripcionGasto;
+            v_entrada.datos.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
+            v_entrada.datos.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);   
+            v_entrada.datos.fecha = resultado.fecha;
         }
     });	
 }

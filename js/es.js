@@ -34,5 +34,12 @@ es =
 	"Ganado_m" : 'ganado',
 	"Cerdos_m" : 'cerdos',
 	"Revuelto_m" : 'revuelto',
-	"Otros_m" : 'otros',	
+	"Otros_m" : 'otros',
+	"nombreIngreso" : '',	
+	"descripcionIngreso" : '',	
+	"nombreGasto" : '',	
+	"descripcionGasto" : '',	
+	"nombreIG" : '',	
+	"descripcionIG" : '',
+	"fecha" : '',	
 }
