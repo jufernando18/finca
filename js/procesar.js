@@ -116,7 +116,6 @@ function autocomplete(DataBase){
             v_entrada.datos.descripcionGasto = resultado.descripcionGasto;
             v_entrada.datos.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
             v_entrada.datos.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);   
-            v_entrada.datos.fecha = resultado.fecha;
         }
     });	
 }
