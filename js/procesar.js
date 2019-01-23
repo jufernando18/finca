@@ -35,7 +35,7 @@ function ingresar(DataBase,dinero){
 	var datos, tipo = v_entrada.datos.estado;
 	var ingresos = document.getElementsByClassName("ingreso");
 	if (dinero == 'gasto')ingresos = document.getElementsByClassName("gasto");
-	if (ingresos[0].value == "" || ingresos[1].value == "" || ingresos[2].value == "" || ingresos[3].value == "" || parseInt(ingresos[2].value).toString() != ingresos[2].value){
+	if (ingresos[0].value == "" || ingresos[2].value == "" || ingresos[3].value == "" || parseInt(ingresos[2].value).toString() != ingresos[2].value){
 		$( "#"+dinero+"Revisar" ).fadeIn( TIEMPO_NOTIFICACION, function() {
 			$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
 				this.style.display = 'none';
