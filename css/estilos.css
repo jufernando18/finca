@@ -1,6 +1,9 @@
 tr{
 	text-align: justify;
 }
+tr:nth-child(even) {
+  background-color: #ededed;
+}
 th {
     width: 18%;
 }			
