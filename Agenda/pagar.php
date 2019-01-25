@@ -75,11 +75,10 @@ require_once('db_connect.php');//importamos la conexion
         $sql = "SELECT * FROM tablaIngresos $busqueda order by fecha desc;";//generamos el script en sql
         $resultado = mysqli_query($con,$sql);//ejecutando el query
         while ($row = mysqli_fetch_array($resultado)) {
-            if (intval($row['costo']) < 0) {
-                $costo = $row['costo'];
+            if (is_numeric(intval($row['costo'])) && intval($row['costo']) < 0) {
+                $costo = explode('-', $row['costo'])[1];
                 $id = $row['id'];
-                $descripcion = $row['descripcion'];
-                mysqli_query($con,"UPDATE tablaIngresos SET descripcion='$descripcion |$pago', costo='P$costo', modificado=now() WHERE id='$id';");  
+                mysqli_query($con,"UPDATE tablaIngresos SET costo='P$pago|$costo', modificado=now() WHERE id='$id';");  
             }
         }        
     }      
@@ -88,11 +87,10 @@ require_once('db_connect.php');//importamos la conexion
         $sql = "SELECT * FROM tablaGastos $busqueda order by fecha desc;";//generamos el script en sql
         $resultado = mysqli_query($con,$sql);//ejecutando el query
         while ($row = mysqli_fetch_array($resultado)) {
-            if (intval($row['costo']) < 0) {
-                $costo = $row['costo'];
+            if (is_numeric(intval($row['costo'])) && intval($row['costo']) < 0) {
+                $costo = explode('-', $row['costo'])[1];
                 $id = $row['id'];
-                $descripcion = $row['descripcion'];
-                mysqli_query($con,"UPDATE tablaGastos SET descripcion='$descripcion |$pago', costo='P$costo', modificado=now() WHERE id='$id';");  
+                mysqli_query($con,"UPDATE tablaGastos SET costo='P$pago|$costo', modificado=now() WHERE id='$id';");  
             }
         }
     }

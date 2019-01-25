@@ -128,37 +128,38 @@ function buscar(DataBase){
 	            		totalGastos+=parseInt(resultado[i].costo);
 	            	}
 	            }
-	            document.getElementById("gasto").innerHTML="Gastos: "+totalGastos+" | Deuda: "+totalDeudas;
-	       		$( "#resultadoBuscar" ).fadeIn( TIEMPO_NOTIFICACION, function() {
-					$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
-						this.style.display = 'none';
-						this.style.opacity = '1';
-					});				
-				});		            
+	            document.getElementById("gasto").innerHTML="Gastos: "+totalGastos+" | Deuda: "+totalDeudas;	            
 	        }
 	    });			    
     }
+	$( "#resultadoBuscar" ).fadeIn( TIEMPO_NOTIFICACION, function() {
+		$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
+			this.style.display = 'none';
+			this.style.opacity = '1';
+		});				
+	});	    
 }	
 function pagar(DataBase){
 	var datosBusqueda = document.getElementsByClassName("busqueda"), buscarIngresos=false,buscarGastos=false;
     switch (datosBusqueda[8].value){
     	case '' :
-	    	buscarIngresos = false;
-	    	buscarGastos = false;
 			$( "#resultadoRevisar" ).fadeIn( TIEMPO_NOTIFICACION, function() {
 				$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
 					this.style.display = 'none';
 					this.style.opacity = '1';
 				});
-			});   			    	
+			});  
+			return; 			    	
 	    	break;
     	case 'ingresos' :
 	    	buscarIngresos = true;
 	    	break;
     	case 'gastos' :
 	    	buscarGastos = true;
-	    	break;	    		        		
-    }
+	    	break;	
+	}    		        
+	if (DataBase == "Agenda/pagar.php" && !confirm("Está seguro que quiere pagar lo seleccionado?"))return;
+	if (DataBase == "Agenda/deuda.php" && !confirm("Está seguro que quiere cambiar a estado de deuda lo seleccionado?"))return;			
     if (buscarIngresos) {
 	    $.ajax({
 	        data: {
@@ -178,7 +179,13 @@ function pagar(DataBase){
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
-	        	buscar('Agenda/buscar.php');			            
+	        	buscar('Agenda/buscar.php');
+	       		$( "#resultadoPagar" ).fadeIn( TIEMPO_NOTIFICACION, function() {
+					$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
+						this.style.display = 'none';
+						this.style.opacity = '1';
+					});				
+				});		        				            
 	        }
 	    });
     }	
