@@ -111,7 +111,7 @@ require_once('db_connect.php');//importamos la conexion
         }
     }
     
-    system("echo fico3137 | /usr/bin/sudo -S php7.2 ../.././test.php");
+    
     
     header('Content-type: application/json; charset=utf-8');
     header('Access-Control-Allow-Credentials: true');
