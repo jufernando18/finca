@@ -10,9 +10,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $dinero = $_GET['dinero'];
 
     //Crear una sentensia SQL
-    $sql = "INSERT INTO tablaIngresos (nombre, descripcion, costo, fecha, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha','$tipo')";//Como el id es incremental, se pone ese NULL
+    $sql = "INSERT INTO tablaIngresos (nombre, descripcion, costo, fecha, modificado, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha',now(),'$tipo')";//Como el id es incremental, se pone ese NULL
     if ($dinero == 'gasto') {
-        $sql = "INSERT INTO tablaGastos (nombre, descripcion, costo, fecha, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha','$tipo')";//Como el id es incremental, se pone ese NULL
+        $sql = "INSERT INTO tablaGastos (nombre, descripcion, costo, fecha, modificado, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha',now(),'$tipo')";//Como el id es incremental, se pone ese NULL
     }
     
 

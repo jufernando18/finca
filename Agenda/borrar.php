@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     if ($dinero == 'ingresos') {
         $sql = "DELETE FROM tablaIngresos WHERE id ='$id';";//Como el id es incremental, se pone ese NULL
     }
-    if ($dinero == 'gasto') {
+    if ($dinero == 'gastos') {
         $sql = "DELETE FROM tablaGastos WHERE id ='$id';";//Como el id es incremental, se pone ese NULL
     }
     

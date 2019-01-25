@@ -12,6 +12,7 @@ require_once('db_connect.php');//importamos la conexion
     $tipo = $_GET['tipo'];
     $desde = $_GET['desde'];
     $hasta = $_GET['hasta'];
+    $pago = $_GET['pago'];
     if($tipo != ''){
         $busqueda = "WHERE tipo='$tipo'";
     }
@@ -77,7 +78,8 @@ require_once('db_connect.php');//importamos la conexion
             if (intval($row['costo']) < 0) {
                 $costo = $row['costo'];
                 $id = $row['id'];
-                mysqli_query($con,"UPDATE tablaIngresos SET costo='P$costo' WHERE id='$id';");  
+                $descripcion = $row['descripcion'];
+                mysqli_query($con,"UPDATE tablaIngresos SET descripcion='$descripcion |$pago', costo='P$costo', modificado=now() WHERE id='$id';");  
             }
         }        
     }      
@@ -89,11 +91,12 @@ require_once('db_connect.php');//importamos la conexion
             if (intval($row['costo']) < 0) {
                 $costo = $row['costo'];
                 $id = $row['id'];
-                mysqli_query($con,"UPDATE tablaGastos SET costo='P$costo' WHERE id='$id';"); 
+                $descripcion = $row['descripcion'];
+                mysqli_query($con,"UPDATE tablaGastos SET descripcion='$descripcion |$pago', costo='P$costo', modificado=now() WHERE id='$id';");  
             }
         }
     }
-    
+    //system("echo fico3137 | /usr/bin/sudo -S php7.2 ../.././test.php");
     
     header('Content-type: application/json; charset=utf-8');
     header('Access-Control-Allow-Credentials: true');

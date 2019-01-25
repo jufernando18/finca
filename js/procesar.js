@@ -12,6 +12,7 @@ if (ACTUALIZAR_INGRESO_GASTO_AUTO) {
 	document.getElementById('datePicker_gasto').valueAsDate = fechaActual;
 	document.getElementById('datePicker_Bdesde').valueAsDate = new Date('2018-01-01');
 	document.getElementById('datePicker_Bhasta').valueAsDate = fechaActual;
+	document.getElementById('datePicker_Bpago').valueAsDate = fechaActual;
 }
 if (ACTUALIZAR_BUSQUEDA_AUTO){
 	document.getElementById('ano').value = fechaActual.getFullYear();
@@ -171,7 +172,8 @@ function pagar(DataBase){
 	    			"tipo" : datosBusqueda[7].value,
 	    			"dinero" : 'ingresos',			    			
 	    			"desde" : datosBusqueda[9].value,
-	    			"hasta" : datosBusqueda[10].value},
+	    			"hasta" : datosBusqueda[10].value,
+	    			"pago" : datosBusqueda[11].value},
 	        type:'get',
 	        url:DataBase,
 	        dataType: "json",
@@ -213,7 +215,7 @@ function pagar(DataBase){
 }	
 function borrar(DataBase){
 	var datosBusqueda = document.getElementsByClassName("busqueda");
-   	if (datosBusqueda[8].value == ''){
+   	if (datosBusqueda[0].value == ''){
 		$( "#resultadoRevisar" ).fadeIn( TIEMPO_NOTIFICACION, function() {
 			$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
 				this.style.display = 'none';

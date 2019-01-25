@@ -59,8 +59,11 @@
 				<span> hasta: </span>
 				<input type="date" class="busqueda" id ="datePicker_Bhasta" :title=datos.fechaHasta>
 				<input type="button" value="Buscar" onclick="buscar('Agenda/buscar.php')" :title=datos.botonB>
+				<span> se paga el día: </span>
+				<input type="date" class="busqueda" id ="datePicker_Bpago" :title=datos.fechaPago>				
 				<input type="button" value="Pagar" onclick="pagar('Agenda/pagar.php')" :title=datos.botonP>
 				<input type="button" value="Borrar" onclick="borrar('Agenda/borrar.php')" :title=datos.botonBO>
+				<input type="button" value="Cambiar a deuda" onclick="pagar('Agenda/deuda.php')" :title=datos.botonD>
 				<span id="resultadoRevisar">{{datos.revisar}}</span>
 				<span class="resultado" id="resultadoBuscar">Listo</span>
 				<span class="resultado" id="resultadoPagar">Pagado</span>
@@ -70,15 +73,15 @@
 		<div id="resultadosBusqueda_ingresos">
 			<h3><strong id="ingreso" title="Total que suman los ingresos en la tabla">Ingresos</strong></h3>
 			<table style="width: 100%">
-				<tr><th style="width: 4%">ID</th><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Clasificación</th></tr>
-				<tr v-for="dato in datos"><td>{{dato.id}}</td><td>{{dato.nombre}}</td><td style="width: 40%">{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
+				<tr><th style="width: 4%">ID</th><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Modificado</th><th>Clasificación</th></tr>
+				<tr v-for="dato in datos"><td>{{dato.id}}</td><td>{{dato.nombre}}</td><td style="width: 40%">{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.modificado}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>
 		<div id="resultadosBusqueda_gastos">
 			<h3><strong id="gasto" title="Total que suman los gastos en la tabla">Gastos</strong></h3>
 			<table style="width: 100%">
-				<tr><th style="width: 4%">ID</th><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Clasificación</th></tr>
-				<tr v-for="dato in datos"><td>{{dato.id}}</td><td>{{dato.nombre}}</td><td style="width: 40%">{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.tipo}}</td></tr>
+				<tr><th style="width: 4%">ID</th><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th>Fecha</th><th>Modificado</th><th>Clasificación</th></tr>
+				<tr v-for="dato in datos"><td>{{dato.id}}</td><td>{{dato.nombre}}</td><td style="width: 40%">{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.modificado}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>		
 		<script type="text/javascript" src="js/es.js"></script>

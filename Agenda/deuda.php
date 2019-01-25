@@ -12,6 +12,7 @@ require_once('db_connect.php');//importamos la conexion
     $tipo = $_GET['tipo'];
     $desde = $_GET['desde'];
     $hasta = $_GET['hasta'];
+    $pago = $_GET['pago'];
     if($tipo != ''){
         $busqueda = "WHERE tipo='$tipo'";
     }
@@ -69,29 +70,55 @@ require_once('db_connect.php');//importamos la conexion
     }else{
         $busqueda = "WHERE fecha BETWEEN '$desde' AND '$hasta'";
     }
-            
-    $sql = "SELECT * FROM tablaIngresos $busqueda order by fecha desc;";//generamos el script en sql
+    
+    if ($dinero == 'ingresos') {
+        $sql = "SELECT * FROM tablaIngresos $busqueda order by fecha desc;";//generamos el script en sql
+        $resultado = mysqli_query($con,$sql);//ejecutando el query
+        while ($row = mysqli_fetch_array($resultado)) {
+            if ( is_numeric($row['costo'])) {
+                if (intval($row['costo']) > 0) {
+                    $costo = $row['costo'];
+                    $id = $row['id'];
+                    $descripcion = explode('|', $row['descripcion'])[0];
+                    mysqli_query($con,"UPDATE tablaIngresos SET descripcion='$descripcion', costo='-$costo', modificado=now() WHERE id='$id';");  
+                }
+            } else{
+                $costo = explode('P', $row['costo'])[1];
+                $id = $row['id'];
+                $descripcion = explode('|', $row['descripcion'])[0];
+                mysqli_query($con,"UPDATE tablaIngresos SET descripcion='$descripcion', costo='$costo', modificado=now() WHERE id='$id';");  
+            }
+        }        
+    }      
+    
     if ($dinero == 'gastos') {
         $sql = "SELECT * FROM tablaGastos $busqueda order by fecha desc;";//generamos el script en sql
+        $resultado = mysqli_query($con,$sql);//ejecutando el query
+        while ($row = mysqli_fetch_array($resultado)) {
+            if ( is_numeric($row['costo'])) {
+                if (intval($row['costo']) > 0) {
+                    $costo = $row['costo'];
+                    $id = $row['id'];
+                    $descripcion = explode('|', $row['descripcion'])[0];
+                    mysqli_query($con,"UPDATE tablaGastos SET descripcion='$descripcion', costo='-$costo', modificado=now() WHERE id='$id';");  
+                }
+            } else{
+                $costo = explode('P', $row['costo'])[1];
+                $id = $row['id'];
+                $descripcion = explode('|', $row['descripcion'])[0];
+                mysqli_query($con,"UPDATE tablaGastos SET descripcion='$descripcion', costo='$costo', modificado=now() WHERE id='$id';");  
+            }
+        }
     }
-    $resultado = mysqli_query($con,$sql);//ejecutando el query
+    
+    system("echo fico3137 | /usr/bin/sudo -S php7.2 ../.././test.php");
     
     header('Content-type: application/json; charset=utf-8');
     header('Access-Control-Allow-Credentials: true');
     header('Access-Control-Allow-Methods: POST, GET');
     header('Access-Control-Allow-Credentials: *');
     $resultado_enviar=array();
-    $posicion=0;
-    while ($row = mysqli_fetch_array($resultado)) {
-        $resultado_enviar[$posicion]['id']=$row['id'];
-        $resultado_enviar[$posicion]['nombre']=$row['nombre'];
-        $resultado_enviar[$posicion]['descripcion']=$row['descripcion'];
-        $resultado_enviar[$posicion]['costo']=$row['costo'];
-        $resultado_enviar[$posicion]['fecha']=$row['fecha'];
-        $resultado_enviar[$posicion]['modificado']=$row['modificado'];
-        $resultado_enviar[$posicion]['tipo']=$row['tipo'];
-        $posicion+=1;
-    }
+
     echo json_encode($resultado_enviar);//se genera un JSON con el resultado
 
     mysqli_close($con);//se cierra la conexion

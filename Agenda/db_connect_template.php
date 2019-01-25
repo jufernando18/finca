@@ -5,7 +5,7 @@ header('Access-Control-Allow-Origin:*');
 
 define('DB_USER',"root");//Usuario
 define('DB_PASSWORD',"");//Contraseña
-define('DB_DATABASE',"boa_books");//Nombre de la base de datos
+define('DB_DATABASE',"");//Nombre de la base de datos
 define('DB_SERVER',"localhost");//Nombre o IP del servidor
 
 //Conexxion
