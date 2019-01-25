@@ -238,7 +238,7 @@ function borrar(DataBase){
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
-	        	document.getElementsByClassName("busqueda")[0].value = '';
+	        	document.getElementsByClassName("busqueda")[0].value = '';//se limpia id
 	       		$( "#resultadoBorrar" ).fadeIn( TIEMPO_NOTIFICACION, function() {
 					$(this).fadeTo(TIEMPO_NOTIFICACION, 0,function() {
 						this.style.display = 'none';
