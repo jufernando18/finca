@@ -1,5 +1,5 @@
-strong{
-	font-size: 1.2em;
+p{
+	background-color: #edecec;
 }
 input{
 	width: 9em;
@@ -41,7 +41,11 @@ span{
 	background-color: #1ddd00;
 	display: none;
 }
-#resultado{
+#resultadoRevisar{
+	background-color: red;
+	display: none;
+}
+.resultado{
 	background-color: #1ddd00;
 	display: none;
 }
