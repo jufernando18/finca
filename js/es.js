@@ -33,5 +33,6 @@ es =
 	"opcionesIG" : [{"opcion" : 'cafe',"valor" : 'cafe'},{"opcion" : 'ganado',"valor" : 'ganado'},{"opcion" : 'cerdos',"valor" : 'cerdos'},{"opcion" : 'revuelto',"valor" : 'revuelto'},{"opcion" : 'otros',"valor" : 'otros'}],
 	"opcionesB" : [{"opcion" : 'todos',"valor" : ''},{"opcion" : 'cafe',"valor" : 'cafe'},{"opcion" : 'ganado',"valor" : 'ganado'},{"opcion" : 'cerdos',"valor" : 'cerdos'},{"opcion" : 'revuelto',"valor" : 'revuelto'},{"opcion" : 'otros',"valor" : 'otros'}],
 	"revisar" : 'Revisar',
+	"revisarB" : 'Debe seleccionar ingresos o gastos, y para borrar debe ingresar id',
 	"agregado" : 'Agregado',
 }

@@ -20,8 +20,8 @@
 					<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
 				</select> 								
 				<input type="button" value="agregar ingreso" onclick="ingresar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
-				<span id="ingresoRevisar">{{datos.revisar}}</span>
-				<span id="ingresoAgregado">{{datos.agregado}}</span>
+				<span class="ocultar" id="ingresoRevisar">{{datos.revisar}}</span>
+				<span class="ocultar" id="ingresoAgregado">{{datos.agregado}}</span>
 			</p>
 			<p id="gastos">
 				Gastos:<br>
@@ -33,8 +33,8 @@
 					<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
 				</select> 				
 				<input type="button" value="agregar gasto" onclick="ingresar('Agenda/crear.php','gasto')" :title=datos.botonG>	
-				<span id="gastoRevisar">{{datos.revisar}}</span>	
-				<span id="gastoAgregado">{{datos.agregado}}</span>											
+				<span class="ocultar" id="gastoRevisar">{{datos.revisar}}</span>	
+				<span class="ocultar" id="gastoAgregado">{{datos.agregado}}</span>											
 			</p>		
 			<p>		
 				Busqueda: <br>
@@ -64,23 +64,24 @@
 				<input type="button" value="Pagar" onclick="pagar('Agenda/pagar.php')" :title=datos.botonP>
 				<input type="button" value="Borrar" onclick="borrar('Agenda/borrar.php')" :title=datos.botonBO>
 				<input type="button" value="Cambiar a deuda" onclick="pagar('Agenda/deuda.php')" :title=datos.botonD>
-				<span id="resultadoRevisar">{{datos.revisar}}</span>
-				<span class="resultado" id="resultadoBuscar">Listo</span>
-				<span class="resultado" id="resultadoPagar">Pagado</span>
-				<span class="resultado" id="resultadoBorrar">Borrado</span>
+				<h4 class="ocultar" id="resultadoRevisar">{{datos.revisarB}}</h4>
+				<h4 class="resultado ocultar" id="resultadoBuscar">Listo</h4>
+				<h4 class="resultado ocultar" id="resultadoPagar">Pagado</h4>
+				<h4 class="resultado ocultar" id="resultadoBorrar">Borrado</h4>
+				<h4 class="resultado ocultar" id="resultadoDeuda">Cambiado a deuda</h4>
 			</p>	
 		</div>	
 		<div id="resultadosBusqueda_ingresos">
 			<h3><strong id="ingreso" title="Total que suman los ingresos en la tabla">Ingresos</strong></h3>
 			<table style="width: 100%">
-				<tr><th style="width: 4%">ID</th><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th style="width: 10%">Anotado</th><th style="width: 20%">Modificado</th><th>Clasificación</th></tr>
+				<tr><th style="width: 4%">ID</th><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th style="width: 10%">Fecha</th><th style="width: 20%">Modificado</th><th>Clasificación</th></tr>
 				<tr v-for="dato in datos"><td>{{dato.id}}</td><td>{{dato.nombre}}</td><td>{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.modificado}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>
 		<div id="resultadosBusqueda_gastos">
 			<h3><strong id="gasto" title="Total que suman los gastos en la tabla">Gastos</strong></h3>
 			<table style="width: 100%">
-				<tr><th style="width: 4%">ID</th><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th style="width: 10%">Anotado</th><th style="width: 20%">Modificado</th><th>Clasificación</th></tr>
+				<tr><th style="width: 4%">ID</th><th>Producto</th><th style="width: 40%">Descripción</th><th>Valor</th><th style="width: 10%">Fecha</th><th style="width: 20%">Modificado</th><th>Clasificación</th></tr>
 				<tr v-for="dato in datos"><td>{{dato.id}}</td><td>{{dato.nombre}}</td><td>{{dato.descripcion}}</td><td>{{dato.costo}}</td><td>{{dato.fecha}}</td><td>{{dato.modificado}}</td><td>{{dato.tipo}}</td></tr>
 			</table>			
 		</div>		

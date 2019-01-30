@@ -23,31 +23,24 @@ a{
 span{
 	border-radius: 4px;
 	text-align: center;
-	width: 9em;
 }
 #ingresoRevisar{
 	background-color: red;
-	display: none;
 }
 #ingresoAgregado{
 	background-color: #1ddd00;
-	display: none;
 }
 #gastoRevisar{
 	background-color: red;
-	display: none;
 }
 #gastoAgregado{
 	background-color: #1ddd00;
-	display: none;
 }
 #resultadoRevisar{
 	background-color: red;
-	display: none;
 }
 .resultado{
 	background-color: #1ddd00;
-	display: none;
 }
 #estado{
 	text-align: center;
@@ -55,6 +48,9 @@ span{
 .descripcion{
 	width: 32em;
 }
-.ni{
+.ocultar{
 	display: none;
+	border-radius: 4px;
+	text-align: center;
+	font-size: 1.2em;
 }
