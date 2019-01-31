@@ -1,5 +1,16 @@
-p{
-	background-color: #edecec;
+body>div>div{
+	background-color: #dadada;
+	margin-bottom: 0.5em;
+	/*padding: 0 0.5em;*/
+}
+body>div>div>div{
+	display: inline-flex;
+	width: 100%;
+	justify-content: space-evenly;
+}
+div>p{
+	width: 10em;
+	margin: 0;
 }
 input{
 	width: 9em;
@@ -8,12 +19,12 @@ tr{
 	text-align: justify;
 }
 tr:nth-child(even) {
-  background-color: #ededed;
+  background-color: #dadada;
 }
 th {
     width: 15%;
 }			
-div{
+body>div{
 	border: solid 1px;
 }
 a{
@@ -21,8 +32,24 @@ a{
 	cursor: pointer;
 }
 span{
-	border-radius: 4px;
+	/*border-radius: 4px;*/
+	/*margin-top: 0.3em;*/
+}
+h4{
+	margin-top: 0;
+}
+footer{
+	margin-top: 0.5em;
 	text-align: center;
+	position: sticky;
+	bottom: 0;
+	background-color: black;
+	height: 2em;
+	padding-top: 1em;
+}
+footer>div{
+	color: white;
+	width: 100%;
 }
 #ingresoRevisar{
 	background-color: red;
