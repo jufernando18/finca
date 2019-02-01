@@ -239,8 +239,8 @@ function borrar(DataBase){
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
-	        	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
 	        	document.getElementsByClassName("busqueda")[0].value = '';//se limpia id
+	        	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
 				$( "#resultadoBorrar" ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
 					this.style.display = 'none';
 					this.style.opacity = '1';
