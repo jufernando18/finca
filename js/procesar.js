@@ -57,12 +57,18 @@ function buscar(DataBase){
     	case '' :
 	    	buscarIngresos = true;
 	    	buscarGastos = true;
+	    	document.getElementById("resultadosBusqueda_ingresos").style.display = "";
+	    	document.getElementById("resultadosBusqueda_gastos").style.display = "";
 	    	break;
     	case 'ingresos' :
 	    	buscarIngresos = true;
+	    	document.getElementById("resultadosBusqueda_ingresos").style.display = "";
+	    	document.getElementById("resultadosBusqueda_gastos").style.display = "none";
 	    	break;
     	case 'gastos' :
 	    	buscarGastos = true;
+	    	document.getElementById("resultadosBusqueda_ingresos").style.display = "none";
+	    	document.getElementById("resultadosBusqueda_gastos").style.display = "";
 	    	break;	    		        		
     }
     if (buscarIngresos) {
