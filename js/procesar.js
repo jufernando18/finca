@@ -3,7 +3,7 @@ var v_ingreso = new Vue ({el : "#resultadosBusqueda_ingresos",data : {datos: ""}
 var v_gasto = new Vue ({el : "#resultadosBusqueda_gastos",data : {datos: ""}});
 var v_entrada = new Vue ({el : "#entrada",data : {datos: es}});						
 window.onload = function(){
-	autocomplete('Agenda/autocompletar.php');
+	autocompletar('Agenda/autocompletar.php');
 	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
 }			
 fechaActual = new Date();
@@ -46,7 +46,7 @@ function ingresar(DataBase,dinero){
 				this.style.display = 'none';
 				this.style.opacity = '1';
 			});			
-			autocomplete('Agenda/autocompletar.php');
+			autocompletar('Agenda/autocompletar.php');
         }			        
     });				
 }
@@ -249,7 +249,7 @@ function borrar(DataBase){
 	        success: function (resultado){
 	        	document.getElementsByClassName("busqueda")[0].value = '';//se limpia id
 	        	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
-	        	autocomplete('Agenda/autocompletar.php');
+	        	autocompletar('Agenda/autocompletar.php');
 				$( "#resultadoBorrar" ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
 					this.style.display = 'none';
 					this.style.opacity = '1';
@@ -258,7 +258,7 @@ function borrar(DataBase){
 	    });
     }
 }
-function autocomplete(DataBase){
+function autocompletar(DataBase){
 	var nombre = document.getElementsByClassName('nombre');
 	var descripcion = document.getElementsByClassName('descripcion');
     $.ajax({
