@@ -249,6 +249,7 @@ function borrar(DataBase){
 	        success: function (resultado){
 	        	document.getElementsByClassName("busqueda")[0].value = '';//se limpia id
 	        	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
+	        	autocomplete('Agenda/autocompletar.php');
 				$( "#resultadoBorrar" ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
 					this.style.display = 'none';
 					this.style.opacity = '1';
