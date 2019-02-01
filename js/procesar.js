@@ -182,6 +182,7 @@ function pagar(DataBase){
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
+	        	document.getElementsByClassName("busqueda")[0].value = '';//se limpia id
 	        	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
 				$( "#"+idResultado ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
 					this.style.display = 'none';
@@ -208,6 +209,7 @@ function pagar(DataBase){
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
+	        	document.getElementsByClassName("busqueda")[0].value = '';//se limpia id
 				if (BUSCAR_AUTO)buscar('Agenda/buscar.php');	            
 				$( "#"+idResultado ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
 					this.style.display = 'none';
