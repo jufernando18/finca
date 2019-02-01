@@ -4,7 +4,7 @@ var v_gasto = new Vue ({el : "#resultadosBusqueda_gastos",data : {datos: ""}});
 var v_entrada = new Vue ({el : "#entrada",data : {datos: es}});						
 window.onload = function(){
 	autocomplete('Agenda/autocompletar.php');
-	if (BUSCAR_AUTO)buscar('Agenda/buscar.php','');
+	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
 }			
 fechaActual = new Date();
 if (ACTUALIZAR_INGRESO_GASTO_AUTO) {
@@ -36,7 +36,7 @@ function ingresar(DataBase,dinero){
         url:DataBase,
         dataType: "json",
         success: function (resultado){
-        	if (BUSCAR_AUTO)buscar('Agenda/buscar.php',dineroIG[4].value);
+        	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
         	if (LIMPIAR_AUTO) {
         		dineroIG[0].value='';
 	        	dineroIG[1].value='';
@@ -176,7 +176,7 @@ function pagar(DataBase){
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
-	        	buscar('Agenda/buscar.php');
+	        	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
 				$( "#"+idResultado ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
 					this.style.display = 'none';
 					this.style.opacity = '1';
@@ -202,7 +202,7 @@ function pagar(DataBase){
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
-				buscar('Agenda/buscar.php');	            
+				if (BUSCAR_AUTO)buscar('Agenda/buscar.php');	            
 				$( "#"+idResultado ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
 					this.style.display = 'none';
 					this.style.opacity = '1';
@@ -239,6 +239,7 @@ function borrar(DataBase){
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
+	        	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
 	        	document.getElementsByClassName("busqueda")[0].value = '';//se limpia id
 				$( "#resultadoBorrar" ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
 					this.style.display = 'none';
