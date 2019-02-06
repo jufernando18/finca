@@ -161,7 +161,7 @@ function pagar(DataBase){
 	} 
 	if (DataBase == "Agenda/deuda_pago.php"){
 		idResultado="resultadoDeuda";
-		if(!confirm("Está seguro que quiere cambiar de estado de lo seleccionado?"))return;
+		if(!confirm("Está seguro que quiere cambiar de estado lo seleccionado?"))return;
 	}
     if (buscarIngresos) {
 	    $.ajax({
