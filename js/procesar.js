@@ -159,9 +159,9 @@ function pagar(DataBase){
 		idResultado="resultadoPagar";
 		if(!confirm("Está seguro que quiere pagar lo seleccionado?"))return;
 	} 
-	if (DataBase == "Agenda/deuda.php"){
+	if (DataBase == "Agenda/deuda_pago.php"){
 		idResultado="resultadoDeuda";
-		if(!confirm("Está seguro que quiere cambiar a estado de deuda lo seleccionado?"))return;
+		if(!confirm("Está seguro que quiere cambiar de estado de lo seleccionado?"))return;
 	}
     if (buscarIngresos) {
 	    $.ajax({

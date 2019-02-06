@@ -77,10 +77,12 @@ require_once('db_connect.php');//importamos la conexion
         while ($row = mysqli_fetch_array($resultado)) {
             if ( is_numeric($row['costo'])) {
                 if (intval($row['costo']) > 0) {
-                    $costo = $row['costo'];
-                    $id = $row['id'];
-                    mysqli_query($con,"UPDATE tablaIngresos SET costo='-$costo', modificado=now() WHERE id='$id';");  
+                    $costo = "-".$row['costo'];
+                }else{
+                    $costo = explode('-', $row['costo'])[1];
                 }
+                $id = $row['id'];
+                mysqli_query($con,"UPDATE tablaIngresos SET costo='$costo', modificado=now() WHERE id='$id';");
             } else{
                 $costo = explode('|', $row['costo'])[1];
                 $id = $row['id'];
@@ -95,10 +97,12 @@ require_once('db_connect.php');//importamos la conexion
         while ($row = mysqli_fetch_array($resultado)) {
             if ( is_numeric($row['costo'])) {
                 if (intval($row['costo']) > 0) {
-                    $costo = $row['costo'];
-                    $id = $row['id'];
-                    mysqli_query($con,"UPDATE tablaGastos SET costo='-$costo', modificado=now() WHERE id='$id';");  
+                    $costo = "-".$row['costo'];  
+                }else{
+                    $costo = explode('-', $row['costo'])[1];
                 }
+                $id = $row['id'];
+                mysqli_query($con,"UPDATE tablaGastos SET costo='$costo', modificado=now() WHERE id='$id';");
             } else{
                 $costo = explode('|', $row['costo'])[1];
                 $id = $row['id'];
