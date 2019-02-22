@@ -70,9 +70,9 @@ require_once('db_connect.php');//importamos la conexion
         $busqueda = "WHERE fecha BETWEEN '$desde' AND '$hasta'";
     }
             
-    $sql = "SELECT * FROM tablaIngresos $busqueda order by fecha desc;";//generamos el script en sql
+    $sql = "SELECT * FROM ".DB_TABLE_INGRESOS." $busqueda order by fecha desc;";//generamos el script en sql
     if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM tablaGastos $busqueda order by fecha desc;";//generamos el script en sql
+        $sql = "SELECT * FROM ".DB_TABLE_GASTOS." $busqueda order by fecha desc;";//generamos el script en sql
     }
     $resultado = mysqli_query($con,$sql);//ejecutando el query
     

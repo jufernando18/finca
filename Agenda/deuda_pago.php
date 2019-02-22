@@ -72,7 +72,7 @@ require_once('db_connect.php');//importamos la conexion
     }
     
     if ($dinero == 'ingresos') {
-        $sql = "SELECT * FROM tablaIngresos $busqueda order by fecha desc;";//generamos el script en sql
+        $sql = "SELECT * FROM ".DB_TABLE_INGRESOS." $busqueda order by fecha desc;";//generamos el script en sql
         $resultado = mysqli_query($con,$sql);//ejecutando el query
         while ($row = mysqli_fetch_array($resultado)) {
             if ( is_numeric($row['costo'])) {
@@ -82,17 +82,17 @@ require_once('db_connect.php');//importamos la conexion
                     $costo = explode('-', $row['costo'])[1];
                 }
                 $id = $row['id'];
-                mysqli_query($con,"UPDATE tablaIngresos SET costo='$costo', modificado=now() WHERE id='$id';");
+                mysqli_query($con,"UPDATE ".DB_TABLE_INGRESOS." SET costo='$costo', modificado=now() WHERE id='$id';");
             } else{
                 $costo = explode('|', $row['costo'])[1];
                 $id = $row['id'];
-                mysqli_query($con,"UPDATE tablaIngresos SET costo='-$costo', modificado=now() WHERE id='$id';");  
+                mysqli_query($con,"UPDATE ".DB_TABLE_INGRESOS." SET costo='-$costo', modificado=now() WHERE id='$id';");  
             }
         }        
     }      
     
     if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM tablaGastos $busqueda order by fecha desc;";//generamos el script en sql
+        $sql = "SELECT * FROM ".DB_TABLE_GASTOS." $busqueda order by fecha desc;";//generamos el script en sql
         $resultado = mysqli_query($con,$sql);//ejecutando el query
         while ($row = mysqli_fetch_array($resultado)) {
             if ( is_numeric($row['costo'])) {
@@ -102,11 +102,11 @@ require_once('db_connect.php');//importamos la conexion
                     $costo = explode('-', $row['costo'])[1];
                 }
                 $id = $row['id'];
-                mysqli_query($con,"UPDATE tablaGastos SET costo='$costo', modificado=now() WHERE id='$id';");
+                mysqli_query($con,"UPDATE ".DB_TABLE_GASTOS." SET costo='$costo', modificado=now() WHERE id='$id';");
             } else{
                 $costo = explode('|', $row['costo'])[1];
                 $id = $row['id'];
-                mysqli_query($con,"UPDATE tablaGastos SET costo='-$costo', modificado=now() WHERE id='$id';");  
+                mysqli_query($con,"UPDATE ".DB_TABLE_GASTOS." SET costo='-$costo', modificado=now() WHERE id='$id';");  
             }
         }
     }

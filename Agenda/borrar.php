@@ -1,4 +1,6 @@
 <?php
+    //Importamos la conexion
+    require_once('db_connect.php');
 //Verificamos si se está usando GET o  POST para la comunicacion de la informacion
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 //Obtener los costoes de las variables
@@ -7,15 +9,11 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     //Crear una sentensia SQL
     if ($dinero == 'ingresos') {
-        $sql = "DELETE FROM tablaIngresos WHERE id ='$id';";//Como el id es incremental, se pone ese NULL
+        $sql = "DELETE FROM ".DB_TABLE_INGRESOS." WHERE id ='$id';";//Como el id es incremental, se pone ese NULL
     }
     if ($dinero == 'gastos') {
-        $sql = "DELETE FROM tablaGastos WHERE id ='$id';";//Como el id es incremental, se pone ese NULL
+        $sql = "DELETE FROM ".DB_TABLE_GASTOS." WHERE id ='$id';";//Como el id es incremental, se pone ese NULL
     }
-    
-
-    //Importamos la conexion
-    require_once('db_connect.php');
 
     //Ejecutamos el query
     $resultado_enviar=array();

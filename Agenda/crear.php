@@ -1,4 +1,6 @@
 <?php
+    //Importamos la conexion
+    require_once('db_connect.php');
 //Verificamos si se está usando GET o  POST para la comunicacion de la informacion
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 //Obtener los costoes de las variables
@@ -10,14 +12,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $dinero = $_GET['dinero'];
 
     //Crear una sentensia SQL
-    $sql = "INSERT INTO tablaIngresos (nombre, descripcion, costo, fecha, modificado, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha',now(),'$tipo')";//Como el id es incremental, se pone ese NULL
+    $sql = "INSERT INTO ".DB_TABLE_INGRESOS." (nombre, descripcion, costo, fecha, modificado, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha',now(),'$tipo')";//Como el id es incremental, se pone ese NULL
     if ($dinero == 'gasto') {
-        $sql = "INSERT INTO tablaGastos (nombre, descripcion, costo, fecha, modificado, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha',now(),'$tipo')";//Como el id es incremental, se pone ese NULL
+        $sql = "INSERT INTO ".DB_TABLE_GASTOS." (nombre, descripcion, costo, fecha, modificado, tipo) VALUES ('$nombre','$descripcion','$costo','$fecha',now(),'$tipo')";//Como el id es incremental, se pone ese NULL
     }
-    
-
-    //Importamos la conexion
-    require_once('db_connect.php');
 
     //Ejecutamos el query
     $resultado_enviar=array();

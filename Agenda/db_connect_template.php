@@ -7,6 +7,8 @@ define('DB_USER',"root");//Usuario
 define('DB_PASSWORD',"");//Contraseña
 define('DB_DATABASE',"");//Nombre de la base de datos
 define('DB_SERVER',"localhost");//Nombre o IP del servidor
+define('DB_TABLE_INGRESOS',"tablaIngresos");
+define('DB_TABLE_GASTOS',"tablaGastos");
 
 //Conexxion
 $con = mysqli_connect(DB_SERVER, DB_USER,DB_PASSWORD,DB_DATABASE) or die ('Unable to Connect');//Aquí se crea la conexion

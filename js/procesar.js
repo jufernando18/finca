@@ -98,7 +98,7 @@ function buscar(DataBase){
 	            		totalIngresos+=parseInt(resultado[i].costo);
 	            	}
 	            }
-	            document.getElementById("ingreso").innerHTML="Ingresos: "+totalIngresos+" | Deuda: "+totalIngresosDeudas;
+	            document.getElementById("ingreso").innerHTML="Ingresos: "+totalIngresos.toLocaleString()+" | Deuda: "+totalIngresosDeudas.toLocaleString();
 	        }
 	    });
     }	
@@ -129,7 +129,7 @@ function buscar(DataBase){
 	            		totalGastos+=parseInt(resultado[i].costo);
 	            	}
 	            }
-	            document.getElementById("gasto").innerHTML="Gastos: "+totalGastos+" | Deuda: "+totalGastosDeudas;	            
+	            document.getElementById("gasto").innerHTML="Gastos: "+totalGastos.toLocaleString()+" | Deuda: "+totalGastosDeudas.toLocaleString();	            
 	        }
 	    });			    
     } 
