@@ -1,3 +1,9 @@
+/*@media (orientation: portrait){
+	body>div>div>div{
+		display: table-caption!important;
+		text-align: center;
+	}
+}*/
 #entrada{
 	position: fixed;
 	margin-right: 0.5em;
