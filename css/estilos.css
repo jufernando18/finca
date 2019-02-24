@@ -1,3 +1,17 @@
+#entrada{
+	position: fixed;
+	margin-right: 0.5em;
+	background-color: white;
+}
+h1{
+	padding-top: 7em;
+	text-align: center;
+}
+h3{
+	text-align: center;
+	padding-top: 1em;
+	margin-bottom: 0.5em;
+}
 body>div>div{
 	background-color: #dadada;
 	margin-bottom: 0.5em;
@@ -25,7 +39,7 @@ th {
     width: 15%;
 }			
 body>div{
-	border: solid 1px;
+	/*border: solid 1px;*/
 }
 a{
 	color: blue;
