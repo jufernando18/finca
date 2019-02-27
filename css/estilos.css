@@ -18,12 +18,12 @@ h3{
 	padding-top: 1em;
 	margin-bottom: 0.5em;
 }
-body>div>div{
+#entrada>div{
 	background-color: #dadada;
 	margin-bottom: 0.5em;
 	/*padding: 0 0.5em;*/
 }
-body>div>div>div{
+#entrada>div>div{
 	display: inline-flex;
 	width: 100%;
 	justify-content: space-evenly;
