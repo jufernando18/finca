@@ -16,62 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tablaGastos`
---
-
-DROP TABLE IF EXISTS `tablaGastos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tablaGastos` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(150) DEFAULT NULL,
-  `costo` varchar(30) DEFAULT NULL,
-  `modificado` datetime DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `tipo` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tablaGastos`
---
-
-LOCK TABLES `tablaGastos` WRITE;
-/*!40000 ALTER TABLE `tablaGastos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tablaGastos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tablaIngresos`
---
-
-DROP TABLE IF EXISTS `tablaIngresos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tablaIngresos` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(150) DEFAULT NULL,
-  `costo` varchar(30) DEFAULT NULL,
-  `modificado` datetime DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `tipo` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tablaIngresos`
---
-
-LOCK TABLES `tablaIngresos` WRITE;
-/*!40000 ALTER TABLE `tablaIngresos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tablaIngresos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tablaUsuarios`
 --
 
@@ -83,6 +27,7 @@ CREATE TABLE `tablaUsuarios` (
   `nombre` varchar(50) DEFAULT NULL,
   `usuario` varchar(50) DEFAULT NULL,
   `contrasena` varchar(50) DEFAULT NULL,
+  `titulo` varchar(50) DEFAULT NULL,
   `creado` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -106,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-07 22:45:30
+-- Dump completed on 2019-03-07 23:10:16

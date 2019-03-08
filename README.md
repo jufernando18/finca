@@ -7,7 +7,7 @@ En el front corre html, css, Vue, Vanilla y JQuery js.
 En el back corre php(con la extensión mysql) y SQLServer.
 
 Tomar el modelo de base de datos que se proporciona en SQLdb_template.sql
-Actualmente, requiere una base de datos con 2 tablas, una para ingresos y otra para gastos.
+Actualmente, requiere una base de datos con 1 tabla de usuarios. Se crean 2 tablas(para ingresos y gastos) por cada usuario registrado.
 Los nombres tanto de base de datos como de las tablas se pueden configurar a gusto usando 
 como base el archivo Agenda/db_connect_template.php . Para usarlo, cambiar nombre por db_connect.php, el cual no tendrá 
 seguimiento por parte de Git.

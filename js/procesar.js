@@ -1,8 +1,13 @@
 const BUSCAR_AUTO =true,ACTUALIZAR_BUSQUEDA_AUTO=false,ACTUALIZAR_INGRESO_GASTO_AUTO=true, TIEMPO_NOTIFICACION=1000, TIEMPO_NOTIFICACION_OK=1000, TIEMPO_NOTIFICACION_FAIL=3000, LIMPIAR_AUTO=true;
 var v_ingreso = new Vue ({el : "#resultadosBusqueda_ingresos",data : {datos: ""}});	
 var v_gasto = new Vue ({el : "#resultadosBusqueda_gastos",data : {datos: ""}});
-var v_entrada = new Vue ({el : "#header",data : {datos: es}});						
+var v_entrada = new Vue ({el : "#header",data : {datos: es}});	
+var usuario;					
 window.onload = function(){
+	usuario = document.URL.substr(document.URL.indexOf('?')+1).split('&')[0].split('=')[1];
+	v_entrada.datos.nombre = document.URL.substr(document.URL.indexOf('?')+1).split('&')[1].split('=')[1].replace(/%20/g, " ");
+	console.log(usuario);
+	console.log(v_entrada.datos.nombre );
 	autocompletar('Agenda/autocompletar.php');
 	if (BUSCAR_AUTO)buscar('Agenda/buscar.php');
 }			
@@ -18,7 +23,7 @@ if (ACTUALIZAR_BUSQUEDA_AUTO){
 	document.getElementById('ano').value = fechaActual.getFullYear();
 	document.getElementById('mes').value = fechaActual.getMonth()+1;
 }
-function ingresar(DataBase,dinero){
+function insertar(DataBase,dinero){
 	var datos;
 	var dineroIG = document.getElementsByClassName("ingreso");
 	if (dinero == 'gasto')dineroIG = document.getElementsByClassName("gasto");
@@ -29,7 +34,7 @@ function ingresar(DataBase,dinero){
 		});
 		return;
 	}
-	datos = {"nombre" : dineroIG[0].value,"descripcion" : dineroIG[1].value,"costo" : dineroIG[2].value,"fecha" : dineroIG[3].value,"tipo" : dineroIG[4].value, "dinero" : dinero};
+	datos = {"usuario" : usuario ,"nombre" : dineroIG[0].value,"descripcion" : dineroIG[1].value,"costo" : dineroIG[2].value,"fecha" : dineroIG[3].value,"tipo" : dineroIG[4].value, "dinero" : dinero};
     $.ajax({
         data: datos,
         type:'get',
@@ -74,6 +79,7 @@ function buscar(DataBase){
     if (buscarIngresos) {
 	    $.ajax({
 	        data: {
+	        		"usuario" : usuario ,
 	    			"id" : datosBusqueda[0].value,    	        	
 	    			"nombre" : datosBusqueda[1].value,
 	    			"descripcion" : datosBusqueda[2].value,
@@ -105,6 +111,7 @@ function buscar(DataBase){
     if (buscarGastos) {
 	    $.ajax({
 	        data: {
+	        		"usuario" : usuario ,
 	    			"id" : datosBusqueda[0].value,    	        	
 	    			"nombre" : datosBusqueda[1].value,
 	    			"descripcion" : datosBusqueda[2].value,
@@ -166,6 +173,7 @@ function pagar(DataBase){
     if (buscarIngresos) {
 	    $.ajax({
 	        data: {
+	        		"usuario" : usuario ,
 	    			"id" : datosBusqueda[0].value,    	        	
 	    			"nombre" : datosBusqueda[1].value,
 	    			"descripcion" : datosBusqueda[2].value,
@@ -194,6 +202,7 @@ function pagar(DataBase){
     if (buscarGastos) {
 	    $.ajax({
 	        data: {
+	        		"usuario" : usuario ,
 	    			"id" : datosBusqueda[0].value,    	        	
 	    			"nombre" : datosBusqueda[1].value,
 	    			"descripcion" : datosBusqueda[2].value,
@@ -233,6 +242,7 @@ function borrar(DataBase){
     }else{
 		$.ajax({
 	        data: {
+	        		"usuario" : usuario ,
 	    			"id" : datosBusqueda[0].value,    	        	
 	    			"nombre" : datosBusqueda[1].value,
 	    			"descripcion" : datosBusqueda[2].value,
@@ -263,6 +273,7 @@ function autocompletar(DataBase){
 	var nombre = document.getElementsByClassName('nombre');
 	var descripcion = document.getElementsByClassName('descripcion');
     $.ajax({
+    	data: { "usuario" : usuario},
         type:'get',
         url:DataBase,
         dataType: "json",
