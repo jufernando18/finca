@@ -14,7 +14,7 @@ window.onload = function(){
 		autocompletar('Agenda/autocompletar.php');	
 		if (BUSCAR_AUTO) buscar('Agenda/buscar.php');
 	} else{
-		alert("Para administrar sus registros, primero debe iniciar sesión");
+		//alert("Para administrar sus registros, primero debe iniciar sesión");
 		document.getElementById('salir').style.display = 'none';
 		document.getElementById('contenido').style.display = 'none';
 		document.getElementById('login').style.display = 'block';
