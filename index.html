@@ -9,64 +9,162 @@
 		<title>Finca</title>
 	</head>
 	<body>
-        <strong>Ya estoy registrado: </strong>
-        <input type="text" value="" placeholder="usuario">
-        <input type="text" value="" placeholder="contraseña">
-        <input type="button" value="ingresar" onclick="ingresar('Agenda/ingresar.php')">
-        <br><br>
-        <strong>Aún no estoy registrado: </strong>
-        <input type="text" value="" placeholder="nombre">
-        <input type="text" value="" placeholder="usuario">
-        <input type="text" value="" placeholder="contraseña">
-        <input type="text" value="" placeholder="título del registro">                
-        <input type="button" value="Registrarme" onclick="registrar('Agenda/registrar.php')"> 
-		<script type="text/javascript">
-			function ingresar(DataBase){
-				var input = document.getElementsByTagName('input');
-				var datos = {"usuario" : input[0].value,"contrasena" : input[1].value};
-				$.ajax({
-					data: datos,
-					type:'get',
-					url:DataBase,
-					dataType: "json",
-					success: function (resultado){
-						if (resultado['usuarioEstado'] == "true" && resultado['contrasenaEstado'] == "true") {
-							document.location.href = 'content.html?usuario='+input[0].value+"&titulo="+resultado.titulo;
-						}
-					}			        
-				});					
-			}
-			function registrar(DataBase){
-				var input = document.getElementsByTagName('input');
-				if (input[4].value.split(' ').length > 1) {
-					alert("El nombre de usuario no debe contener espacios");
-					return;
-				}
-				var datos = {"nombre" : input[3].value,"usuario" : input[4].value,"contrasena" : input[5].value,"titulo" : input[6].value};
-				$.ajax({
-					data: datos,
-					type:'get',
-					url:DataBase,
-					dataType: "json",
-					success: function (resultado){
-						switch(resultado['estadoUsuario']){
-							case 'OK':
-								alert("El usuario fue creado con éxito");
-								break;
-							case 'No se pudo hacer crear el usuario':
-								alert("No se pudo hacer crear el usuario");
-								break;
-							case 'El usuario ya existe':
-								alert("El usuario ya existe");
-								break;
-							default:
-						}
-					}			        
-				});					
-			}			
-		</script>
+		<div id="login">
+	        <strong>Ya estoy registrado: </strong>
+	        <input type="text" value="" class="login" placeholder="usuario">
+	        <input type="password" value="" class="login" placeholder="contraseña">
+	        <input type="button" value="ingresar" onclick="ingresar('Agenda/ingresar.php')">
+	        <br><br>
+	        <strong>Aún no estoy registrado: </strong>
+	        <input type="text" value="" class="registro" placeholder="nombre">
+	        <input type="text" value="" class="registro" placeholder="usuario">
+	        <input type="text" value="" class="registro" placeholder="contraseña">
+	        <input type="text" value="" class="registro" placeholder="título del registro">                
+	        <input type="button" value="Registrarme" onclick="registrar('Agenda/registrar.php')"> 			
+		</div>
+		<div id="contenido">
+			<div id="header">
+				<div id="entrada">
+					<div id="ingresos">
+						<p><strong>Ingresos: </strong></p>
+						<div>
+							<input type="text" value="" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI list="nombreI">
+							<datalist id="nombreI">
+								<option v-for="dato in datos.nombreIngreso">{{dato.nombre}}</option>
+							</datalist>
+							<input type="text" value="" class="ingreso descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionI">
+							<datalist id="descripcionI">
+								<option v-for="dato in datos.descripcionIngreso">{{dato.descripcion}}</option>
+							</datalist>
+							<input type="text" value="" class="ingreso" placeholder="costo" :title=datos.costoGI>
+							<input type="date" class="ingreso" id ="datePicker_ingreso" :title=datos.fechaI>
+							<select class="ingreso" :title=datos.tipo>
+								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
+							</select> 								
+							<input type="button" value="agregar ingreso" onclick="insertar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
+						</div>
+							<h4 class="ocultar" id="ingresoRevisar">{{datos.revisar}}</h4>
+							<h4 class="ocultar" id="ingresoAgregado">{{datos.agregado}}</h4>
+					</div>
+					<div id="gastos">
+						<p><strong>Gastos: </strong></p>
+						<div>
+							<input type="text" value="" class="gasto nombre" placeholder="nombre" :title=datos.nombreG list="nombreG">
+							<datalist id="nombreG">
+								<option v-for="dato in datos.nombreGasto">{{dato.nombre}}</option>
+							</datalist>
+							<input type="text" value="" class="gasto descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionG">
+							<datalist id="descripcionG">
+								<option v-for="dato in datos.descripcionGasto">{{dato.descripcion}}</option>
+							</datalist>
+							<input type="text" value="" class="gasto" placeholder="costo" :title=datos.costoGI>
+							<input type="date" class="gasto" id ="datePicker_gasto" :title=datos.fechaG>	
+							<select class="gasto" :title=datos.tipo>
+								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
+							</select> 				
+							<input type="button" value="agregar gasto" onclick="insertar('Agenda/crear.php','gasto')" :title=datos.botonG>	
+						</div>
+							<h4 class="ocultar" id="gastoRevisar">{{datos.revisar}}</h4>	
+							<h4 class="ocultar" id="gastoAgregado">{{datos.agregado}}</h4>		
+					</div>		
+					<div>		
+						<p><strong>Busqueda: </strong></p>
+						<div>
+							<input type="text" value="" class="busqueda" placeholder="id" style="width: 4em">
+							<input type="text" value="" class="busqueda nombre" placeholder="nombre" :title=datos.nombreB list="nombres">
+							<datalist id="nombres">
+								<option v-for="dato in datos.nombreIG">{{dato.nombre}}</option>
+							</datalist>
+							<input type="text" value="" class="busqueda descripcion" placeholder="descripción" :title=datos.descripcion list="descripciones">
+							<datalist id="descripciones">
+								<option v-for="dato in datos.descripcionIG">{{dato.descripcion}}</option>
+							</datalist>
+							<input type="text" value="" class="busqueda" placeholder="costo" :title=datos.costoB>
+							<input type="text" value="" class="busqueda" id="ano" placeholder="año" :title=datos.ano style="width: 4em">
+							<input type="text" value="" class="busqueda" id="mes" placeholder="mes" :title=datos.mes style="width: 2em">
+							<input type="text" value="" class="busqueda" placeholder="dia" :title=datos.dia style="width: 2em">
+							<select class="busqueda" :title=datos.tipo>
+								<option v-for="dato in datos.opcionesB" :value=dato.valor>{{dato.opcion}}</option>
+							</select> 
+							<select class="busqueda" :title=datos.dinerosB>
+								<option v-for="dato in datos.dineroB" :value=dato.valor>{{dato.dinero}}</option>
+							</select>				
+						</div>
+						<div>
+							<span>desde: </span>
+							<input type="date" class="busqueda" id ="datePicker_Bdesde" :title=datos.fechaDesde>
+							<span> hasta: </span>
+							<input type="date" class="busqueda" id ="datePicker_Bhasta" :title=datos.fechaHasta>
+							<input type="button" value="Buscar" onclick="buscar('Agenda/buscar.php')" :title=datos.botonB>
+							<span> se paga el día: </span>
+							<input type="date" class="busqueda" id ="datePicker_Bpago" :title=datos.fechaPago>			
+							<input type="button" value="Pagar" onclick="pagar('Agenda/pagar.php')" :title=datos.botonP>
+							<input type="button" value="Borrar" onclick="borrar('Agenda/borrar.php')" :title=datos.botonBO>
+							<input type="button" value="deuda/pago" onclick="pagar('Agenda/deuda_pago.php')" :title=datos.botonD>
+						</div>
+							<h4 class="ocultar" id="resultadoRevisar">{{datos.revisarB}}</h4>
+							<h4 class="resultado ocultar" id="resultadoBuscar">Listo</h4>
+							<h4 class="resultado ocultar" id="resultadoPagar">Pagado</h4>
+							<h4 class="resultado ocultar" id="resultadoBorrar">Borrado</h4>
+							<h4 class="resultado ocultar" id="resultadoDeuda">Cambiado deuda/pago</h4>
+					</div>	
+				</div>				
+				<h1>{{datos.titulo}}</h1>
+			</div>
+			<div id="resultadosBusqueda_ingresos">
+				<h3><strong id="ingreso" title="Total que suman los ingresos en la tabla">Ingresos</strong></h3>
+				<table style="width: 100%">
+					<tr>
+						<th style="width: 4%">ID</th>
+						<th>Producto</th>
+						<th style="width: 40%">Descripción</th>
+						<th>Valor</th>
+						<th style="width: 10%">Fecha</th>
+						<th style="width: 20%">Modificado</th>
+						<th>Clasificación</th>
+					</tr>
+					<tr v-for="dato in datos">
+						<td>{{dato.id}}</td>
+						<td>{{dato.nombre}}</td>
+						<td>{{dato.descripcion}}</td>
+						<td>{{dato.costo}}</td>
+						<td>{{dato.fecha}}</td>
+						<td>{{dato.modificado}}</td>
+						<td>{{dato.tipo}}</td>
+					</tr>
+				</table>			
+			</div>
+			<div id="resultadosBusqueda_gastos">
+				<h3><strong id="gasto" title="Total que suman los gastos en la tabla">Gastos</strong></h3>
+				<table style="width: 100%">
+					<tr>
+						<th style="width: 4%">ID</th>
+						<th>Producto</th>
+						<th style="width: 40%">Descripción</th>
+						<th>Valor</th>
+						<th style="width: 10%">Fecha</th>
+						<th style="width: 20%">Modificado</th>
+						<th>Clasificación</th>
+					</tr>
+					<tr v-for="dato in datos">
+						<td>{{dato.id}}</td>
+						<td>{{dato.nombre}}</td>
+						<td>{{dato.descripcion}}</td>
+						<td>{{dato.costo}}</td>
+						<td>{{dato.fecha}}</td>
+						<td>{{dato.modificado}}</td>
+						<td>{{dato.tipo}}</td>
+					</tr>
+				</table>			
+			</div>				
+		</div>			
+		<script type="text/javascript" src="js/funciones.js"></script>
+		<script type="text/javascript" src="js/procesar.js"></script>
 	</body>
 	<footer>
-		<div>Realizado por Juan Fernando Echavarria Zapata - fernando.echavarria@powersite.online</div>
+		<div>
+			Realizado por Juan Fernando Echavarria Zapata - fernando.echavarria@powersite.online
+			<input type="button" id="salir" value="Salir" onclick="document.location.href = 'index.html';">
+		</div>
 	</footer>
 </html>

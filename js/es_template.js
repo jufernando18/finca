@@ -1,6 +1,6 @@
 es =
 {
-	"nombre" : 'Finca de Jhon Fernando',
+	"titulo" : 'Finca de Jhon Fernando',
 	"nombreG" : 'Que producto compró?',
 	"nombreI" : 'Que producto vendió?',
 	"nombreB" : 'Qué quiere buscar?',
