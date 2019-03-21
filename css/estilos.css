@@ -41,6 +41,7 @@ h3{
 	display: inline-flex;
 	width: 100%;
 	justify-content: space-evenly;
+	margin-bottom: 0.2em;
 }
 div>p{
 	width: 10em;
@@ -48,6 +49,10 @@ div>p{
 }
 input{
 	width: 9em;
+	border-radius: 1em 0;
+}
+select{
+	border-radius: 1em 0;
 }
 tr{
 	text-align: justify;

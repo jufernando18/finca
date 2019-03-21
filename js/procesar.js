@@ -2,7 +2,9 @@ const BUSCAR_AUTO =true,ACTUALIZAR_BUSQUEDA_AUTO=false,ACTUALIZAR_INGRESO_GASTO_
 var v_ingreso = new Vue ({el : "#resultadosBusqueda_ingresos",data : {datos: ""}});	
 var v_gasto = new Vue ({el : "#resultadosBusqueda_gastos",data : {datos: ""}});
 var v_entrada = new Vue ({el : "#header",data : {datos: es}});	
-var usuario;					
+var usuario;			
+let login = new Login;
+let crud = new Crud;		
 window.onload = function(){
 	usuario = document.URL.indexOf('?')+1;
 	if (usuario) {
@@ -11,16 +13,13 @@ window.onload = function(){
 		document.getElementById('login').style.display = 'none';
 		v_entrada.datos.titulo =  document.URL.substr(usuario).split('&')[1].split('=')[1].replace(/%20/g, " ");
 		usuario =  document.URL.substr(usuario).split('&')[0].split('=')[1];
-		autocompletar('Agenda/autocompletar.php');	
-		if (BUSCAR_AUTO) buscar('Agenda/buscar.php');
+		crud.autocompletar('Agenda/autocompletar.php');	
+		if (BUSCAR_AUTO) crud.buscar('Agenda/buscar.php');
 	} else{
-		//alert("Para administrar sus registros, primero debe iniciar sesión");
 		document.getElementById('salir').style.display = 'none';
 		document.getElementById('contenido').style.display = 'none';
 		document.getElementById('login').style.display = 'block';
 	}
-	console.log(usuario);
-	console.log(v_entrada.datos.titulo );
 }			
 fechaActual = new Date();
 if (ACTUALIZAR_INGRESO_GASTO_AUTO) {

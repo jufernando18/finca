@@ -13,14 +13,14 @@
 	        <strong>Ya estoy registrado: </strong>
 	        <input type="text" value="" class="login" placeholder="usuario">
 	        <input type="password" value="" class="login" placeholder="contraseña">
-	        <input type="button" value="ingresar" onclick="ingresar('Agenda/ingresar.php')">
+	        <input type="button" value="ingresar" onclick="login.ingresar('Agenda/ingresar.php')">
 	        <br><br>
 	        <strong>Aún no estoy registrado: </strong>
 	        <input type="text" value="" class="registro" placeholder="nombre">
 	        <input type="text" value="" class="registro" placeholder="usuario">
 	        <input type="text" value="" class="registro" placeholder="contraseña">
 	        <input type="text" value="" class="registro" placeholder="título del registro">                
-	        <input type="button" value="Registrarme" onclick="registrar('Agenda/registrar.php')"> 			
+	        <input type="button" value="Registrarme" onclick="login.registrar('Agenda/registrar.php')"> 			
 		</div>
 		<div id="contenido">
 			<div id="header">
@@ -41,7 +41,7 @@
 							<select class="ingreso" :title=datos.tipo>
 								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
 							</select> 								
-							<input type="button" value="agregar ingreso" onclick="insertar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
+							<input type="button" value="agregar ingreso" onclick="crud.insertar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
 						</div>
 							<h4 class="ocultar" id="ingresoRevisar">{{datos.revisar}}</h4>
 							<h4 class="ocultar" id="ingresoAgregado">{{datos.agregado}}</h4>
@@ -62,7 +62,7 @@
 							<select class="gasto" :title=datos.tipo>
 								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
 							</select> 				
-							<input type="button" value="agregar gasto" onclick="insertar('Agenda/crear.php','gasto')" :title=datos.botonG>	
+							<input type="button" value="agregar gasto" onclick="crud.insertar('Agenda/crear.php','gasto')" :title=datos.botonG>	
 						</div>
 							<h4 class="ocultar" id="gastoRevisar">{{datos.revisar}}</h4>	
 							<h4 class="ocultar" id="gastoAgregado">{{datos.agregado}}</h4>		
@@ -95,12 +95,12 @@
 							<input type="date" class="busqueda" id ="datePicker_Bdesde" :title=datos.fechaDesde>
 							<span> hasta: </span>
 							<input type="date" class="busqueda" id ="datePicker_Bhasta" :title=datos.fechaHasta>
-							<input type="button" value="Buscar" onclick="buscar('Agenda/buscar.php')" :title=datos.botonB>
+							<input type="button" value="Buscar" onclick="crud.buscar('Agenda/buscar.php')" :title=datos.botonB>
 							<span> se paga el día: </span>
 							<input type="date" class="busqueda" id ="datePicker_Bpago" :title=datos.fechaPago>			
-							<input type="button" value="Pagar" onclick="pagar('Agenda/pagar.php')" :title=datos.botonP>
-							<input type="button" value="Borrar" onclick="borrar('Agenda/borrar.php')" :title=datos.botonBO>
-							<input type="button" value="deuda/pago" onclick="pagar('Agenda/deuda_pago.php')" :title=datos.botonD>
+							<input type="button" value="Pagar" onclick="crud.pagar('Agenda/pagar.php')" :title=datos.botonP>
+							<input type="button" value="Borrar" onclick="crud.borrar('Agenda/borrar.php')" :title=datos.botonBO>
+							<input type="button" value="deuda/pago" onclick="crud.pagar('Agenda/deuda_pago.php')" :title=datos.botonD>
 						</div>
 							<h4 class="ocultar" id="resultadoRevisar">{{datos.revisarB}}</h4>
 							<h4 class="resultado ocultar" id="resultadoBuscar">Listo</h4>

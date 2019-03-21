@@ -29,7 +29,7 @@ es =
 	"fechaDesde" : 'Desde qué fecha quiere buscar',
 	"fechaHasta" : 'Hasta qué fecha quiere buscar',
 	"fechaPago" : 'Fecha en que se realizó el pago',
-	"dineroB" : [{"dinero" :  'Todos', "valor" : ''},{"dinero" :  'ingresos', "valor" : 'ingresos'},{"dinero" :  'gastos', "valor" : 'gastos'}],
+	"dineroB" : [{"dinero" :  'todos', "valor" : ''},{"dinero" :  'ingresos', "valor" : 'ingresos'},{"dinero" :  'gastos', "valor" : 'gastos'}],
 	"opcionesIG" : [{"opcion" : 'cafe',"valor" : 'cafe'},{"opcion" : 'ganado',"valor" : 'ganado'},{"opcion" : 'cerdos',"valor" : 'cerdos'},{"opcion" : 'revuelto',"valor" : 'revuelto'},{"opcion" : 'otros',"valor" : 'otros'}],
 	"opcionesB" : [{"opcion" : 'todos',"valor" : ''},{"opcion" : 'cafe',"valor" : 'cafe'},{"opcion" : 'ganado',"valor" : 'ganado'},{"opcion" : 'cerdos',"valor" : 'cerdos'},{"opcion" : 'revuelto',"valor" : 'revuelto'},{"opcion" : 'otros',"valor" : 'otros'}],
 	"revisar" : 'Revisar',
