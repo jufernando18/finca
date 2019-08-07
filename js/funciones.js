@@ -272,23 +272,40 @@ class Login{
 			url:DataBase,
 			dataType: "json",
 			success: function (resultado){
-				if (resultado['usuarioEstado'] == "true" && resultado['contrasenaEstado'] == "true") {
-					document.location.href = 'index.html?usuario='+input[0].value+"&titulo="+resultado.titulo;
+				if (resultado['valid'] == "true") {
+
+					document.location.href = 'index.html?usuario='+input[0].value+'&nombre='+resultado.nombre+"&titulo="+resultado.titulo;
 				}
 			}			        
 		});					
 	}	
 	registrar(DataBase){
 		var input = document.getElementsByClassName('registro');
-		if (input[1].value.split(' ').length > 1) {
+		if (input[1].value.length == 0) {
+			alert("Ingrese un usuario");
+			return;
+		} 
+		if(input[1].value.split(' ').length > 1) {
 			alert("El nombre de usuario no debe contener espacios");
 			return;
 		}
+		if (input[2].value.length == 0) {
+			alert("Ingrese una contraseña");
+			return;
+		} 
+		if(input[2].value.split(' ').length > 1) {
+			alert("La contraseña no debe contener espacios");
+			return;
+		}	
+		if(!(input[2].value == input[3].value)) {
+			alert("Las contraseñas no coinciden");
+			return;
+		}				
 		this._datos = {
 			"nombre" : input[0].value,
 			"usuario" : input[1].value,
 			"contrasena" : input[2].value,
-			"titulo" : input[3].value};
+			"titulo" : input[4].value};
 		$.ajax({
 			data: this._datos,
 			type:'get',

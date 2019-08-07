@@ -11,8 +11,11 @@ window.onload = function(){
 		document.getElementById('salir').style.display = 'block';
 		document.getElementById('contenido').style.display = 'block';
 		document.getElementById('login').style.display = 'none';
-		v_entrada.datos.titulo =  document.URL.substr(usuario).split('&')[1].split('=')[1].replace(/%20/g, " ");
-		usuario =  document.URL.substr(usuario).split('&')[0].split('=')[1];
+		urlData = document.URL.substr(usuario).replace(/%20/g, " ");
+		urlData = urlData.split('&');
+		v_entrada.datos.titulo = urlData[2].split('=')[1];
+		v_entrada.datos.nombre = urlData[1].split('=')[1];
+		usuario = urlData[0].split('=')[1];
 		crud.autocompletar('Agenda/autocompletar.php');	
 		if (BUSCAR_AUTO) crud.buscar('Agenda/buscar.php');
 	} else{
