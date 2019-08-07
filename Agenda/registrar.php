@@ -7,8 +7,6 @@ require_once('db_connect.php');//importamos la conexion
     if (empty(mysqli_fetch_array($resultado))) {
         $sql = "INSERT INTO ".DB_TABLE_USUARIOS." (nombre, usuario, contrasena, titulo, creado) VALUES ('$nombre','$usuario','$contrasena','$titulo',now())";
 
-        //Ejecutamos el query
-        $resultado_enviar=array();
         if(mysqli_query($con, $sql)){
             $resultado_enviar['estadoUsuario']='OK';
             $resultado_enviar['tablaIngresos']= $tablaIngresos;
@@ -36,14 +34,6 @@ require_once('db_connect.php');//importamos la conexion
             $resultado_enviar['estadoTablaIngresos']='No se pudo crear la tabla de ingresos';
             $resultado_enviar['estadoTablaGastos']='No se pudo crear la tabla de gastos';        
     }
-
-
-
-    
-    header('Content-type: application/json; charset=utf-8');
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Allow-Methods: POST, GET');
-    header('Access-Control-Allow-Credentials: *');
 
     echo json_encode($resultado_enviar);//se genera un JSON con el resultado
 

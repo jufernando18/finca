@@ -1,5 +1,12 @@
 <?php
-require_once('db_connect.php');//importamos la conexion
+    require_once('validarSesion.php');//importamos la conexion
+
+    if (!$sesion){
+        echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+        mysqli_close($con);//se cierra la conexion
+        exit;
+    }
+
     $busqueda = '';
 
     if($tipo != ''){
@@ -65,12 +72,7 @@ require_once('db_connect.php');//importamos la conexion
         $sql = "SELECT * FROM $tablaGastos $busqueda order by fecha desc;";//generamos el script en sql
     }
     $resultado = mysqli_query($con,$sql);//ejecutando el query
-    
-    header('Content-type: application/json; charset=utf-8');
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Allow-Methods: POST, GET');
-    header('Access-Control-Allow-Credentials: *');
-    $resultado_enviar=array();
+
     $posicion=0;
     while ($row = mysqli_fetch_array($resultado)) {
         $resultado_enviar[$posicion]['id']=$row['id'];

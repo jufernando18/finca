@@ -2,20 +2,17 @@ const BUSCAR_AUTO =true,ACTUALIZAR_BUSQUEDA_AUTO=false,ACTUALIZAR_INGRESO_GASTO_
 var v_ingreso = new Vue ({el : "#resultadosBusqueda_ingresos",data : {datos: ""}});	
 var v_gasto = new Vue ({el : "#resultadosBusqueda_gastos",data : {datos: ""}});
 var v_entrada = new Vue ({el : "#header",data : {datos: es}});	
-var usuario;			
+var token;			
 let login = new Login;
 let crud = new Crud;		
 window.onload = function(){
-	usuario = document.URL.indexOf('?')+1;
-	if (usuario) {
+	let tokenIndex = document.URL.indexOf('?')+1;
+	if (tokenIndex) {
 		document.getElementById('salir').style.display = 'block';
 		document.getElementById('contenido').style.display = 'block';
 		document.getElementById('login').style.display = 'none';
-		urlData = document.URL.substr(usuario).replace(/%20/g, " ");
-		urlData = urlData.split('&');
-		v_entrada.datos.titulo = urlData[2].split('=')[1];
-		v_entrada.datos.nombre = urlData[1].split('=')[1];
-		usuario = urlData[0].split('=')[1];
+		token = document.URL.substr(tokenIndex);
+		window.history.replaceState({}, document.title, document.URL.substr(0,tokenIndex-"index.html?".length));
 		crud.autocompletar('Agenda/autocompletar.php');	
 		if (BUSCAR_AUTO) crud.buscar('Agenda/buscar.php');
 	} else{

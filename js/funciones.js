@@ -13,7 +13,7 @@ class Crud{
 			return;
 		}
 		_this._datos = {
-			"usuario" : usuario,
+			"token" : token,
 			"nombre" : dineroIG[0].value,
 			"descripcion" : dineroIG[1].value,
 			"costo" : dineroIG[2].value,
@@ -26,6 +26,7 @@ class Crud{
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
+						if(!_this.validar(resultado))return;
 	        	if (BUSCAR_AUTO)_this.buscar('Agenda/buscar.php');
 	        	if (LIMPIAR_AUTO) {
 	        		dineroIG[0].value='';
@@ -65,7 +66,7 @@ class Crud{
 		    	break;	    		        		
 		}
 		_this._datos = {
-			"usuario" : usuario ,
+			"token" : token ,
 			"id" : datosBusqueda[0].value,    	        	
 			"nombre" : datosBusqueda[1].value,
 			"descripcion" : datosBusqueda[2].value,
@@ -84,6 +85,7 @@ class Crud{
 		        url:DataBase,
 		        dataType: "json",
 		        success: function (resultado){
+							if(!_this.validar(resultado))return;
 		        	v_ingreso.datos = resultado;
 		            for (var i = 0; i < resultado.length; i++) {
 		            	if (isNaN(parseInt(resultado[i].costo))) {
@@ -105,6 +107,7 @@ class Crud{
 		        url:DataBase,
 		        dataType: "json",
 		        success: function (resultado){
+							if(!_this.validar(resultado))return;
 		        	v_gasto.datos = resultado;
 		            for (var i = 0; i < resultado.length; i++) {
 		            	if (isNaN(parseInt(resultado[i].costo))) {
@@ -144,7 +147,7 @@ class Crud{
 			if(!confirm("Está seguro que quiere cambiar de estado lo seleccionado?"))return;
 		}
 		_this._datos = {
-			"usuario" : usuario ,
+			"token" : token ,
 			"id" : datosBusqueda[0].value,    	        	
 			"nombre" : datosBusqueda[1].value,
 			"descripcion" : datosBusqueda[2].value,
@@ -163,6 +166,7 @@ class Crud{
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){
+						if(!_this.validar(resultado))return;
 	        	datosBusqueda[0].value = '';//se limpia id
 	        	if (BUSCAR_AUTO)_this.buscar('Agenda/buscar.php');
 				$( "#"+idResultado ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
@@ -182,7 +186,7 @@ class Crud{
 			});			 		
 	    }else{
 	    	_this._datos = {
-	    		"usuario" : usuario ,
+	    		"token" : token ,
 				"id" : datosBusqueda[0].value,    	        	
 				"nombre" : datosBusqueda[1].value,
 				"descripcion" : datosBusqueda[2].value,
@@ -200,6 +204,7 @@ class Crud{
 		        url:DataBase,
 		        dataType: "json",
 		        success: function (resultado){
+							if(!_this.validar(resultado))return;
 		        	document.getElementsByClassName("busqueda")[0].value = '';//se limpia id
 		        	if (BUSCAR_AUTO)_this.buscar('Agenda/buscar.php');
 		        	_this.autocompletar('Agenda/autocompletar.php');
@@ -212,50 +217,61 @@ class Crud{
 	    }
 	}	
 	autocompletar(DataBase){
-		var nombre = document.getElementsByClassName('nombre');
-		var descripcion = document.getElementsByClassName('descripcion');
 		let _this = this;
 		_this._datos = { 
-			"usuario" : usuario};
+			"token" : token};
 	    $.ajax({
 	    	data: _this._datos,
 	        type:'get',
 	        url:DataBase,
 	        dataType: "json",
 	        success: function (resultado){   
-	            if (typeof resultado.nombreIngreso === "undefined" && typeof resultado.nombreGasto === "undefined"){
-	            }else if (typeof resultado.nombreIngreso === "undefined" || typeof resultado.nombreGasto === "undefined"){
-		        	if (typeof resultado.nombreIngreso !== "undefined"){
-		        		v_entrada.datos.nombreIngreso = resultado.nombreIngreso;
-		        		v_entrada.datos.nombreIG = resultado.nombreIngreso;
-		        	}
-		            if (typeof resultado.nombreGasto !== "undefined"){
-		            	v_entrada.datos.nombreGasto = resultado.nombreGasto;            	
-		            	v_entrada.datos.nombreIG = resultado.nombreGasto;
-		            }
-	            }else{
-	            	v_entrada.datos.nombreIngreso = resultado.nombreIngreso;
-	            	v_entrada.datos.nombreGasto = resultado.nombreGasto; 
-		            v_entrada.datos.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
+						if(!_this.validar(resultado))return;
+						if (typeof resultado.nombreIngreso === "undefined" && typeof resultado.nombreGasto === "undefined"){
+						}else if (typeof resultado.nombreIngreso === "undefined" || typeof resultado.nombreGasto === "undefined"){
+							if (typeof resultado.nombreIngreso !== "undefined"){
+								v_entrada.datos.nombreIngreso = resultado.nombreIngreso;
+								v_entrada.datos.nombreIG = resultado.nombreIngreso;
+							}
+							if (typeof resultado.nombreGasto !== "undefined"){
+								v_entrada.datos.nombreGasto = resultado.nombreGasto;            	
+								v_entrada.datos.nombreIG = resultado.nombreGasto;
+							}
+						}else{
+							v_entrada.datos.nombreIngreso = resultado.nombreIngreso;
+							v_entrada.datos.nombreGasto = resultado.nombreGasto; 
+							v_entrada.datos.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
 	        	}
-	            if (typeof resultado.descripcionIngreso === "undefined" && typeof resultado.descripcionGasto === "undefined"){
-	            }else if (typeof resultado.descripcionIngreso === "undefined" || typeof resultado.descripcionGasto === "undefined"){
-		        	if (typeof resultado.descripcionIngreso !== "undefined"){
-		        		v_entrada.datos.descripcionIngreso = resultado.descripcionIngreso;
-		        		v_entrada.datos.descripcionIG = resultado.descripcionIngreso;
-		        	}
-		            if (typeof resultado.descripcionGasto !== "undefined"){
-		            	v_entrada.datos.descripcionGasto = resultado.descripcionGasto;            	
-		            	v_entrada.datos.descripcionIG = resultado.descripcionGasto;
-		            }
-	            }else{
-	            	v_entrada.datos.descripcionIngreso = resultado.descripcionIngreso;
-	            	v_entrada.datos.descripcionGasto = resultado.descripcionGasto;   
-		            v_entrada.datos.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);
+						if (typeof resultado.descripcionIngreso === "undefined" && typeof resultado.descripcionGasto === "undefined"){
+						}else if (typeof resultado.descripcionIngreso === "undefined" || typeof resultado.descripcionGasto === "undefined"){
+							if (typeof resultado.descripcionIngreso !== "undefined"){
+								v_entrada.datos.descripcionIngreso = resultado.descripcionIngreso;
+								v_entrada.datos.descripcionIG = resultado.descripcionIngreso;
+							}
+							if (typeof resultado.descripcionGasto !== "undefined"){
+								v_entrada.datos.descripcionGasto = resultado.descripcionGasto;            	
+								v_entrada.datos.descripcionIG = resultado.descripcionGasto;
+							}
+						}else{
+							v_entrada.datos.descripcionIngreso = resultado.descripcionIngreso;
+							v_entrada.datos.descripcionGasto = resultado.descripcionGasto;   
+							v_entrada.datos.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);
 	        	}        	          	
 	        }
 	    });	
-	}				
+	}			
+	validar(resultado) {
+		if (resultado.valid) {
+			return true;
+		} 
+		pedirIngreso();
+		return false;
+	}
+	pedirIngreso() {
+		document.getElementById('salir').style.display = 'none';
+		document.getElementById('contenido').style.display = 'none';
+		document.getElementById('login').style.display = 'block';
+	}	
 }
 class Login{
 	constructor(datos){
@@ -273,8 +289,17 @@ class Login{
 			dataType: "json",
 			success: function (resultado){
 				if (resultado['valid'] == "true") {
+					v_entrada.datos.titulo = resultado.titulo;
+					v_entrada.datos.nombre = resultado.nombre;
+					token = resultado.token;
 
-					document.location.href = 'index.html?usuario='+input[0].value+'&nombre='+resultado.nombre+"&titulo="+resultado.titulo;
+					document.getElementById('salir').style.display = 'block';
+					document.getElementById('contenido').style.display = 'block';
+					document.getElementById('login').style.display = 'none';					
+
+					crud.autocompletar('Agenda/autocompletar.php');	
+					if (BUSCAR_AUTO) crud.buscar('Agenda/buscar.php');					
+					//document.location.href = 'index.html?usuario='+input[0].value+'&nombre='+resultado.nombre+"&titulo="+resultado.titulo;
 				}
 			}			        
 		});					
@@ -326,5 +351,8 @@ class Login{
 				}
 			}			        
 		});					
+	}
+	abrirPestana() {
+		window.open("index.html?"+token, "_blank");
 	}
 }

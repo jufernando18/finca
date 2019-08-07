@@ -1,6 +1,11 @@
 <?php
-    //Importamos la conexion
-    require_once('db_connect.php');
+    require_once('validarSesion.php');//importamos la conexion
+
+    if (!$sesion){
+        echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+        mysqli_close($con);//se cierra la conexion
+        exit;
+    }
 //Verificamos si se está usando GET o  POST para la comunicacion de la informacion
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
@@ -11,7 +16,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     }
 
     //Ejecutamos el query
-    $resultado_enviar=array();
     if(mysqli_query($con, $sql)){
         /*$resultado_enviar['nombre']=$nombre
         $resultado_envia
@@ -23,10 +27,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $resultado_enviar['error']='No se pudo hacer el registro';
     }
         
-    header('Content-type: application/json; charset=utf-8');
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Allow-Methods: POST, GET');
-    header('Access-Control-Allow-Credentials: *');
     echo json_encode($resultado_enviar);//se genera un JSON con el resultado
     //Cerrar la conexion
     mysqli_close($con);

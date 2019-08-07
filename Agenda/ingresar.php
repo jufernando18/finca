@@ -7,18 +7,13 @@ require_once('db_connect.php');//importamos la conexion
 
     $resultado = mysqli_query($con,$sql);//ejecutando el query
     
-    header('Content-type: application/json; charset=utf-8');
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Allow-Methods: POST, GET');
-    header('Access-Control-Allow-Credentials: *');
-    $resultado_enviar=array();
     $resultado_enviar['valid']="false";
     $opcion=0;
     while ($row = mysqli_fetch_array($resultado)) {
         if ($usuario == $row['usuario']) {
             if ($contrasena == $row['contrasena']) {
                 $token = sha1 ("".time());
-                $sql = "UPDATE ".DB_TABLE_USUARIOS." SET token = '$token' $busqueda;";
+                $sql = "UPDATE ".DB_TABLE_USUARIOS." SET token = '$token', sesion = true $busqueda;";
                 mysqli_query($con,$sql);//ejecutando el query
 
                 $resultado_enviar['valid'] ="true";
@@ -27,8 +22,6 @@ require_once('db_connect.php');//importamos la conexion
                 $resultado_enviar['token']=$token;
             }
         }
-        //$resultado_enviar['usuario'][$opcion]=$row['usuario'];
-        //$resultado_enviar['contrasena'][$opcion]=$row['contrasena'];
         $opcion++;
     }  
     echo json_encode($resultado_enviar);//se genera un JSON con el resultado
