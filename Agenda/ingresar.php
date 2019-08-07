@@ -1,7 +1,7 @@
 <?php
 require_once('db_connect.php');//importamos la conexion
-    $busqueda = "";
-    //$busqueda = "WHERE usuario='$usuario' AND contrasena='$contrasena'";
+    //$busqueda = "";
+    $busqueda = "WHERE usuario='$usuario' AND contrasena='$contrasena'";
             
     $sql = "SELECT * FROM ".DB_TABLE_USUARIOS." $busqueda order by creado desc;";//generamos el script en sql
 
@@ -12,18 +12,19 @@ require_once('db_connect.php');//importamos la conexion
     header('Access-Control-Allow-Methods: POST, GET');
     header('Access-Control-Allow-Credentials: *');
     $resultado_enviar=array();
-    //$resultado_enviar['usuarioEstado']="false";
-    //$resultado_enviar['contrasenaEstado']="false";
     $resultado_enviar['valid']="false";
     $opcion=0;
     while ($row = mysqli_fetch_array($resultado)) {
         if ($usuario == $row['usuario']) {
-            //$resultado_enviar['usuarioEstado']="true";
             if ($contrasena == $row['contrasena']) {
+                $token = sha1 ("".time());
+                $sql = "UPDATE ".DB_TABLE_USUARIOS." SET token = '$token' $busqueda;";
+                mysqli_query($con,$sql);//ejecutando el query
+
                 $resultado_enviar['valid'] ="true";
-                //$resultado_enviar['contrasenaEstado']="true";
                 $resultado_enviar['titulo']=$row['titulo'];
                 $resultado_enviar['nombre']=$row['nombre'];
+                $resultado_enviar['token']=$token;
             }
         }
         //$resultado_enviar['usuario'][$opcion]=$row['usuario'];
