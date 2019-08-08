@@ -28,16 +28,17 @@ table{
 	box-shadow: 6px 6px 6px #888;
 }
 h1{
-	padding-top: 6.2em;
+	padding-top: 7.5em;
 	text-align: center;
-}
-h2{
-	text-align: right;
 }
 h3{
 	text-align: center;
 	padding-top: 1em;
 	margin-bottom: 0.5em;
+}
+h4{
+	text-align: right;
+	margin-bottom: 0;
 }
 #entrada>div{
 	background-color: #dadada;

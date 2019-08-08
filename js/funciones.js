@@ -311,7 +311,7 @@ class Login{
 			success: function (resultado){
 				if (resultado.valid) {
 					input[1].value = "";
-					v_entrada.datos.titulo = resultado.titulo;
+					if(TITULO)v_entrada.datos.titulo = resultado.titulo;
 					v_entrada.datos.nombre = resultado.nombre;
 					token = resultado.token;
 
@@ -321,7 +321,6 @@ class Login{
 
 					crud.autocompletar('Agenda/autocompletar.php');	
 					if (BUSCAR_AUTO) crud.buscar('Agenda/buscar.php');					
-					//document.location.href = 'index.html?usuario='+input[0].value+'&nombre='+resultado.nombre+"&titulo="+resultado.titulo;
 				}
 			}			        
 		});					
