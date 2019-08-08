@@ -8,13 +8,10 @@ let crud = new Crud;
 window.onload = function(){
 	let tokenIndex = document.URL.indexOf('?')+1;
 	if (tokenIndex) {
-		document.getElementById('salir').style.display = 'block';
-		document.getElementById('contenido').style.display = 'block';
-		document.getElementById('login').style.display = 'none';
 		token = document.URL.substr(tokenIndex);
+		crud.pedirIngreso();
+		login.ingresar('Agenda/ingresar.php');
 		window.history.replaceState({}, document.title, document.URL.substr(0,tokenIndex-"index.html?".length));
-		crud.autocompletar('Agenda/autocompletar.php');	
-		if (BUSCAR_AUTO) crud.buscar('Agenda/buscar.php');
 	} else{
 		document.getElementById('salir').style.display = 'none';
 		document.getElementById('contenido').style.display = 'none';

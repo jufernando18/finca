@@ -264,7 +264,7 @@ class Crud{
 		if (resultado.valid) {
 			return true;
 		} 
-		pedirIngreso();
+		this.pedirIngreso();
 		return false;
 	}
 	pedirIngreso() {
@@ -280,6 +280,7 @@ class Login{
 	ingresar(DataBase){
 		var input = document.getElementsByClassName('login');
 		this._datos = {
+			"token" : token,
 			"usuario" : input[0].value,
 			"contrasena" : input[1].value};
 		$.ajax({
@@ -288,7 +289,7 @@ class Login{
 			url:DataBase,
 			dataType: "json",
 			success: function (resultado){
-				if (resultado['valid'] == "true") {
+				if (resultado.valid) {
 					v_entrada.datos.titulo = resultado.titulo;
 					v_entrada.datos.nombre = resultado.nombre;
 					token = resultado.token;
