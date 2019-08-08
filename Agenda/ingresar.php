@@ -1,7 +1,7 @@
 <?php
 require_once('db_connect.php');//importamos la conexion
 
-    $busqueda = "WHERE token='$token'";
+    $busqueda = "WHERE token='$token' AND sesion = true";
     $sql = "SELECT * FROM ".DB_TABLE_USUARIOS." $busqueda order by creado desc;";//generamos el script en sql
 
     $resultado = mysqli_query($con,$sql);//ejecutando el query
@@ -25,16 +25,14 @@ require_once('db_connect.php');//importamos la conexion
     $resultado = mysqli_query($con,$sql);//ejecutando el query
 
     while ($row = mysqli_fetch_array($resultado)) {
-        if ($usuario == $row['usuario'] && $contrasena == $row['contrasena']) {
-            $token = sha1 ("".time());
-            $sql = "UPDATE ".DB_TABLE_USUARIOS." SET token = '$token', sesion = true $busqueda;";
-            mysqli_query($con,$sql);//ejecutando el query
+        $token = sha1 ("".time());
+        $sql = "UPDATE ".DB_TABLE_USUARIOS." SET token = '$token', sesion = true $busqueda;";
+        mysqli_query($con,$sql);//ejecutando el query
 
-            $resultado_enviar['valid'] =true;
-            $resultado_enviar['titulo']=$row['titulo'];
-            $resultado_enviar['nombre']=$row['nombre'];
-            $resultado_enviar['token']=$token;
-        }
+        $resultado_enviar['valid'] =true;
+        $resultado_enviar['titulo']=$row['titulo'];
+        $resultado_enviar['nombre']=$row['nombre'];
+        $resultado_enviar['token']=$token;
     }  
 
     echo json_encode($resultado_enviar);//se genera un JSON con el resultado

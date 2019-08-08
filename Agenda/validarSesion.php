@@ -1,7 +1,7 @@
 <?php
   require_once('db_connect.php');//importamos la conexion
 
-  $sql = "SELECT * FROM ".DB_TABLE_USUARIOS." WHERE token='$token';";
+  $sql = "SELECT * FROM ".DB_TABLE_USUARIOS." WHERE token='$token' AND sesion = true;";
   $resultado = mysqli_query($con,$sql);//ejecutando el query
   $sesion = false;
   

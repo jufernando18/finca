@@ -26,7 +26,10 @@
 		<div id="contenido">
 			<div id="header">
 				<div id="entrada">
-					<h2>{{datos.nombre}} <input type="button" value="nueva pestaña" onclick="login.abrirPestana()"></h2>
+					<h2>{{datos.nombre}} 
+						<input type="button" id="copyToClipboard" style="width: 11em;" value="copiar link de acceso" onclick="crud.copyToClipboard()">
+						</input><input type="button" value="nueva pestaña" onclick="login.abrirPestana()">
+					</h2>
 					<div id="ingresos">
 						<p><strong>Ingresos: </strong></p>
 						<div>
@@ -166,7 +169,7 @@
 	<footer>
 		<div>
 			Realizado por Juan Fernando Echavarria Zapata - fernando.echavarria@powersite.online
-			<input type="button" id="salir" value="Salir" onclick="document.location.href = 'index.html';">
+			<input type="button" id="salir" value="Salir" onclick="crud.cerrarSesion('Agenda/cerrarSesion.php')">
 		</div>
 	</footer>
 </html>
