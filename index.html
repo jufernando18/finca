@@ -75,7 +75,7 @@
 					<div>		
 						<p><strong>Busqueda: </strong></p>
 						<div>
-							<input type="text" value="" class="busqueda" placeholder="id" style="width: 4em">
+							<input type="text" value="" class="busqueda" placeholder="id" style="width: 4em; display: none">
 							<input type="text" value="" class="busqueda nombre" placeholder="nombre" :title=datos.nombreB list="nombres">
 							<datalist id="nombres">
 								<option v-for="dato in datos.nombreIG">{{dato.nombre}}</option>
@@ -104,7 +104,7 @@
 							<span> se paga el día: </span>
 							<input type="date" class="busqueda" id ="datePicker_Bpago" :title=datos.fechaPago>			
 							<input type="button" value="Pagar" onclick="crud.pagar('Agenda/pagar.php')" :title=datos.botonP>
-							<input type="button" value="Borrar" onclick="crud.borrar('Agenda/borrar.php')" :title=datos.botonBO>
+							<input type="button" value="Borrar" onclick="crud.borrar('Agenda/borrar.php')" :title=datos.botonBO style="display: none">
 							<input type="button" value="deuda/pago" onclick="crud.pagar('Agenda/deuda_pago.php')" :title=datos.botonD>
 						</div>
 							<h4 class="ocultar" id="resultadoRevisar">{{datos.revisarB}}</h4>
@@ -120,7 +120,7 @@
 				<h3><strong id="ingreso" title="Total que suman los ingresos en la tabla">Ingresos</strong></h3>
 				<table style="width: 100%">
 					<tr>
-						<th style="width: 4%">ID</th>
+						<th style="width: 4%"></th>
 						<th>Producto</th>
 						<th style="width: 40%">Descripción</th>
 						<th>Valor</th>
@@ -129,7 +129,7 @@
 						<th>Clasificación</th>
 					</tr>
 					<tr v-for="dato in datos">
-						<td>{{dato.id}}</td>
+						<td><button :value="dato.id" class="ingresos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button></td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
 						<td>{{dato.costo}}</td>
@@ -143,7 +143,7 @@
 				<h3><strong id="gasto" title="Total que suman los gastos en la tabla">Gastos</strong></h3>
 				<table style="width: 100%">
 					<tr>
-						<th style="width: 4%">ID</th>
+						<th style="width: 4%"></th>
 						<th>Producto</th>
 						<th style="width: 40%">Descripción</th>
 						<th>Valor</th>
@@ -152,7 +152,7 @@
 						<th>Clasificación</th>
 					</tr>
 					<tr v-for="dato in datos">
-						<td>{{dato.id}}</td>
+						<td><button :value="dato.id" class="gastos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button></td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
 						<td>{{dato.costo}}</td>

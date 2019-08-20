@@ -174,18 +174,18 @@ class Crud{
 				}
 		});
 	}
-	borrar(DataBase){
+	borrar(DataBase,id, dinero){
 		var datosBusqueda = document.getElementsByClassName("busqueda");
 		let _this = this;
-		if (datosBusqueda[0].value == '' || datosBusqueda[8].value == ''){
+		/*if (datosBusqueda[0].value == '' || datosBusqueda[8].value == ''){
 		$( "#resultadoRevisar" ).fadeIn(TIEMPO_NOTIFICACION_FAIL).delay(TIEMPO_NOTIFICACION_FAIL).fadeTo(TIEMPO_NOTIFICACION_FAIL,0, function() {
 			this.style.display = 'none';
 			this.style.opacity = '1';
-		});			 		
-		}else{
+		});
+		}else{*/
 			_this._datos = {
 				"token" : token ,
-			"id" : datosBusqueda[0].value,    	        	
+			"id" : id,//datosBusqueda[0].value,    	        	
 			"nombre" : datosBusqueda[1].value,
 			"descripcion" : datosBusqueda[2].value,
 			"costo" : datosBusqueda[3].value,
@@ -193,7 +193,7 @@ class Crud{
 			"mes" : datosBusqueda[5].value,
 			"dia" : datosBusqueda[6].value,
 			"tipo" : datosBusqueda[7].value,
-			"dinero" : datosBusqueda[8].value,			    			
+			"dinero" : dinero,//datosBusqueda[8].value,			    			
 			"desde" : datosBusqueda[9].value,
 			"hasta" : datosBusqueda[10].value};
 		$.ajax({
@@ -212,7 +212,7 @@ class Crud{
 				});					            	        				            
 					}
 			});
-		}
+		//}
 	}	
 	autocompletar(DataBase){
 		let _this = this;

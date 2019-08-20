@@ -1,6 +1,7 @@
 <?php
 require_once('db_connect.php');//importamos la conexion
 
+
     $busqueda = "WHERE usuario='$usuario' AND contrasena='$contrasena'";        
     $sql = "SELECT * FROM ".DB_TABLE_USUARIOS." $busqueda;";//generamos el script en sql
     $resultado = mysqli_query($con,$sql);//ejecutando el query
@@ -8,6 +9,8 @@ require_once('db_connect.php');//importamos la conexion
         $sql = "INSERT INTO ".DB_TABLE_USUARIOS." (nombre, usuario, contrasena, titulo, creado) VALUES ('$nombre','$usuario','$contrasena','$titulo',now())";
 
         if(mysqli_query($con, $sql)){
+            $tablaIngresos = $usuario."_tablaIngresos";
+            $tablaGastos = $usuario."_tablaGastos";
             $resultado_enviar['estadoUsuario']='OK';
             $resultado_enviar['tablaIngresos']= $tablaIngresos;
             $sql ="CREATE TABLE `$tablaIngresos` (  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,  `nombre` varchar(50) DEFAULT NULL,  `descripcion` varchar(150) DEFAULT NULL,  `costo` varchar(30) DEFAULT NULL,  `modificado` datetime DEFAULT NULL,  `fecha` date DEFAULT NULL,  `tipo` varchar(20) DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
