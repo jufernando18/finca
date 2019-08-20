@@ -1,11 +1,6 @@
 <?php
     require_once('validarSesion.php');//importamos la conexion
 
-    if (!$sesion){
-        echo json_encode($resultado_enviar);//se genera un JSON con el resultado
-        mysqli_close($con);//se cierra la conexion
-        exit;
-    }
 //Verificamos si se está usando GET o  POST para la comunicacion de la informacion
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 

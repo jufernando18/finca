@@ -1,12 +1,6 @@
 <?php
     require_once('validarSesion.php');//importamos la conexion
 
-    if (!$sesion){
-        echo json_encode($resultado_enviar);//se genera un JSON con el resultado
-        mysqli_close($con);//se cierra la conexion
-        exit;
-    }
-
     $sql = "SELECT DISTINCT nombre FROM $tablaIngresos;";
     $resultado = mysqli_query($con,$sql);//ejecutando el query
     $opcion=0;    

@@ -86,8 +86,10 @@ class Crud{
 		        dataType: "json",
 		        success: function (resultado){
 							if(!_this.validar(resultado))return;
-		        	v_ingreso.datos = resultado;
+							v_ingreso.datos = resultado;
+							console.log(resultado);
 		            for (var i = 0; i < resultado.length; i++) {
+									console.log(resultado[i].costo);
 		            	if (isNaN(parseInt(resultado[i].costo))) {
 		            	}else if(parseInt(resultado[i].costo)<0){
 		            		totalIngresosDeudas+=parseInt(resultado[i].costo);
@@ -109,7 +111,9 @@ class Crud{
 						success: function (resultado){
 							if(!_this.validar(resultado))return;
 							v_gasto.datos = resultado;
+							console.log(resultado.length);
 								for (var i = 0; i < resultado.length; i++) {
+									console.log(resultado[i].costo);
 									if (isNaN(parseInt(resultado[i].costo))) {
 									}else if(parseInt(resultado[i].costo)<0){
 										totalGastosDeudas+=parseInt(resultado[i].costo);
@@ -281,11 +285,11 @@ class Crud{
 		});					
 	}
 	validar(resultado) {
-		if (resultado.valid) {
-			return true;
+		if (resultado.valid == false) {
+			this.pedirIngreso();
+			return false;
 		} 
-		this.pedirIngreso();
-		return false;
+		return true;
 	}
 	pedirIngreso() {
 		document.getElementById('salir').style.display = 'none';
