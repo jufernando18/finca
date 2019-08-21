@@ -6,10 +6,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     //Crear una sentensia SQL
     if ($dinero == 'ingresos') {
-        $sql = "DELETE FROM $tablaIngresos WHERE id ='$id';";//Como el id es incremental, se pone ese NULL
+        $sql = "DELETE FROM $TABLA_INGRESOS WHERE id =$id AND idUsuario = $idUsuario;";//Como el id es incremental, se pone ese NULL
     }
     if ($dinero == 'gastos') {
-        $sql = "DELETE FROM $tablaGastos WHERE id ='$id';";//Como el id es incremental, se pone ese NULL
+        $sql = "DELETE FROM $TABLA_GASTOS WHERE id =$id AND idUsuario = $idUsuario;";//Como el id es incremental, se pone ese NULL
     }
 
     //Ejecutamos el query

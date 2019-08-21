@@ -11,6 +11,11 @@ define('DB_PASSWORD',"");//Contraseña
 define('DB_DATABASE',"");//Nombre de la base de datos
 define('DB_SERVER',"localhost");//Nombre o IP del servidor
 define('DB_TABLE_USUARIOS',"tablaUsuarios");
+define('DB_TABLE_INGRESOS',"tablaIngresos");
+define('DB_TABLE_GASTOS',"tablaGastos");
+$TABLA_USUARIOS = DB_TABLE_USUARIOS;
+$TABLA_INGRESOS = DB_TABLE_INGRESOS;
+$TABLA_GASTOS = DB_TABLE_GASTOS;
 
 $token = $_GET['token'];
 $nombre = $_GET['nombre'];

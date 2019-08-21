@@ -2,7 +2,7 @@
 require_once('db_connect.php');//importamos la conexion
 
     $busqueda = "WHERE token='$token' AND sesion = true";
-    $sql = "SELECT * FROM ".DB_TABLE_USUARIOS." $busqueda order by creado desc;";//generamos el script en sql
+    $sql = "SELECT * FROM $TABLA_USUARIOS $busqueda order by creado desc;";//generamos el script en sql
 
     $resultado = mysqli_query($con,$sql);//ejecutando el query
 
@@ -20,13 +20,13 @@ require_once('db_connect.php');//importamos la conexion
     }      
 
     $busqueda = "WHERE usuario='$usuario' AND contrasena='$contrasena'";
-    $sql = "SELECT * FROM ".DB_TABLE_USUARIOS." $busqueda order by creado desc;";//generamos el script en sql
+    $sql = "SELECT * FROM $TABLA_USUARIOS $busqueda order by creado desc;";//generamos el script en sql
 
     $resultado = mysqli_query($con,$sql);//ejecutando el query
 
     while ($row = mysqli_fetch_array($resultado)) {
         $token = sha1 ("".time());
-        $sql = "UPDATE ".DB_TABLE_USUARIOS." SET token = '$token', sesion = true $busqueda;";
+        $sql = "UPDATE $TABLA_USUARIOS SET token = '$token', sesion = true $busqueda;";
         mysqli_query($con,$sql);//ejecutando el query
 
         $resultado_enviar['valid'] =true;

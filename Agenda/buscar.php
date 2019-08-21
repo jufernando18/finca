@@ -1,59 +1,31 @@
 <?php
     require_once('validarSesion.php');//importamos la conexion
 
-    $busqueda = '';
+    $busqueda = "WHERE idUsuario=$idUsuario";
 
     if($tipo != ''){
-        $busqueda = "WHERE tipo='$tipo'";
+        $busqueda = $busqueda." AND tipo='$tipo'";
     }
     if($id != ''){
-        if($busqueda != ''){
-            $busqueda = $busqueda." AND id='$id'";
-        }else{
-            $busqueda = "WHERE id='$id'";
-        }
+        $busqueda = $busqueda." AND id=$id";
     }
     if($nombre != ''){
-        if($busqueda != ''){
-            $busqueda = $busqueda." AND nombre='$nombre'";
-        }else{
-            $busqueda = "WHERE nombre='$nombre'";
-        }
+        $busqueda = $busqueda." AND nombre='$nombre'";
     }
     if($descripcion != ''){
-        if($busqueda != ''){
-            $busqueda = $busqueda." AND descripcion LIKE '%$descripcion%'";
-        }else{
-            $busqueda = "WHERE descripcion LIKE '%$descripcion%'";
-        }
+        $busqueda = $busqueda." AND descripcion LIKE '%$descripcion%'";
     }
     if($costo != ''){
-        if($busqueda != ''){
-            $busqueda = $busqueda." AND costo LIKE '$costo%'";
-        }else{
-            $busqueda = "WHERE costo LIKE '%$costo%'";
-        }
+        $busqueda = $busqueda." AND costo LIKE '$costo%'";
     }
     if($ano != ''){
-        if($busqueda != ''){
-            $busqueda = $busqueda." AND YEAR(fecha)='$ano'";
-        }else{
-            $busqueda = "WHERE YEAR(fecha)='$ano'";
-        }
+        $busqueda = $busqueda." AND YEAR(fecha)='$ano'";
     }    
     if($mes != ''){
-        if($busqueda != ''){
-            $busqueda = $busqueda." AND MONTH(fecha)='$mes'";
-        }else{
-            $busqueda = "WHERE MONTH(fecha)='$mes'";
-        }
+        $busqueda = $busqueda." AND MONTH(fecha)='$mes'";
     }        
     if($dia != ''){
-        if($busqueda != ''){
-            $busqueda = $busqueda." AND DAY(fecha)='$dia'";
-        }else{
-            $busqueda = "WHERE DAY(fecha)='$dia'";
-        }
+        $busqueda = $busqueda." AND DAY(fecha)='$dia'";
     }  
     if($busqueda != ''){
         $busqueda = $busqueda." AND fecha BETWEEN '$desde' AND '$hasta'";
@@ -61,9 +33,9 @@
         $busqueda = "WHERE fecha BETWEEN '$desde' AND '$hasta'";
     }
             
-    $sql = "SELECT * FROM $tablaIngresos $busqueda order by fecha desc;";//generamos el script en sql
+    $sql = "SELECT * FROM $TABLA_INGRESOS $busqueda order by fecha desc;";//generamos el script en sql
     if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM $tablaGastos $busqueda order by fecha desc;";//generamos el script en sql
+        $sql = "SELECT * FROM $TABLA_GASTOS $busqueda order by fecha desc;";//generamos el script en sql
     }
     $resultado = mysqli_query($con,$sql);//ejecutando el query
 
