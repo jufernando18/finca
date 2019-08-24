@@ -18,7 +18,8 @@ window.onload = function(){
 		document.getElementById('login').style.display = 'block';
 	}
 }			
-fechaActual = new Date();
+fechaActual = new Date().toLocaleString("en-US", {timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone});
+fechaActual = new Date(fechaActual);
 if (ACTUALIZAR_INGRESO_GASTO_AUTO) {
 	document.getElementById('datePicker_ingreso').valueAsDate = fechaActual;
 	document.getElementById('datePicker_gasto').valueAsDate = fechaActual;
