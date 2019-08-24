@@ -87,9 +87,7 @@ class Crud{
 		        success: function (resultado){
 							if(!_this.validar(resultado))return;
 							v_ingreso.datos = resultado;
-							console.log(resultado);
 		            for (var i = 0; i < resultado.length; i++) {
-									console.log(resultado[i].costo);
 		            	if (isNaN(parseInt(resultado[i].costo))) {
 		            	}else if(parseInt(resultado[i].costo)<0){
 		            		totalIngresosDeudas+=parseInt(resultado[i].costo);
@@ -111,9 +109,7 @@ class Crud{
 						success: function (resultado){
 							if(!_this.validar(resultado))return;
 							v_gasto.datos = resultado;
-							console.log(resultado.length);
 								for (var i = 0; i < resultado.length; i++) {
-									console.log(resultado[i].costo);
 									if (isNaN(parseInt(resultado[i].costo))) {
 									}else if(parseInt(resultado[i].costo)<0){
 										totalGastosDeudas+=parseInt(resultado[i].costo);
