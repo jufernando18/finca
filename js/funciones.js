@@ -304,7 +304,6 @@ class Crud{
 				if(!_this.validar(resultado))return;
 				resultado = resultado[0];
 				var dineroIG = document.getElementsByClassName("agregarInfo");
-				console.log(dineroIG);
 				dineroIG[0].value = resultado.nombre;
 				dineroIG[1].value = resultado.descripcion;
 				dineroIG[2].value = resultado.costo;
