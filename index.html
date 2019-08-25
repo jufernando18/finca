@@ -46,7 +46,8 @@
 							<select class="ingreso" :title=datos.tipo>
 								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
 							</select> 								
-							<input type="button" value="agregar ingreso" onclick="crud.insertar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
+							<input type="button" value="agregar" onclick="crud.insertar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
+							<button type="button" value="" placeholder="actualizar"></button>
 						</div>
 							<h4 class="ocultar" id="ingresoRevisar">{{datos.revisar}}</h4>
 							<h4 class="ocultar" id="ingresoAgregado">{{datos.agregado}}</h4>
@@ -67,7 +68,8 @@
 							<select class="gasto" :title=datos.tipo>
 								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
 							</select> 				
-							<input type="button" value="agregar gasto" onclick="crud.insertar('Agenda/crear.php','gasto')" :title=datos.botonG>	
+							<input type="button" value="agregar" onclick="crud.insertar('Agenda/crear.php','gasto')" :title=datos.botonG>	
+							<button type="button" value="" placeholder="actualizar"></button>
 						</div>
 							<h4 class="ocultar" id="gastoRevisar">{{datos.revisar}}</h4>	
 							<h4 class="ocultar" id="gastoAgregado">{{datos.agregado}}</h4>		
@@ -129,7 +131,7 @@
 						<th>Clasificación</th>
 					</tr>
 					<tr v-for="dato in datos">
-						<td><button :value="dato.id" class="ingresos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button></td>
+						<td><span><input type="checkbox"/><button :value="dato.id" class="ingresos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button></span></td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
 						<td>{{dato.costo}}</td>
@@ -152,7 +154,7 @@
 						<th>Clasificación</th>
 					</tr>
 					<tr v-for="dato in datos">
-						<td><button :value="dato.id" class="gastos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button></td>
+						<td><span><input type="checkbox"/><button :value="dato.id" class="gastos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button></span></td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
 						<td>{{dato.costo}}</td>
