@@ -5,19 +5,24 @@
 if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     //Crear una sentensia SQL
-    $sql = "INSERT INTO $TABLA_INGRESOS (nombre, descripcion, costo, fecha, modificado, tipo, idUsuario) VALUES ('$nombre','$descripcion','$costo','$fecha',now(),'$tipo',$idUsuario)";//Como el id es incremental, se pone ese NULL
+    $tablaQuery = $TABLA_INGRESOS;
     if ($dinero == 'gasto') {
-        $sql = "INSERT INTO $TABLA_GASTOS (nombre, descripcion, costo, fecha, modificado, tipo, idUsuario) VALUES ('$nombre','$descripcion','$costo','$fecha',now(),'$tipo',$idUsuario)";//Como el id es incremental, se pone ese NULL
+        $tablaQuery = $TABLA_GASTOS;
     }
+
+    $start = "UPDATE $tablaQuery SET ";
+    $end = " WHERE idUsuario = $idUsuario AND id = $id";
+    $assignment = "nombre = '$nombre', descripcion = '$descripcion', costo = '$costo', fecha = '$fecha', modificado = now(), tipo = '$tipo'";
+    if ($id == null) {
+        $start = "INSERT INTO $tablaQuery ";
+        $end = "";
+        $assignment = "(nombre, descripcion, costo, fecha, modificado, tipo, idUsuario) VALUES ('$nombre','$descripcion','$costo','$fecha',now(),'$tipo',$idUsuario)";
+    }
+
+    $sql = $start.$assignment.$end;
 
     //Ejecutamos el query
     if(mysqli_query($con, $sql)){
-        /*$resultado_enviar['nombre']=$nombre
-        $resultado_envia
-        $resultado_enviar['descripcion']=$descripcion;
-        $resultado_enviar['costo']=$costo;
-        $resultado_enviar['fecha']=$fecha;*/
-
     } else {
         $resultado_enviar['error']="No se pudo hacer el registro.";
     }

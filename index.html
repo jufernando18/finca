@@ -33,21 +33,21 @@
 					<div id="ingresos">
 						<p><strong>Ingresos: </strong></p>
 						<div>
-							<input type="text" value="" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI list="nombreI">
+							<input type="text" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI list="nombreI">
 							<datalist id="nombreI">
 								<option v-for="dato in datos.nombreIngreso">{{dato.nombre}}</option>
 							</datalist>
-							<input type="text" value="" class="ingreso descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionI">
+							<input type="text" class="ingreso descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionI">
 							<datalist id="descripcionI">
 								<option v-for="dato in datos.descripcionIngreso">{{dato.descripcion}}</option>
 							</datalist>
-							<input type="text" value="" class="ingreso" placeholder="costo" :title=datos.costoGI>
+							<input type="text" class="ingreso" placeholder="costo" :title=datos.costoGI>
 							<input type="date" class="ingreso" id ="datePicker_ingreso" :title=datos.fechaI>
 							<select class="ingreso" :title=datos.tipo>
 								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
 							</select> 								
-							<input type="button" value="agregar" onclick="crud.insertar('Agenda/crear.php','ingreso')" :title=datos.botonI>	
-							<button type="button" value="" placeholder="actualizar"></button>
+							<input type="button" value="agregar" onclick="crud.insertar('Agenda/crear.php','ingreso', null)" :title=datos.botonI>	
+							<button class="ingreso" value="" title="actualizar" onclick="crud.insertar('Agenda/crear.php','ingreso', this.value)"></button>
 						</div>
 							<h4 class="ocultar" id="ingresoRevisar">{{datos.revisar}}</h4>
 							<h4 class="ocultar" id="ingresoAgregado">{{datos.agregado}}</h4>
@@ -55,21 +55,21 @@
 					<div id="gastos">
 						<p><strong>Gastos: </strong></p>
 						<div>
-							<input type="text" value="" class="gasto nombre" placeholder="nombre" :title=datos.nombreG list="nombreG">
+							<input type="text" class="gasto nombre" placeholder="nombre" :title=datos.nombreG list="nombreG">
 							<datalist id="nombreG">
 								<option v-for="dato in datos.nombreGasto">{{dato.nombre}}</option>
 							</datalist>
-							<input type="text" value="" class="gasto descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionG">
+							<input type="text" class="gasto descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionG">
 							<datalist id="descripcionG">
 								<option v-for="dato in datos.descripcionGasto">{{dato.descripcion}}</option>
 							</datalist>
-							<input type="text" value="" class="gasto" placeholder="costo" :title=datos.costoGI>
+							<input type="text" class="gasto" placeholder="costo" :title=datos.costoGI>
 							<input type="date" class="gasto" id ="datePicker_gasto" :title=datos.fechaG>	
 							<select class="gasto" :title=datos.tipo>
 								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
 							</select> 				
-							<input type="button" value="agregar" onclick="crud.insertar('Agenda/crear.php','gasto')" :title=datos.botonG>	
-							<button type="button" value="" placeholder="actualizar"></button>
+							<input type="button" value="agregar" onclick="crud.insertar('Agenda/crear.php','gasto', null)" :title=datos.botonG>	
+							<button class="gasto" value="" title="actualizar" onclick="crud.insertar('Agenda/crear.php','gasto', this.value)"></button>
 						</div>
 							<h4 class="ocultar" id="gastoRevisar">{{datos.revisar}}</h4>	
 							<h4 class="ocultar" id="gastoAgregado">{{datos.agregado}}</h4>		
@@ -77,19 +77,19 @@
 					<div>		
 						<p><strong>Busqueda: </strong></p>
 						<div>
-							<input type="text" value="" class="busqueda" placeholder="id" style="width: 4em; display: none">
-							<input type="text" value="" class="busqueda nombre" placeholder="nombre" :title=datos.nombreB list="nombres">
+							<input type="text" class="busqueda" placeholder="id" style="width: 4em; display: none">
+							<input type="text" class="busqueda nombre" placeholder="nombre" :title=datos.nombreB list="nombres">
 							<datalist id="nombres">
 								<option v-for="dato in datos.nombreIG">{{dato.nombre}}</option>
 							</datalist>
-							<input type="text" value="" class="busqueda descripcion" placeholder="descripción" :title=datos.descripcion list="descripciones">
+							<input type="text" class="busqueda descripcion" placeholder="descripción" :title=datos.descripcion list="descripciones">
 							<datalist id="descripciones">
 								<option v-for="dato in datos.descripcionIG">{{dato.descripcion}}</option>
 							</datalist>
-							<input type="text" value="" class="busqueda" placeholder="costo" :title=datos.costoB>
-							<input type="text" value="" class="busqueda" id="ano" placeholder="año" :title=datos.ano style="width: 4em">
-							<input type="text" value="" class="busqueda" id="mes" placeholder="mes" :title=datos.mes style="width: 2em">
-							<input type="text" value="" class="busqueda" placeholder="dia" :title=datos.dia style="width: 2em">
+							<input type="text" class="busqueda" placeholder="costo" :title=datos.costoB>
+							<input type="text" class="busqueda" id="ano" placeholder="año" :title=datos.ano style="width: 4em">
+							<input type="text" class="busqueda" id="mes" placeholder="mes" :title=datos.mes style="width: 2em">
+							<input type="text" class="busqueda" placeholder="dia" :title=datos.dia style="width: 2em">
 							<select class="busqueda" :title=datos.tipo>
 								<option v-for="dato in datos.opcionesB" :value=dato.valor>{{dato.opcion}}</option>
 							</select> 
@@ -131,7 +131,8 @@
 						<th>Clasificación</th>
 					</tr>
 					<tr v-for="dato in datos">
-						<td><span><input type="checkbox"/><button :value="dato.id" class="ingresos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button></span></td>
+						<td><span class="menu-results"><input type="checkbox"/><button :value="dato.id" class="ingresos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button>
+							<button :value="dato.id" class="ingresos" onclick="crud.setDatosEdicion('Agenda/buscar.php', this.value, this.className)" style="background-color: green">E</button></span></td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
 						<td>{{dato.costo}}</td>
@@ -154,7 +155,8 @@
 						<th>Clasificación</th>
 					</tr>
 					<tr v-for="dato in datos">
-						<td><span><input type="checkbox"/><button :value="dato.id" class="gastos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button></span></td>
+						<td><span class="menu-results"><input type="checkbox"/><button :value="dato.id" class="gastos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button>
+							<button :value="dato.id" class="gastos" onclick="crud.setDatosEdicion('Agenda/buscar.php', this.value, this.className)" style="background-color: green">E</button></span></td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
 						<td>{{dato.costo}}</td>

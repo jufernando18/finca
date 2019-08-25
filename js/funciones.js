@@ -2,8 +2,8 @@ class Crud{
 	constructor(datos){
 		this._datos=datos;
 	}
-	insertar(DataBase,dinero){
-		var dineroIG = (dinero == 'gasto')?dineroIG = document.getElementsByClassName("gasto"):document.getElementsByClassName("ingreso");
+	insertar(DataBase,dinero, id){
+		var dineroIG = (dinero == 'gasto')?document.getElementsByClassName("gasto"):document.getElementsByClassName("ingreso");
 		let _this = this;
 		if (dineroIG[0].value == "" || dineroIG[2].value == "" || dineroIG[3].value == "" || parseInt(dineroIG[2].value).toString() != dineroIG[2].value){
 			$( "#"+dinero+"Revisar" ).fadeIn(TIEMPO_NOTIFICACION).delay(TIEMPO_NOTIFICACION).fadeTo(TIEMPO_NOTIFICACION,0, function() {
@@ -14,6 +14,7 @@ class Crud{
 		}
 		_this._datos = {
 			"token" : token,
+			"id" : id,
 			"nombre" : dineroIG[0].value,
 			"descripcion" : dineroIG[1].value,
 			"costo" : dineroIG[2].value,
@@ -37,6 +38,8 @@ class Crud{
 				this.style.display = 'none';
 				this.style.opacity = '1';
 			});			
+			dineroIG[5].innerHTML = "";
+			dineroIG[5].value = null;
 			_this.autocompletar('Agenda/autocompletar.php');
 				}			        
 		});				
@@ -292,6 +295,33 @@ class Crud{
 		document.getElementById('contenido').style.display = 'none';
 		document.getElementById('login').style.display = 'block';
 	}	
+	setDatosEdicion(DataBase, id, dinero) {
+		let _this = this;
+		this._datos = {
+			"token" : token,
+			"id" : id,
+			"dinero" : dinero};
+		$.ajax({
+			data: this._datos,
+			type:'get',
+			url:DataBase,
+			dataType: "json",
+			success: function (resultado){
+				if(!_this.validar(resultado))return;
+				resultado = resultado[0];
+				var dineroIG = (dinero == 'gasto')?document.getElementsByClassName("gasto"):document.getElementsByClassName("ingreso");
+				console.log(dineroIG);
+				dineroIG[0].value = resultado.nombre;
+				dineroIG[1].value = resultado.descripcion;
+				dineroIG[2].value = resultado.costo;
+				dineroIG[3].valueAsDate = new Date(resultado.fecha);
+				dineroIG[4].value = resultado.tipo;
+				dineroIG[5].value = id;
+				dineroIG[5].innerHTML = "actualizar";
+
+			}			        
+		});			
+	}
 }
 class Login{
 	constructor(datos){

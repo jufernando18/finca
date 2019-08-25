@@ -61,6 +61,7 @@ input{
 }
 input[type='checkbox'] {
 	width: auto;
+	display: none;
 }
 select{
 	border-radius: 0.5em 0;
@@ -134,4 +135,10 @@ button:hover{
 }
 button:empty {
 	display: none;
+}
+.menu-results {
+	overflow: hidden;
+}
+.menu-results:hover {
+	overflow: visible;
 }

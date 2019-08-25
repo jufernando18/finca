@@ -3,35 +3,36 @@
 
     $busqueda = "WHERE idUsuario=$idUsuario";
 
-    if($tipo != ''){
+    if($tipo != null && $tipo != ''){
         $busqueda = $busqueda." AND tipo='$tipo'";
     }
-    if($id != ''){
+    if($id != null && $id != ''){
         $busqueda = $busqueda." AND id=$id";
     }
-    if($nombre != ''){
+    if($nombre != null && $nombre != ''){
         $busqueda = $busqueda." AND nombre='$nombre'";
     }
-    if($descripcion != ''){
+    if($descripcion != null && $descripcion != ''){
         $busqueda = $busqueda." AND descripcion LIKE '%$descripcion%'";
     }
-    if($costo != ''){
+    if($costo != null && $costo != ''){
         $busqueda = $busqueda." AND costo LIKE '$costo%'";
     }
-    if($ano != ''){
+    if($ano != null && $ano != ''){
         $busqueda = $busqueda." AND YEAR(fecha)='$ano'";
     }    
-    if($mes != ''){
+    if($mes != null && $mes != ''){
         $busqueda = $busqueda." AND MONTH(fecha)='$mes'";
     }        
-    if($dia != ''){
+    if($dia != null && $dia != ''){
         $busqueda = $busqueda." AND DAY(fecha)='$dia'";
     }  
-    if($busqueda != ''){
-        $busqueda = $busqueda." AND fecha BETWEEN '$desde' AND '$hasta'";
-    }else{
-        $busqueda = "WHERE fecha BETWEEN '$desde' AND '$hasta'";
-    }
+    if($desde != null && $desde != ''){
+        $busqueda = $busqueda." AND fecha >= '$desde'";
+    }  
+    if($hasta != null && $hasta != ''){
+        $busqueda = $busqueda." AND fecha <='$hasta'";
+    }      
             
     $sql = "SELECT * FROM $TABLA_INGRESOS $busqueda order by fecha desc;";//generamos el script en sql
     if ($dinero == 'gastos') {
