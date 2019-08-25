@@ -225,31 +225,23 @@ class Crud{
 					if (typeof resultado.nombreIngreso === "undefined" && typeof resultado.nombreGasto === "undefined"){
 					}else if (typeof resultado.nombreIngreso === "undefined" || typeof resultado.nombreGasto === "undefined"){
 						if (typeof resultado.nombreIngreso !== "undefined"){
-							v_entrada.datos.nombreIngreso = resultado.nombreIngreso;
 							v_entrada.datos.nombreIG = resultado.nombreIngreso;
 						}
 						if (typeof resultado.nombreGasto !== "undefined"){
-							v_entrada.datos.nombreGasto = resultado.nombreGasto;            	
 							v_entrada.datos.nombreIG = resultado.nombreGasto;
 						}
 					}else{
-						v_entrada.datos.nombreIngreso = resultado.nombreIngreso;
-						v_entrada.datos.nombreGasto = resultado.nombreGasto; 
 						v_entrada.datos.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
 					}
 					if (typeof resultado.descripcionIngreso === "undefined" && typeof resultado.descripcionGasto === "undefined"){
 					}else if (typeof resultado.descripcionIngreso === "undefined" || typeof resultado.descripcionGasto === "undefined"){
 						if (typeof resultado.descripcionIngreso !== "undefined"){
-							v_entrada.datos.descripcionIngreso = resultado.descripcionIngreso;
 							v_entrada.datos.descripcionIG = resultado.descripcionIngreso;
 						}
 						if (typeof resultado.descripcionGasto !== "undefined"){
-							v_entrada.datos.descripcionGasto = resultado.descripcionGasto;            	
 							v_entrada.datos.descripcionIG = resultado.descripcionGasto;
 						}
-					}else{
-						v_entrada.datos.descripcionIngreso = resultado.descripcionIngreso;
-						v_entrada.datos.descripcionGasto = resultado.descripcionGasto;   
+					}else{ 
 						v_entrada.datos.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);
 					}        	          	
 				}

@@ -35,11 +35,11 @@
 						<div>
 							<input type="text" class="agregarInfo nombre" placeholder="nombre" :title=datos.nombreI list="nombreI">
 							<datalist id="nombreI">
-								<option v-for="dato in datos.nombreagregarInfo">{{dato.nombre}}</option>
+								<option v-for="dato in datos.nombreIG">{{dato.nombre}}</option>
 							</datalist>
 							<input type="text" class="agregarInfo descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionI">
 							<datalist id="descripcionI">
-								<option v-for="dato in datos.descripcionagregarInfo">{{dato.descripcion}}</option>
+								<option v-for="dato in datos.descripcionIG">{{dato.descripcion}}</option>
 							</datalist>
 							<input type="text" class="agregarInfo" placeholder="costo" :title=datos.costoGI>
 							<input type="date" class="agregarInfo" id ="datePicker_agregarInfo" :title=datos.fechaI>
