@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     //Crear una sentensia SQL
     $tablaQuery = $TABLA_INGRESOS;
-    if ($dinero == 'gasto') {
+    if ($dinero == 'gastos') {
         $tablaQuery = $TABLA_GASTOS;
     }
 

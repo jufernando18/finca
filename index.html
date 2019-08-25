@@ -30,49 +30,30 @@
 						<input type="button" id="copyToClipboard" style="width: 11em;" value="copiar link de acceso" onclick="crud.copyToClipboard()">
 						</input><input type="button" value="nueva pestaña" onclick="login.abrirPestana()">
 					</h4>
-					<div id="ingresos">
-						<p><strong>Ingresos: </strong></p>
+					<div>
+						<p><strong>Información: </strong></p>
 						<div>
-							<input type="text" class="ingreso nombre" placeholder="nombre" :title=datos.nombreI list="nombreI">
+							<input type="text" class="agregarInfo nombre" placeholder="nombre" :title=datos.nombreI list="nombreI">
 							<datalist id="nombreI">
-								<option v-for="dato in datos.nombreIngreso">{{dato.nombre}}</option>
+								<option v-for="dato in datos.nombreagregarInfo">{{dato.nombre}}</option>
 							</datalist>
-							<input type="text" class="ingreso descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionI">
+							<input type="text" class="agregarInfo descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionI">
 							<datalist id="descripcionI">
-								<option v-for="dato in datos.descripcionIngreso">{{dato.descripcion}}</option>
+								<option v-for="dato in datos.descripcionagregarInfo">{{dato.descripcion}}</option>
 							</datalist>
-							<input type="text" class="ingreso" placeholder="costo" :title=datos.costoGI>
-							<input type="date" class="ingreso" id ="datePicker_ingreso" :title=datos.fechaI>
-							<select class="ingreso" :title=datos.tipo>
+							<input type="text" class="agregarInfo" placeholder="costo" :title=datos.costoGI>
+							<input type="date" class="agregarInfo" id ="datePicker_agregarInfo" :title=datos.fechaI>
+							<select class="agregarInfo" :title=datos.tipo>
 								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
-							</select> 								
-							<input type="button" value="agregar" onclick="crud.insertar('Agenda/crear.php','ingreso', null)" :title=datos.botonI>	
-							<button class="ingreso" value="" title="actualizar" onclick="crud.insertar('Agenda/crear.php','ingreso', this.value)"></button>
+							</select> 			
+							<select class="agregarInfo" :title=datos.dinerosInsertar>
+								<option v-for="dato in datos.dineroInsertar" :value=dato.valor>{{dato.dinero}}</option>
+							</select>													
+							<input type="button" value="agregar" onclick="crud.insertar('Agenda/crear.php',null)" :title=datos.botonI>	
+							<button class="agregarInfo" value="" title="actualizar" onclick="crud.insertar('Agenda/crear.php', this.value)"></button>
 						</div>
-							<h4 class="ocultar" id="ingresoRevisar">{{datos.revisar}}</h4>
-							<h4 class="ocultar" id="ingresoAgregado">{{datos.agregado}}</h4>
-					</div>
-					<div id="gastos">
-						<p><strong>Gastos: </strong></p>
-						<div>
-							<input type="text" class="gasto nombre" placeholder="nombre" :title=datos.nombreG list="nombreG">
-							<datalist id="nombreG">
-								<option v-for="dato in datos.nombreGasto">{{dato.nombre}}</option>
-							</datalist>
-							<input type="text" class="gasto descripcion" placeholder="descripción" :title=datos.descripcion list="descripcionG">
-							<datalist id="descripcionG">
-								<option v-for="dato in datos.descripcionGasto">{{dato.descripcion}}</option>
-							</datalist>
-							<input type="text" class="gasto" placeholder="costo" :title=datos.costoGI>
-							<input type="date" class="gasto" id ="datePicker_gasto" :title=datos.fechaG>	
-							<select class="gasto" :title=datos.tipo>
-								<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
-							</select> 				
-							<input type="button" value="agregar" onclick="crud.insertar('Agenda/crear.php','gasto', null)" :title=datos.botonG>	
-							<button class="gasto" value="" title="actualizar" onclick="crud.insertar('Agenda/crear.php','gasto', this.value)"></button>
-						</div>
-							<h4 class="ocultar" id="gastoRevisar">{{datos.revisar}}</h4>	
-							<h4 class="ocultar" id="gastoAgregado">{{datos.agregado}}</h4>		
+							<h4 class="ocultar" id="agregarInfoRevisar">{{datos.revisar}}</h4>
+							<h4 class="ocultar" id="agregarInfoAgregado">{{datos.agregado}}</h4>
 					</div>		
 					<div>		
 						<p><strong>Busqueda: </strong></p>

@@ -2,11 +2,12 @@ class Crud{
 	constructor(datos){
 		this._datos=datos;
 	}
-	insertar(DataBase,dinero, id){
-		var dineroIG = (dinero == 'gasto')?document.getElementsByClassName("gasto"):document.getElementsByClassName("ingreso");
+	insertar(DataBase, id){
+		
+		var dineroIG = document.getElementsByClassName("agregarInfo");
 		let _this = this;
 		if (dineroIG[0].value == "" || dineroIG[2].value == "" || dineroIG[3].value == "" || parseInt(dineroIG[2].value).toString() != dineroIG[2].value){
-			$( "#"+dinero+"Revisar" ).fadeIn(TIEMPO_NOTIFICACION).delay(TIEMPO_NOTIFICACION).fadeTo(TIEMPO_NOTIFICACION,0, function() {
+			$( "#agregarInfoRevisar" ).fadeIn(TIEMPO_NOTIFICACION).delay(TIEMPO_NOTIFICACION).fadeTo(TIEMPO_NOTIFICACION,0, function() {
 				this.style.display = 'none';
 				this.style.opacity = '1';
 			});
@@ -20,7 +21,7 @@ class Crud{
 			"costo" : dineroIG[2].value,
 			"fecha" : dineroIG[3].value,
 			"tipo" : dineroIG[4].value, 
-			"dinero" : dinero};
+			"dinero" : dineroIG[5].value};
 		$.ajax({
 				data: _this._datos,
 				type:'get',
@@ -34,12 +35,12 @@ class Crud{
 						dineroIG[1].value='';
 						dineroIG[2].value='';        		
 					}
-			$( "#"+dinero+"Agregado" ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
+			$( "#agregarInfoAgregado" ).fadeIn(TIEMPO_NOTIFICACION_OK).delay(TIEMPO_NOTIFICACION_OK).fadeTo(TIEMPO_NOTIFICACION_OK,0, function() {
 				this.style.display = 'none';
 				this.style.opacity = '1';
 			});			
-			dineroIG[5].innerHTML = "";
-			dineroIG[5].value = null;
+			dineroIG[6].innerHTML = "";
+			dineroIG[6].value = null;
 			_this.autocompletar('Agenda/autocompletar.php');
 				}			        
 		});				
@@ -180,12 +181,6 @@ class Crud{
 	borrar(DataBase,id, dinero){
 		var datosBusqueda = document.getElementsByClassName("busqueda");
 		let _this = this;
-		/*if (datosBusqueda[0].value == '' || datosBusqueda[8].value == ''){
-		$( "#resultadoRevisar" ).fadeIn(TIEMPO_NOTIFICACION_FAIL).delay(TIEMPO_NOTIFICACION_FAIL).fadeTo(TIEMPO_NOTIFICACION_FAIL,0, function() {
-			this.style.display = 'none';
-			this.style.opacity = '1';
-		});
-		}else{*/
 			_this._datos = {
 				"token" : token ,
 			"id" : id,//datosBusqueda[0].value,    	        	
@@ -215,7 +210,6 @@ class Crud{
 				});					            	        				            
 					}
 			});
-		//}
 	}	
 	autocompletar(DataBase){
 		let _this = this;
@@ -309,15 +303,16 @@ class Crud{
 			success: function (resultado){
 				if(!_this.validar(resultado))return;
 				resultado = resultado[0];
-				var dineroIG = (dinero == 'gasto')?document.getElementsByClassName("gasto"):document.getElementsByClassName("ingreso");
+				var dineroIG = document.getElementsByClassName("agregarInfo");
 				console.log(dineroIG);
 				dineroIG[0].value = resultado.nombre;
 				dineroIG[1].value = resultado.descripcion;
 				dineroIG[2].value = resultado.costo;
 				dineroIG[3].valueAsDate = new Date(resultado.fecha);
 				dineroIG[4].value = resultado.tipo;
-				dineroIG[5].value = id;
-				dineroIG[5].innerHTML = "actualizar";
+				dineroIG[5].value = dinero;
+				dineroIG[6].value = id;
+				dineroIG[6].innerHTML = "actualizar";
 
 			}			        
 		});			

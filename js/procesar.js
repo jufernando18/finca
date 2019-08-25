@@ -21,8 +21,7 @@ window.onload = function(){
 fechaActual = new Date().toLocaleString("en-US", {timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone});
 fechaActual = new Date(fechaActual);
 if (ACTUALIZAR_INGRESO_GASTO_AUTO) {
-	document.getElementById('datePicker_ingreso').valueAsDate = fechaActual;
-	document.getElementById('datePicker_gasto').valueAsDate = fechaActual;
+	document.getElementById('datePicker_agregarInfo').valueAsDate = fechaActual;
 	document.getElementById('datePicker_Bdesde').valueAsDate = new Date('2018-01-01');
 	document.getElementById('datePicker_Bhasta').valueAsDate = fechaActual;
 	document.getElementById('datePicker_Bpago').valueAsDate = fechaActual;
