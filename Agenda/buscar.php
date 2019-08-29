@@ -1,5 +1,5 @@
 <?php
-    require_once('validarSesion.php');//importamos la conexion
+    require_once('validarSesion.php');
 
     $busqueda = "WHERE idUsuario=$idUsuario";
 
@@ -34,11 +34,11 @@
         $busqueda = $busqueda." AND fecha <='$hasta'";
     }      
             
-    $sql = "SELECT * FROM $TABLA_INGRESOS $busqueda order by fecha desc;";//generamos el script en sql
+    $sql = "SELECT * FROM $TABLA_INGRESOS $busqueda order by fecha desc;";
     if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM $TABLA_GASTOS $busqueda order by fecha desc;";//generamos el script en sql
+        $sql = "SELECT * FROM $TABLA_GASTOS $busqueda order by fecha desc;";
     }
-    $resultado = mysqli_query($con,$sql);//ejecutando el query
+    $resultado = mysqli_query($con,$sql);
 
     $posicion=0;
     while ($row = mysqli_fetch_array($resultado)) {
@@ -51,7 +51,7 @@
         $resultado_enviar[$posicion]['tipo']=$row['tipo'];
         $posicion+=1;
     }
-    echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+    echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);//se cierra la conexion
+    mysqli_close($con);
 ?>

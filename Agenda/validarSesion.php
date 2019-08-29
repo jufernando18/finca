@@ -1,20 +1,19 @@
 <?php
-  require_once('db_connect.php');//importamos la conexion
+  require_once('db_connect.php');
 
-  $sesion = 1;
-  $busqueda = "WHERE token=? AND sesion=?";
-  $sql = "SELECT id FROM $TABLA_USUARIOS $busqueda;";//generamos el script en sql
+  $busqueda = "WHERE token=? AND sesion = true";
+  $sql = "SELECT id FROM $TABLA_USUARIOS $busqueda;";
   $stmt = $con->prepare($sql);
-  $stmt->bind_param("si", $token, $sesion);
+  $stmt->bind_param("s", $token);
   $stmt->execute();
   $stmt->store_result();
   $stmt->bind_result($idUsuario);  
 
   if($stmt->num_rows != 1) {
     $resultado_enviar['valid']=false;
-    echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+    echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);//se cierra la conexion
+    mysqli_close($con);
     exit();    
   }
   $stmt->fetch()

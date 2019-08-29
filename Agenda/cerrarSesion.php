@@ -1,10 +1,10 @@
 <?php
-    require_once('validarSesion.php');//importamos la conexion
+    require_once('validarSesion.php');
 
     $sql = "UPDATE $TABLA_USUARIOS SET sesion = false  WHERE token='$token';";
-    mysqli_query($con,$sql);//ejecutando el query
+    mysqli_query($con,$sql);
 
-    echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+    echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);//se cierra la conexion    
+    mysqli_close($con);
 ?>

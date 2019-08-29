@@ -1,10 +1,10 @@
 <?php
-require_once('db_connect.php');//importamos la conexion
+require_once('db_connect.php');
 
 
     $busqueda = "WHERE usuario='$usuario' AND contrasena='$contrasena'";        
-    $sql = "SELECT * FROM $TABLA_USUARIOS $busqueda;";//generamos el script en sql
-    $resultado = mysqli_query($con,$sql);//ejecutando el query
+    $sql = "SELECT * FROM $TABLA_USUARIOS $busqueda;";
+    $resultado = mysqli_query($con,$sql);
     if (empty(mysqli_fetch_array($resultado))) {
         $sql = "INSERT INTO $TABLA_USUARIOS (nombre, usuario, contrasena, titulo, creado) VALUES ('$nombre','$usuario','$contrasena','$titulo',now())";
 
@@ -17,7 +17,7 @@ require_once('db_connect.php');//importamos la conexion
             $resultado_enviar['estadoUsuario']='El usuario ya existe';
     }
 
-    echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+    echo json_encode($resultado_enviar);
 
-    mysqli_close($con);//se cierra la conexion
+    mysqli_close($con);
 ?>

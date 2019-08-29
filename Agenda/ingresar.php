@@ -1,11 +1,10 @@
 <?php
-require_once('db_connect.php');//importamos la conexion
+require_once('db_connect.php');
 
-    $sesion = 1;
-    $busqueda = "WHERE token=? AND sesion=?";
-    $sql = "SELECT nombre, titulo FROM $TABLA_USUARIOS $busqueda order by creado desc;";//generamos el script en sql
+    $busqueda = "WHERE token=? AND sesion = true";
+    $sql = "SELECT nombre, titulo FROM $TABLA_USUARIOS $busqueda order by creado desc;";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("si", $token, $sesion);
+    $stmt->bind_param("s", $token);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($nombre, $titulo);    
@@ -18,9 +17,9 @@ require_once('db_connect.php');//importamos la conexion
         $resultado_enviar['nombre']=$nombre;
         $resultado_enviar['token']=$token;
 
-        echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+        echo json_encode($resultado_enviar);
         $stmt->close();
-        mysqli_close($con);//se cierra la conexion
+        mysqli_close($con);
         exit();
     }      
 
@@ -28,7 +27,7 @@ require_once('db_connect.php');//importamos la conexion
 
     $busqueda = "WHERE usuario=? AND contrasena=?";
     $busqueda_unsecure = "WHERE usuario='$usuario' AND contrasena='$contrasena'";
-    $sql = "SELECT nombre, titulo FROM $TABLA_USUARIOS $busqueda order by creado desc;";//generamos el script en sql
+    $sql = "SELECT nombre, titulo FROM $TABLA_USUARIOS $busqueda order by creado desc;";
 
 
     $stmt = $con->prepare($sql);
@@ -40,21 +39,16 @@ require_once('db_connect.php');//importamos la conexion
 
     while ($row = $stmt->fetch()) {
         $token = sha1 ("".time());
-        $sql = "UPDATE $TABLA_USUARIOS SET token = '$token', sesion = $sesion $busqueda_unsecure;"; // ya se sabe que el usuario y contraseña estan bien
-        mysqli_query($con,$sql);//ejecutando el query
+        $sql = "UPDATE $TABLA_USUARIOS SET token = '$token', sesion = true $busqueda_unsecure;";
+        mysqli_query($con,$sql);
 
         $resultado_enviar['valid'] =true;
         $resultado_enviar['titulo']=$titulo;
         $resultado_enviar['nombre']=$nombre;
         $resultado_enviar['token']=$token;
-
-        echo json_encode($resultado_enviar);//se genera un JSON con el resultado
-        
-        mysqli_close($con);//se cierra la conexion
-        exit();
     }   
 
-    echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+    echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);//se cierra la conexion
+    mysqli_close($con);
 ?>

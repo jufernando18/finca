@@ -1,5 +1,5 @@
 <?php
-    require_once('validarSesion.php');//importamos la conexion
+    require_once('validarSesion.php');
 
     $busqueda = "WHERE idUsuario=$idUsuario";
 
@@ -30,8 +30,8 @@
     $busqueda = $busqueda." AND fecha BETWEEN '$desde' AND '$hasta'";
     
     if ($dinero == 'ingresos') {
-        $sql = "SELECT * FROM $TABLA_INGRESOS $busqueda order by fecha desc;";//generamos el script en sql
-        $resultado = mysqli_query($con,$sql);//ejecutando el query
+        $sql = "SELECT * FROM $TABLA_INGRESOS $busqueda order by fecha desc;";
+        $resultado = mysqli_query($con,$sql);
         while ($row = mysqli_fetch_array($resultado)) {
             if (is_numeric(intval($row['costo'])) && intval($row['costo']) < 0) {
                 $costo = explode('-', $row['costo'])[1];
@@ -42,8 +42,8 @@
     }      
     
     if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM $TABLA_GASTOS $busqueda order by fecha desc;";//generamos el script en sql
-        $resultado = mysqli_query($con,$sql);//ejecutando el query
+        $sql = "SELECT * FROM $TABLA_GASTOS $busqueda order by fecha desc;";
+        $resultado = mysqli_query($con,$sql);
         while ($row = mysqli_fetch_array($resultado)) {
             if (is_numeric(intval($row['costo'])) && intval($row['costo']) < 0) {
                 $costo = explode('-', $row['costo'])[1];
@@ -53,7 +53,7 @@
         }
     }
 
-    echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+    echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);//se cierra la conexion
+    mysqli_close($con);
 ?>

@@ -1,7 +1,6 @@
 <?php
-    require_once('validarSesion.php');//importamos la conexion
+    require_once('validarSesion.php');
 
-    //Crear una sentensia SQL
     $tablaQuery = $TABLA_INGRESOS;
     if ($dinero == 'gastos') {
         $tablaQuery = $TABLA_GASTOS;
@@ -18,13 +17,12 @@
 
     $sql = $start.$assignment.$end;
 
-    //Ejecutamos el query
     if(mysqli_query($con, $sql)){
     } else {
         $resultado_enviar['error']="No se pudo hacer el registro.";
     }
         
-    echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+    echo json_encode($resultado_enviar);
     $stmt->close();
     mysqli_close($con);
 ?>
