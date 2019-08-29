@@ -8,9 +8,10 @@
         $tablaQuery = $TABLA_GASTOS;
     }    
 
-    $sql = "DELETE FROM $tablaQuery WHERE id =$id AND idUsuario = $idUsuario;";
-
-    if(!mysqli_query($con, $sql)){
+    $sql = "DELETE FROM $tablaQuery WHERE id=? AND idUsuario = $idUsuario;";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("i", $id);
+    if(!$stmt->execute()){
         $resultado_enviar['error']='No se pudo hacer el registro';
     }
 
