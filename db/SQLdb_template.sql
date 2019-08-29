@@ -1,54 +1,121 @@
--- MySQL dump 10.16  Distrib 10.1.38-MariaDB, for debian-linux-gnu (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: dbFinca
--- ------------------------------------------------------
--- Server version	10.1.38-MariaDB-0ubuntu0.18.04.1
+-- Host: 127.0.0.1:3306
+-- Generation Time: Aug 29, 2019 at 02:35 AM
+-- Server version: 10.2.23-MariaDB
+-- PHP Version: 7.2.18
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Database: `registroContable`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tablaGastos`
+--
+
+CREATE TABLE `tablaGastos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
+  `costo` varchar(30) DEFAULT NULL,
+  `modificado` datetime DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `tipo` varchar(20) DEFAULT NULL,
+  `idUsuario` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tablaIngresos`
+--
+
+CREATE TABLE `tablaIngresos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
+  `costo` varchar(30) DEFAULT NULL,
+  `modificado` datetime DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `tipo` varchar(20) DEFAULT NULL,
+  `idUsuario` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tablaUsuarios`
 --
 
-DROP TABLE IF EXISTS `tablaUsuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tablaUsuarios` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) UNSIGNED NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `usuario` varchar(50) DEFAULT NULL,
   `contrasena` varchar(50) DEFAULT NULL,
   `titulo` varchar(50) DEFAULT NULL,
   `creado` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `token` varchar(40) NOT NULL,
+  `sesion` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tablaUsuarios`
+-- Indexes for dumped tables
 --
 
-LOCK TABLES `tablaUsuarios` WRITE;
-/*!40000 ALTER TABLE `tablaUsuarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tablaUsuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Indexes for table `tablaGastos`
+--
+ALTER TABLE `tablaGastos`
+  ADD PRIMARY KEY (`id`);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for table `tablaIngresos`
+--
+ALTER TABLE `tablaIngresos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tablaUsuarios`
+--
+ALTER TABLE `tablaUsuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tablaGastos`
+--
+ALTER TABLE `tablaGastos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table `tablaIngresos`
+--
+ALTER TABLE `tablaIngresos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT for table `tablaUsuarios`
+--
+ALTER TABLE `tablaUsuarios`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2019-03-07 23:10:16
