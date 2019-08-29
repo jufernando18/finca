@@ -33,11 +33,13 @@
     if($hasta != null && $hasta != ''){
         $busqueda = $busqueda." AND fecha <='$hasta'";
     }      
-            
-    $sql = "SELECT * FROM $TABLA_INGRESOS $busqueda order by fecha desc;";
+
+    $tablaQuery = $TABLA_INGRESOS;
     if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM $TABLA_GASTOS $busqueda order by fecha desc;";
-    }
+        $tablaQuery = $TABLA_GASTOS;
+    }    
+
+    $sql = "SELECT * FROM $tablaQuery $busqueda order by fecha desc;";
     $resultado = mysqli_query($con,$sql);
 
     $posicion=0;
