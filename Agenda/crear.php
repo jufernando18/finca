@@ -1,9 +1,6 @@
 <?php
     require_once('validarSesion.php');//importamos la conexion
 
-//Verificamos si se está usando GET o  POST para la comunicacion de la informacion
-if($_SERVER['REQUEST_METHOD'] == 'GET'){
-
     //Crear una sentensia SQL
     $tablaQuery = $TABLA_INGRESOS;
     if ($dinero == 'gastos') {
@@ -28,7 +25,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     }
         
     echo json_encode($resultado_enviar);//se genera un JSON con el resultado
-    //Cerrar la conexion
+    $stmt->close();
     mysqli_close($con);
-}
 ?>

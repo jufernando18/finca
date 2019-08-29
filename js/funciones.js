@@ -24,7 +24,7 @@ class Crud{
 			"dinero" : dineroIG[5].value};
 		$.ajax({
 				data: _this._datos,
-				type:'get',
+				type:'POST',
 				url:DataBase,
 				dataType: "json",
 				success: function (resultado){
@@ -85,7 +85,7 @@ class Crud{
 				_this._datos.dinero = 'ingresos';
 		    $.ajax({
 		        data: _this._datos,
-		        type:'get',
+		        type:'POST',
 		        url:DataBase,
 		        dataType: "json",
 		        success: function (resultado){
@@ -107,7 +107,7 @@ class Crud{
 				_this._datos.dinero = 'gastos';
 				$.ajax({
 						data: _this._datos,
-						type:'get',
+						type:'POST',
 						url:DataBase,
 						dataType: "json",
 						success: function (resultado){
@@ -164,7 +164,7 @@ class Crud{
 			"pago" : datosBusqueda[11].value};
 		$.ajax({
 				data: _this._datos,
-				type:'get',
+				type:'POST',
 				url:DataBase,
 				dataType: "json",
 				success: function (resultado){
@@ -196,7 +196,7 @@ class Crud{
 			"hasta" : datosBusqueda[10].value};
 		$.ajax({
 					data: _this._datos,
-					type:'get',
+					type:'POST',
 					url:DataBase,
 					dataType: "json",
 					success: function (resultado){
@@ -217,7 +217,7 @@ class Crud{
 			"token" : token};
 		$.ajax({
 			data: _this._datos,
-				type:'get',
+				type:'POST',
 				url:DataBase,
 				dataType: "json",
 				success: function (resultado){   
@@ -261,7 +261,7 @@ class Crud{
 			"token" : token};
 		$.ajax({
 			data: _this._datos,
-				type:'get',
+				type:'POST',
 				url:DataBase,
 				dataType: "json",
 				success: function (resultado){   	
@@ -289,7 +289,7 @@ class Crud{
 			"dinero" : dinero};
 		$.ajax({
 			data: this._datos,
-			type:'get',
+			type:'POST',
 			url:DataBase,
 			dataType: "json",
 			success: function (resultado){
@@ -321,7 +321,7 @@ class Login{
 			"contrasena" : input[1].value};
 		$.ajax({
 			data: this._datos,
-			type:'get',
+			type:'POST',
 			url:DataBase,
 			dataType: "json",
 			success: function (resultado){
@@ -370,7 +370,7 @@ class Login{
 			"titulo" : input[4].value};
 		$.ajax({
 			data: this._datos,
-			type:'get',
+			type:'POST',
 			url:DataBase,
 			dataType: "json",
 			success: function (resultado){

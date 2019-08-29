@@ -1,10 +1,11 @@
 <?php
 require_once('db_connect.php');//importamos la conexion
 
-    $busqueda = "WHERE token=? AND sesion = true";
+    $sesion = 1;
+    $busqueda = "WHERE token=? AND sesion=?";
     $sql = "SELECT nombre, titulo FROM $TABLA_USUARIOS $busqueda order by creado desc;";//generamos el script en sql
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("s", $token);
+    $stmt->bind_param("si", $token, $sesion);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($nombre, $titulo);    
@@ -39,7 +40,7 @@ require_once('db_connect.php');//importamos la conexion
 
     while ($row = $stmt->fetch()) {
         $token = sha1 ("".time());
-        $sql = "UPDATE $TABLA_USUARIOS SET token = '$token', sesion = true $busqueda_unsecure;"; // ya se sabe que el usuario y contraseña estan bien
+        $sql = "UPDATE $TABLA_USUARIOS SET token = '$token', sesion = $sesion $busqueda_unsecure;"; // ya se sabe que el usuario y contraseña estan bien
         mysqli_query($con,$sql);//ejecutando el query
 
         $resultado_enviar['valid'] =true;

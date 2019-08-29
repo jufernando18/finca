@@ -5,5 +5,6 @@
     mysqli_query($con,$sql);//ejecutando el query
 
     echo json_encode($resultado_enviar);//se genera un JSON con el resultado
+    $stmt->close();
     mysqli_close($con);//se cierra la conexion    
 ?>
