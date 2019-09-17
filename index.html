@@ -149,6 +149,7 @@
 								<button :value="dato.id" class="gastos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button>
 							<button :value="dato.id" class="gastos" onclick="crud.setDatosEdicion('Agenda/buscar.php', this.value, this.className)" style="background-color: green">E</button>
 							<button :value="dato.id" class="gastos" onclick="crud.pagar('Agenda/pagar.php', this.value, this.className)" style="background-color: yellow">P</button>
+							<button :value="dato.id" class="gastos" onclick="crud.pagar('Agenda/deuda_pago.php', this.value, this.className)" style="background-color: purple">C</button>
 						</span>
 					</td>
 						<td>{{dato.nombre}}</td>
