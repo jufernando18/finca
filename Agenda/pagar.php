@@ -1,57 +1,43 @@
 <?php
     require_once('validarSesion.php');
 
-    $busqueda = "WHERE idUsuario=$idUsuario";
-
-    if($tipo != ''){
-        $busqueda = $busqueda." AND tipo='$tipo'";
-    }
-    if($id != ''){
-        $busqueda = $busqueda." AND id=$id";
-    }
-    if($nombre != ''){
-        $busqueda = $busqueda." AND nombre='$nombre'";
-    }
-    if($descripcion != ''){
-        $busqueda = $busqueda." AND descripcion LIKE '%$descripcion%'";
-    }
-    if($costo != ''){
-        $busqueda = $busqueda." AND costo LIKE '$costo%'";
-    }
-    if($ano != ''){
-        $busqueda = $busqueda." AND YEAR(fecha)='$ano'";
-    }    
-    if($mes != ''){
-        $busqueda = $busqueda." AND MONTH(fecha)='$mes'";
-    }        
-    if($dia != ''){
-        $busqueda = $busqueda." AND DAY(fecha)='$dia'";
-    }  
-    $busqueda = $busqueda." AND fecha BETWEEN '$desde' AND '$hasta'";
-    
     if ($dinero == 'ingresos') {
-        $sql = "SELECT * FROM $TABLA_INGRESOS $busqueda order by fecha desc;";
-        $resultado = mysqli_query($con,$sql);
-        while ($row = mysqli_fetch_array($resultado)) {
-            if (is_numeric(intval($row['costo'])) && intval($row['costo']) < 0) {
-                $costo = explode('-', $row['costo'])[1];
-                $id = $row['id'];
-                mysqli_query($con,"UPDATE $TABLA_INGRESOS SET costo='P$pago|$costo', modificado=now() WHERE id=$id AND idUsuario = $idUsuario;");  
-            }
-        }        
-    }      
-    
-    if ($dinero == 'gastos') {
-        $sql = "SELECT * FROM $TABLA_GASTOS $busqueda order by fecha desc;";
-        $resultado = mysqli_query($con,$sql);
-        while ($row = mysqli_fetch_array($resultado)) {
-            if (is_numeric(intval($row['costo'])) && intval($row['costo']) < 0) {
-                $costo = explode('-', $row['costo'])[1];
-                $id = $row['id'];
-                mysqli_query($con,"UPDATE $TABLA_GASTOS SET costo='P$pago|$costo', modificado=now() WHERE id=$id AND idUsuario = $idUsuario;");  
-            }
-        }
+        $tablaQuery = $TABLA_INGRESOS;
     }
+    if ($dinero == 'gastos') {
+        $tablaQuery = $TABLA_GASTOS;
+    } 
+    $sql = "SELECT id, costo FROM $tablaQuery WHERE id=? idUsuario=$idUsuario;";
+    
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($id, $costo);  
+    $stmt->fetch();
+    $resultado_enviar['id']=$id;
+    $resultado_enviar['costo']=$costo;
+    echo json_encode($resultado_enviar);
+    if($stmt->num_rows != 1) {
+        $resultado_enviar['id']=$id;
+        $resultado_enviar['costo']=$costo;
+        echo json_encode($resultado_enviar);
+        $stmt->close();
+        mysqli_close($con);
+        exit();    
+    }
+
+    if (!(is_numeric(intval($costo)) && intval($costo) < 0)) {
+        echo json_encode($resultado_enviar);
+        $stmt->close();
+        mysqli_close($con);
+        exit();            
+    }
+    $costo = explode('-', $costo)[1];
+    $sql = "UPDATE $tablaQuery SET costo='P?|$costo', modificado=now() WHERE id=$id AND idUsuario = $idUsuario;";  
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $pago);
+    $stmt->execute();
 
     echo json_encode($resultado_enviar);
     $stmt->close();

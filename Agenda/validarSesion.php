@@ -16,5 +16,5 @@
     mysqli_close($con);
     exit();    
   }
-  $stmt->fetch()
+  $stmt->fetch();
 ?>

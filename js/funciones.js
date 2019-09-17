@@ -130,37 +130,21 @@ class Crud{
 			this.style.opacity = '1';
 		});	   
 	}
-	pagar(DataBase){
+	pagar(DataBase, id, dinero){
 		var datosBusqueda = document.getElementsByClassName("busqueda");
-		let _this = this;
-		if (datosBusqueda[8].value == ''){
-			$( "#resultadoRevisar" ).fadeIn(TIEMPO_NOTIFICACION_FAIL).delay(TIEMPO_NOTIFICACION_FAIL).fadeTo(TIEMPO_NOTIFICACION_FAIL,0, function() {
-				this.style.display = 'none';
-				this.style.opacity = '1';
-			});			
-			return; 			    	
-		}    		        
-		if (DataBase == "Agenda/pagar.php"){
+		let _this = this;  		        
+		/*if (DataBase == "Agenda/pagar.php"){
 			idResultado="resultadoPagar";
 			if(!confirm("Está seguro que quiere pagar lo seleccionado?"))return;
 		} 
 		if (DataBase == "Agenda/deuda_pago.php"){
 			idResultado="resultadoDeuda";
 			if(!confirm("Está seguro que quiere cambiar de estado lo seleccionado?"))return;
-		}
+		}*/
 		_this._datos = {
 			"token" : token ,
-			"id" : datosBusqueda[0].value,    	        	
-			"nombre" : datosBusqueda[1].value,
-			"descripcion" : datosBusqueda[2].value,
-			"costo" : datosBusqueda[3].value,
-			"ano" : datosBusqueda[4].value,
-			"mes" : datosBusqueda[5].value,
-			"dia" : datosBusqueda[6].value,
-			"tipo" : datosBusqueda[7].value,
-			"dinero" : datosBusqueda[8].value,		    			
-			"desde" : datosBusqueda[9].value,
-			"hasta" : datosBusqueda[10].value,
+			"id" :id,    	        	
+			"dinero" :dinero,		    			
 			"pago" : datosBusqueda[11].value};
 		$.ajax({
 				data: _this._datos,

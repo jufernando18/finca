@@ -112,8 +112,14 @@
 						<th>Clasificación</th>
 					</tr>
 					<tr v-for="dato in datos">
-						<td><span class="menu-results"><input type="checkbox"/><button :value="dato.id" class="ingresos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button>
-							<button :value="dato.id" class="ingresos" onclick="crud.setDatosEdicion('Agenda/buscar.php', this.value, this.className)" style="background-color: green">E</button></span></td>
+						<td>
+							<span class="menu-results">
+								<input type="checkbox"/>
+								<button :value="dato.id" class="ingresos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button>
+								<button :value="dato.id" class="ingresos" onclick="crud.setDatosEdicion('Agenda/buscar.php', this.value, this.className)" style="background-color: green">E</button>
+								<button :value="dato.id" class="ingresos" onclick="crud.pagar('Agenda/pagar.php', this.value, this.className)" style="background-color: yellow">P</button>
+							</span>
+						</td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
 						<td>{{dato.costo}}</td>
@@ -136,8 +142,14 @@
 						<th>Clasificación</th>
 					</tr>
 					<tr v-for="dato in datos">
-						<td><span class="menu-results"><input type="checkbox"/><button :value="dato.id" class="gastos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button>
-							<button :value="dato.id" class="gastos" onclick="crud.setDatosEdicion('Agenda/buscar.php', this.value, this.className)" style="background-color: green">E</button></span></td>
+						<td>
+							<span class="menu-results">
+								<input type="checkbox"/>
+								<button :value="dato.id" class="gastos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button>
+							<button :value="dato.id" class="gastos" onclick="crud.setDatosEdicion('Agenda/buscar.php', this.value, this.className)" style="background-color: green">E</button>
+							<button :value="dato.id" class="gastos" onclick="crud.pagar('Agenda/pagar.php', this.value, this.className)" style="background-color: yellow">P</button>
+						</span>
+					</td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
 						<td>{{dato.costo}}</td>
