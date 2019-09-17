@@ -133,14 +133,15 @@ class Crud{
 	pagar(DataBase, id, dinero){
 		var datosBusqueda = document.getElementsByClassName("busqueda");
 		let _this = this;  		        
-		/*if (DataBase == "Agenda/pagar.php"){
+		let idResultado;
+		if (DataBase == "Agenda/pagar.php"){
 			idResultado="resultadoPagar";
-			if(!confirm("Está seguro que quiere pagar lo seleccionado?"))return;
+			//if(!confirm("Está seguro que quiere pagar lo seleccionado?"))return;
 		} 
 		if (DataBase == "Agenda/deuda_pago.php"){
 			idResultado="resultadoDeuda";
-			if(!confirm("Está seguro que quiere cambiar de estado lo seleccionado?"))return;
-		}*/
+			//if(!confirm("Está seguro que quiere cambiar de estado lo seleccionado?"))return;
+		}
 		_this._datos = {
 			"token" : token ,
 			"id" :id,    	        	
@@ -167,17 +168,8 @@ class Crud{
 		let _this = this;
 			_this._datos = {
 				"token" : token ,
-			"id" : id,//datosBusqueda[0].value,    	        	
-			"nombre" : datosBusqueda[1].value,
-			"descripcion" : datosBusqueda[2].value,
-			"costo" : datosBusqueda[3].value,
-			"ano" : datosBusqueda[4].value,
-			"mes" : datosBusqueda[5].value,
-			"dia" : datosBusqueda[6].value,
-			"tipo" : datosBusqueda[7].value,
-			"dinero" : dinero,//datosBusqueda[8].value,			    			
-			"desde" : datosBusqueda[9].value,
-			"hasta" : datosBusqueda[10].value};
+				"id" : id,
+				"dinero" : dinero};
 		$.ajax({
 					data: _this._datos,
 					type:'POST',

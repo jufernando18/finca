@@ -15,8 +15,6 @@
     $stmt->bind_result($id, $costo);  
     $stmt->fetch();
     if($stmt->num_rows != 1) {
-        $resultado_enviar['id']=$id;
-        $resultado_enviar['costo']=$costo;
         echo json_encode($resultado_enviar);
         $stmt->close();
         mysqli_close($con);
