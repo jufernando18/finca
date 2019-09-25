@@ -86,9 +86,6 @@
 							<input type="button" value="Buscar" onclick="crud.buscar('Agenda/buscar.php')" :title=datos.botonB>
 							<span> se paga el día: </span>
 							<input type="date" class="busqueda" id ="datePicker_Bpago" :title=datos.fechaPago>			
-							<input type="button" value="Pagar" onclick="crud.pagar('Agenda/pagar.php')" :title=datos.botonP>
-							<input type="button" value="Borrar" onclick="crud.borrar('Agenda/borrar.php')" :title=datos.botonBO style="display: none">
-							<input type="button" value="deuda/pago" onclick="crud.pagar('Agenda/deuda_pago.php')" :title=datos.botonD>
 						</div>
 							<h4 class="ocultar" id="resultadoRevisar">{{datos.revisarB}}</h4>
 							<h4 class="resultado ocultar" id="resultadoBuscar">Listo</h4>
@@ -123,7 +120,7 @@
 						</td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
-						<td>{{dato.costo}}</td>
+						<td>{{dato.costo  | currency}}</td>
 						<td>{{dato.fecha}}</td>
 						<td>{{dato.modificado}}</td>
 						<td>{{dato.tipo}}</td>
@@ -154,7 +151,7 @@
 					</td>
 						<td>{{dato.nombre}}</td>
 						<td>{{dato.descripcion}}</td>
-						<td>{{dato.costo}}</td>
+						<td>{{dato.costo  | currency}}</td>
 						<td>{{dato.fecha}}</td>
 						<td>{{dato.modificado}}</td>
 						<td>{{dato.tipo}}</td>

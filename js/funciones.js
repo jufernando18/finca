@@ -371,3 +371,16 @@ class Login{
 		window.open("index.html?"+token, "_blank");
 	}
 }
+Vue.filter('currency', function (value) {
+	let valueSplited = [];
+	if(!isNaN(value)) {
+		valueSplited.push('');
+	} else {
+		valueSplited = value.split("|");
+		value = valueSplited[1];
+		valueSplited[0] = valueSplited[0] + "|";
+	}
+
+	let val = (value/1).toFixed(2).replace('.', ',')
+	return valueSplited[0] + '$' + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+});
