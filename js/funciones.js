@@ -99,7 +99,7 @@ class Crud{
 		            		totalIngresos+=parseInt(resultado[i].costo);
 		            	}
 		            }
-		            document.getElementById("ingreso").innerHTML="Ingresos: "+totalIngresos.toLocaleString()+" | Deuda: "+totalIngresosDeudas.toLocaleString();
+		            document.getElementById("ingreso").innerHTML="Ingresos: $"+totalIngresos.toLocaleString()+",00 | Deuda: $"+totalIngresosDeudas.toLocaleString()+',00';
 		        }
 		    });
 	    }	
@@ -121,7 +121,7 @@ class Crud{
 										totalGastos+=parseInt(resultado[i].costo);
 									}
 								}
-								document.getElementById("gasto").innerHTML="Gastos: "+totalGastos.toLocaleString()+" | Deuda: "+totalGastosDeudas.toLocaleString();	            
+								document.getElementById("gasto").innerHTML="Gastos: $"+totalGastos.toLocaleString()+",00 | Deuda: $"+totalGastosDeudas.toLocaleString()+',00';	            
 						}
 				});			    
 	    } 
