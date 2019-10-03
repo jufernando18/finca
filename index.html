@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="js/bootstrap.min.css">
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/vue-2.5.22.js"></script>
 		<script type="text/javascript" src="js/es.js"></script>
@@ -114,7 +114,7 @@
 							<th>Clasificación</th>
 						</tr>
 						<tr v-for="dato in datos">
-							<td class="row flex-fill">
+							<td class="">
 								<span class="menu-results d-flex">
 									<button :value="dato.id" class="ingresos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button>
 									<button :value="dato.id" class="ingresos" onclick="crud.setDatosEdicion('Agenda/buscar.php', this.value, this.className)" style="background-color: green">E</button>
@@ -144,7 +144,7 @@
 							<th>Clasificación</th>
 						</tr>
 						<tr v-for="dato in datos">
-							<td class="row flex-fill">
+							<td class="">
 								<span class="menu-results d-flex">
 								<button :value="dato.id" class="gastos" onclick="crud.borrar('Agenda/borrar.php', this.value, this.className)" style="background-color: red">X</button>
 								<button :value="dato.id" class="gastos" onclick="crud.setDatosEdicion('Agenda/buscar.php', this.value, this.className)" style="background-color: green">E</button>
