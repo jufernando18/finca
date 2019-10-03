@@ -1,7 +1,7 @@
 const BUSCAR_AUTO =true,ACTUALIZAR_BUSQUEDA_AUTO=false,ACTUALIZAR_INGRESO_GASTO_AUTO=true, TIEMPO_NOTIFICACION=1000, TIEMPO_NOTIFICACION_OK=1000, TIEMPO_NOTIFICACION_FAIL=3000, LIMPIAR_AUTO=true,TITULO=true;
 var v_ingreso = new Vue ({el : "#resultadosBusqueda_ingresos",data : {datos: ""}});	
 var v_gasto = new Vue ({el : "#resultadosBusqueda_gastos",data : {datos: ""}});
-var v_entrada = new Vue ({el : "#header-body",data : {datos: es}});	
+var v_entrada = new Vue ({el : "#header",data : {datosGenerales: es}});	
 var token;			
 let login = new Login;
 let crud = new Crud;		
@@ -30,23 +30,33 @@ if (ACTUALIZAR_BUSQUEDA_AUTO){
 	document.getElementById('ano').value = fechaActual.getFullYear();
 	document.getElementById('mes').value = fechaActual.getMonth()+1;
 }
-v_entrada.datos.showIngreso = false;
-v_entrada.datos.showRegistro = false;
-v_entrada.datos.showIngresoInfo = false;
-v_entrada.datos.showBuscar = false;
 function toogleIngreso() {
-	console.log('toogleIngreso: ', v_entrada.datos.showIngreso, ' to: ', !v_entrada.datos.showIngreso);
-	v_entrada.datos.showIngreso = !v_entrada.datos.showIngreso;
+	if (document.getElementById('form-ingreso').style.display == 'none') {
+		document.getElementById('form-ingreso').style.display = 'block';
+	} else {
+		document.getElementById('form-ingreso').style.display = 'none';
+	}
 }
 function toogleRegistro() {
-	console.log('toogleRegistro: ', v_entrada.datos.showRegistro, ' to: ', !v_entrada.datos.showRegistro);
-	v_entrada.datos.showRegistro = !v_entrada.datos.showRegistro;
+	if (document.getElementById('form-registro').style.display == 'none') {
+		document.getElementById('form-registro').style.display = 'block';
+	} else {
+		document.getElementById('form-registro').style.display = 'none';
+	}
 }
 function toogleIngresoInfo() {
-	console.log('toogleIngresoInfo: ', v_entrada.datos.showIngresoInfo, ' to: ', !v_entrada.datos.showIngresoInfo);
-	v_entrada.datos.showIngresoInfo = !v_entrada.datos.showIngresoInfo;
+	if (document.getElementById('form-ingreso-info').style.display == 'none') {
+		document.getElementById('form-ingreso-info').style.display = 'block';
+	} else {
+		document.getElementById('form-ingreso-info').style.display = 'none';
+	}
 }
 function toogleBuscar() {
-	console.log('toogleBuscar: ', v_entrada.datos.showBuscar, ' to: ', !v_entrada.datos.showBuscar);
-	v_entrada.datos.showBuscar = !v_entrada.datos.showBuscar;
+	if (document.getElementById('form-buscar-1').style.display == 'none') {
+		document.getElementById('form-buscar-1').style.display = 'block';
+		document.getElementById('form-buscar-2').style.display = 'block';
+	} else {
+		document.getElementById('form-buscar-1').style.display = 'none';
+		document.getElementById('form-buscar-2').style.display = 'none';
+	}
 }

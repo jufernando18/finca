@@ -201,24 +201,24 @@ class Crud{
 					if (typeof resultado.nombreIngreso === "undefined" && typeof resultado.nombreGasto === "undefined"){
 					}else if (typeof resultado.nombreIngreso === "undefined" || typeof resultado.nombreGasto === "undefined"){
 						if (typeof resultado.nombreIngreso !== "undefined"){
-							v_entrada.datos.nombreIG = resultado.nombreIngreso;
+							v_entrada.datosGenerales.nombreIG = resultado.nombreIngreso;
 						}
 						if (typeof resultado.nombreGasto !== "undefined"){
-							v_entrada.datos.nombreIG = resultado.nombreGasto;
+							v_entrada.datosGenerales.nombreIG = resultado.nombreGasto;
 						}
 					}else{
-						v_entrada.datos.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
+						v_entrada.datosGenerales.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
 					}
 					if (typeof resultado.descripcionIngreso === "undefined" && typeof resultado.descripcionGasto === "undefined"){
 					}else if (typeof resultado.descripcionIngreso === "undefined" || typeof resultado.descripcionGasto === "undefined"){
 						if (typeof resultado.descripcionIngreso !== "undefined"){
-							v_entrada.datos.descripcionIG = resultado.descripcionIngreso;
+							v_entrada.datosGenerales.descripcionIG = resultado.descripcionIngreso;
 						}
 						if (typeof resultado.descripcionGasto !== "undefined"){
-							v_entrada.datos.descripcionIG = resultado.descripcionGasto;
+							v_entrada.datosGenerales.descripcionIG = resultado.descripcionGasto;
 						}
 					}else{ 
-						v_entrada.datos.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);
+						v_entrada.datosGenerales.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);
 					}        	          	
 				}
 		});	
@@ -303,8 +303,8 @@ class Login{
 			success: function (resultado){
 				if (resultado.valid) {
 					input[1].value = "";
-					if(TITULO)v_entrada.datos.titulo = resultado.titulo;
-					v_entrada.datos.nombre = resultado.nombre;
+					if(TITULO)v_entrada.datosGenerales.titulo = resultado.titulo;
+					v_entrada.datosGenerales.nombre = resultado.nombre;
 					token = resultado.token;
 
 					document.getElementById('salir').style.display = 'block';

@@ -12,14 +12,14 @@
 	<body>
 		<div id="header-body">
 				<div id="login">
-						<strong class="d-block text-center" onclick="toogleIngreso()">Ya estoy registrado: </strong>
-						<div class="row justify-content-center" v-bind:class="{ 'd-none': datos.showIngreso }">
+						<strong class="d-block text-center" onclick="toogleIngreso()" >Ya estoy registrado: </strong>
+						<div class="row justify-content-center" id="form-ingreso">
 							<input type="text" value="" class="login col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="usuario">
 							<input type="password" value="" class="login col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="contraseña">
 							<input type="button" value="ingresar" class="col-12 col-sm-5 col-md-2 mx-2 btn btn-primary" onclick="login.ingresar('Agenda/ingresar.php')">
 						</div>
 						<strong class="d-block text-center mt-3" onclick="toogleRegistro()">Aún no estoy registrado: </strong>
-						<div class="row justify-content-center" v-bind:class="{ 'd-none': datos.showRegistro }">
+						<div class="row justify-content-center" id="form-registro">
 							<input type="text" value="" class="registro col-12 col-sm-6 col-md-6 col-lg-5 col-xl-4 mx-2 text-center" placeholder="nombre">
 							<input type="text" value="" class="registro col-12 col-sm-6 col-md-6 col-lg-5 col-xl-4 mx-2 text-center" placeholder="usuario">
 							<input type="password" value="" class="registro col-12 col-sm-6 col-md-6 col-lg-5 col-xl-4 mx-2 text-center" placeholder="contraseña">
@@ -30,81 +30,81 @@
 			</div>
 			<div id="contenido">
 				<div id="header">
-					<div id="entrada">
+					<div id="entrada" class="w-100">
 						<div class="d-flex">
-								<h4 class="d-inline text-truncate">{{datos.nombre}}</h4>
-								<div class="d-flex flex-column">
-									<input type="button" id="copyToClipboard" value="copiar link de acceso" class="btn btn-secondary m-0 p-0 align-self-center" onclick="crud.copyToClipboard()">
-									</input><input type="button" value="nueva pestaña" class="btn btn-secondary m-0 p-0 align-self-center" onclick="login.abrirPestana()">
+								<h4 class="d-inline text-truncate">{{datosGenerales.nombre}}</h4>
+								<div class="d-flex justify-content-end">
+									<input type="button" id="copyToClipboard" value="copiar link de acceso" class="btn btn-secondary my-0 mx-1 p-0 align-self-center" onclick="crud.copyToClipboard()">
+									</input><input type="button" value="nueva pestaña" class="btn btn-secondary my-0 mx-1 p-0 align-self-center" onclick="login.abrirPestana()">
 								</div>
 						</div>
 						<div>
 							<strong class="d-block" onclick="toogleIngresoInfo()">Información: </strong>
-							<div class="row justify-content-between" v-bind:class="{ 'd-none': datos.showIngresoInfo }">
-								<input type="text" class="agregarInfo nombre col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="nombre" :title=datos.nombreI list="nombreI">
+							<div class="row justify-content-between" id="form-ingreso-info">
+								<input type="text" class="agregarInfo nombre col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="nombre" :title=datosGenerales.nombreI list="nombreI">
 								<datalist id="nombreI">
-									<option v-for="dato in datos.nombreIG">{{dato.nombre}}</option>
+									<option v-for="dato in datosGenerales.nombreIG">{{dato.nombre}}</option>
 								</datalist>
-								<input type="text" class="agregarInfo descripcion col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="descripción" :title=datos.descripcion list="descripcionI">
+								<input type="text" class="agregarInfo descripcion col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="descripción" :title=datosGenerales.descripcion list="descripcionI">
 								<datalist id="descripcionI">
-									<option v-for="dato in datos.descripcionIG">{{dato.descripcion}}</option>
+									<option v-for="dato in datosGenerales.descripcionIG">{{dato.descripcion}}</option>
 								</datalist>
-								<input type="text" class="agregarInfo col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="costo" :title=datos.costoGI>
-								<input type="date" class="agregarInfo col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" id ="datePicker_agregarInfo" :title=datos.fechaI>
-								<select class="agregarInfo col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" :title=datos.tipo>
-									<option v-for="dato in datos.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
+								<input type="text" class="agregarInfo col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="costo" :title=datosGenerales.costoGI>
+								<input type="date" class="agregarInfo col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" id ="datePicker_agregarInfo" :title=datosGenerales.fechaI>
+								<select class="agregarInfo col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" :title=datosGenerales.tipo>
+									<option v-for="dato in datosGenerales.opcionesIG" :value=dato.valor>{{dato.opcion}}</option>
 								</select> 			
-								<select class="agregarInfo col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" :title=datos.dinerosInsertar>
-									<option v-for="dato in datos.dineroInsertar" :value=dato.valor>{{dato.dinero}}</option>
+								<select class="agregarInfo col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" :title=datosGenerales.dinerosInsertar>
+									<option v-for="dato in datosGenerales.dineroInsertar" :value=dato.valor>{{dato.dinero}}</option>
 								</select>													
-								<input type="button" value="agregar" class="btn btn-primary col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" onclick="crud.insertar('Agenda/crear.php',null)" :title=datos.botonI>	
+								<input type="button" value="agregar" class="btn btn-primary col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" onclick="crud.insertar('Agenda/crear.php',null)" :title=datosGenerales.botonI>	
 								<button class="agregarInfo" value="" title="actualizar" class="btn btn-warning col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" onclick="crud.insertar('Agenda/crear.php', this.value)"></button>
 							</div>
-								<h4 class="ocultar" id="agregarInfoRevisar">{{datos.revisar}}</h4>
-								<h4 class="ocultar" id="agregarInfoAgregado">{{datos.agregado}}</h4>
+								<h4 class="ocultar" id="agregarInfoRevisar">{{datosGenerales.revisar}}</h4>
+								<h4 class="ocultar" id="agregarInfoAgregado">{{datosGenerales.agregado}}</h4>
 						</div>		
 						<div>		
 							<strong class="d-block" onclick="toogleBuscar()">Busqueda: </strong>
-							<div class="row justify-content-between" v-bind:class="{ 'd-none': datos.showBuscar }">
+							<div class="row justify-content-between" id="form-buscar-1">
 								<input type="text" class="busqueda" placeholder="id" style="width: 4em; display: none">
-								<input type="text" class="busqueda nombre col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="nombre" :title=datos.nombreB list="nombres">
+								<input type="text" class="busqueda nombre col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="nombre" :title=datosGenerales.nombreB list="nombres">
 								<datalist id="nombres">
-									<option v-for="dato in datos.nombreIG">{{dato.nombre}}</option>
+									<option v-for="dato in datosGenerales.nombreIG">{{dato.nombre}}</option>
 								</datalist>
-								<input type="text" class="busqueda descripcion col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="descripción" :title=datos.descripcion list="descripciones">
+								<input type="text" class="busqueda descripcion col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="descripción" :title=datosGenerales.descripcion list="descripciones">
 								<datalist id="descripciones">
-									<option v-for="dato in datos.descripcionIG">{{dato.descripcion}}</option>
+									<option v-for="dato in datosGenerales.descripcionIG">{{dato.descripcion}}</option>
 								</datalist>
-								<input type="text" class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="costo" :title=datos.costoB>
-								<input type="text" class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" id="ano" placeholder="año" :title=datos.ano style="width: 4em">
-								<input type="text" class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" id="mes" placeholder="mes" :title=datos.mes style="width: 2em">
-								<input type="text" class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="dia" :title=datos.dia style="width: 2em">
-								<select class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" :title=datos.tipo>
-									<option v-for="dato in datos.opcionesB" :value=dato.valor>{{dato.opcion}}</option>
+								<input type="text" class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="costo" :title=datosGenerales.costoB>
+								<input type="text" class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" id="ano" placeholder="año" :title=datosGenerales.ano style="width: 4em">
+								<input type="text" class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" id="mes" placeholder="mes" :title=datosGenerales.mes style="width: 2em">
+								<input type="text" class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" placeholder="dia" :title=datosGenerales.dia style="width: 2em">
+								<select class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" :title=datosGenerales.tipo>
+									<option v-for="dato in datosGenerales.opcionesB" :value=dato.valor>{{dato.opcion}}</option>
 								</select> 
-								<select class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" :title=datos.dinerosB>
-									<option v-for="dato in datos.dineroB" :value=dato.valor>{{dato.dinero}}</option>
+								<select class="busqueda col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" :title=datosGenerales.dinerosB>
+									<option v-for="dato in datosGenerales.dineroB" :value=dato.valor>{{dato.dinero}}</option>
 								</select>				
 							</div>
-							<div class="row justify-content-between" v-bind:class="{ 'd-none': datos.showBuscar }">
-								<span class=" col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center">desde: <input type="date" class="busqueda text-center" id ="datePicker_Bdesde" :title=datos.fechaDesde></span>
-								<span class=" col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center"> hasta: <input type="date" class="busqueda text-center" id ="datePicker_Bhasta" :title=datos.fechaHasta></span>
-								<input type="button" value="Buscar" class="btn btn-primary col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" onclick="crud.buscar('Agenda/buscar.php')" :title=datos.botonB>
-								<span class=" col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center"> se paga el día: <input type="date" class="busqueda text-center" id ="datePicker_Bpago" :title=datos.fechaPago>		</span>	
+							<div class="row justify-content-between" id="form-buscar-2">
+								<span class=" col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center">desde: <input type="date" class="busqueda text-center" id ="datePicker_Bdesde" :title=datosGenerales.fechaDesde></span>
+								<span class=" col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center"> hasta: <input type="date" class="busqueda text-center" id ="datePicker_Bhasta" :title=datosGenerales.fechaHasta></span>
+								<input type="button" value="Buscar" class="btn btn-primary col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center" onclick="crud.buscar('Agenda/buscar.php')" :title=datosGenerales.botonB>
+								<span class=" col-12 col-sm-5 col-md-3 col-xl-2 mx-2 text-center"> se paga el día: <input type="date" class="busqueda text-center" id ="datePicker_Bpago" :title=datosGenerales.fechaPago>		</span>	
 							</div>
-								<h4 class="ocultar" id="resultadoRevisar">{{datos.revisarB}}</h4>
+								<h4 class="ocultar" id="resultadoRevisar">{{datosGenerales.revisarB}}</h4>
 								<h4 class="resultado ocultar" id="resultadoBuscar">Listo</h4>
 								<h4 class="resultado ocultar" id="resultadoPagar">Pagado</h4>
 								<h4 class="resultado ocultar" id="resultadoBorrar">Borrado</h4>
 								<h4 class="resultado ocultar" id="resultadoDeuda">Cambiado deuda/pago</h4>
 						</div>	
 					</div>				
-					<h2>{{datos.titulo}}</h2>
+					<h2>{{datosGenerales.titulo}}</h2>
 				</div>
 				<div id="resultadosBusqueda_ingresos">
 					<h3><strong id="ingreso" title="Total que suman los ingresos en la tabla">Ingresos</strong></h3>
 					<table style="width: 100%">
-						<tr class="row flex-fill">
+						<tr class="">
 							<th></th>
 							<th>Producto</th>
 							<th>Descripción</th>
@@ -134,7 +134,7 @@
 				<div id="resultadosBusqueda_gastos">
 					<h3><strong id="gasto" title="Total que suman los gastos en la tabla">Gastos</strong></h3>
 					<table style="width: 100%">
-						<tr class="row flex-fill">
+						<tr class="">
 							<th></th>
 							<th>Producto</th>
 							<th>Descripción</th>
