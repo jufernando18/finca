@@ -32,29 +32,29 @@ if (ACTUALIZAR_BUSQUEDA_AUTO){
 }
 function toogleIngreso() {
 	if (document.getElementById('form-ingreso').style.display == 'none') {
-		document.getElementById('form-ingreso').style.display = 'block';
+		document.getElementById('form-ingreso').style.display = 'flex';
 	} else {
 		document.getElementById('form-ingreso').style.display = 'none';
 	}
 }
 function toogleRegistro() {
 	if (document.getElementById('form-registro').style.display == 'none') {
-		document.getElementById('form-registro').style.display = 'block';
+		document.getElementById('form-registro').style.display = 'flex';
 	} else {
 		document.getElementById('form-registro').style.display = 'none';
 	}
 }
 function toogleIngresoInfo() {
 	if (document.getElementById('form-ingreso-info').style.display == 'none') {
-		document.getElementById('form-ingreso-info').style.display = 'block';
+		document.getElementById('form-ingreso-info').style.display = 'flex';
 	} else {
 		document.getElementById('form-ingreso-info').style.display = 'none';
 	}
 }
 function toogleBuscar() {
 	if (document.getElementById('form-buscar-1').style.display == 'none') {
-		document.getElementById('form-buscar-1').style.display = 'block';
-		document.getElementById('form-buscar-2').style.display = 'block';
+		document.getElementById('form-buscar-1').style.display = 'flex';
+		document.getElementById('form-buscar-2').style.display = 'flex';
 	} else {
 		document.getElementById('form-buscar-1').style.display = 'none';
 		document.getElementById('form-buscar-2').style.display = 'none';
