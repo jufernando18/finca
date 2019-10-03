@@ -28,7 +28,7 @@ table{
 	box-shadow: 6px 6px 6px #888;
 }
 h2{
-	padding-top: 7em;
+	/*padding-top: 7em;*/
 	text-align: center;
 }
 h3{
@@ -137,4 +137,7 @@ button:empty {
 }
 .menu-results:hover {
 	overflow: visible;
+}
+.dinero-disponible-container {
+	padding-top: 17em;
 }

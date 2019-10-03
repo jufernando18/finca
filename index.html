@@ -32,7 +32,10 @@
 				<div id="header">
 					<div id="entrada" class="w-100">
 						<div class="d-flex">
-								<h4 class="d-inline text-truncate">{{datosGenerales.nombre}}</h4>
+							<div class="d-flex justify-content-between">
+									<h6 class="d-inline text-truncate">{{datosGenerales.nombre}}</h6>
+									<h4>{{datosGenerales.titulo}}</h4>
+							</div>
 								<div class="d-flex justify-content-end">
 									<input type="button" id="copyToClipboard" value="copiar link de acceso" class="btn btn-secondary my-0 mx-1 p-0 align-self-center" onclick="crud.copyToClipboard()">
 									</input><input type="button" value="nueva pestaña" class="btn btn-secondary my-0 mx-1 p-0 align-self-center" onclick="login.abrirPestana()">
@@ -99,9 +102,8 @@
 								<h4 class="resultado ocultar" id="resultadoDeuda">Cambiado deuda/pago</h4>
 						</div>	
 					</div>				
-					<h2>{{datosGenerales.titulo}}</h2>
 				</div>
-				<div>Dinero disponible: <h6 class="d-inline" id="dinero-disponible">0</h6></div>
+				<div class="dinero-disponible-container">Dinero disponible: <h6 class="d-inline" id="dinero-disponible">0</h6></div>
 				<div id="resultadosBusqueda_ingresos">
 					<h3><strong id="ingreso" title="Total que suman los ingresos en la tabla">Ingresos</strong></h3>
 					<table style="width: 100%">
