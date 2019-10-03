@@ -100,10 +100,7 @@ class Crud{
 		            	}
 		            }
 								document.getElementById("ingreso").innerHTML="Ingresos: $"+totalIngresos.toLocaleString()+",00 | Deuda: $"+totalIngresosDeudas.toLocaleString()+',00';
-								let dineroDisponible;
-								dineroDisponible = document.getElementById('dinero-disponible').innerHTML;
-								dineroDisponible = (parseInt(dineroDisponible) + totalIngresos);
-								document.getElementById('dinero-disponible').innerHTML = dineroDisponible;
+								document.getElementById('dinero-disponible').innerHTML = totalIngresos - totalGastos;
 		        }
 		    });
 	    }	
@@ -126,10 +123,7 @@ class Crud{
 									}
 								}
 								document.getElementById("gasto").innerHTML="Gastos: $"+totalGastos.toLocaleString()+",00 | Deuda: $"+totalGastosDeudas.toLocaleString()+',00';	            
-								let dineroDisponible;
-								dineroDisponible = document.getElementById('dinero-disponible').innerHTML;
-								dineroDisponible = (parseInt(dineroDisponible) - totalGastos);
-								document.getElementById('dinero-disponible').innerHTML = dineroDisponible;
+								document.getElementById('dinero-disponible').innerHTML = totalIngresos - totalGastos;
 						}
 				});			    
 	    } 
