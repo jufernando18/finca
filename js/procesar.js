@@ -54,9 +54,7 @@ function toogleIngresoInfo() {
 function toogleBuscar() {
 	if (document.getElementById('form-buscar-1').style.display == 'none') {
 		document.getElementById('form-buscar-1').style.display = 'flex';
-		document.getElementById('form-buscar-2').style.display = 'flex';
 	} else {
 		document.getElementById('form-buscar-1').style.display = 'none';
-		document.getElementById('form-buscar-2').style.display = 'none';
 	}
 }

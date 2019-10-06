@@ -56,11 +56,15 @@ div>p{
 	margin: 0;
 }
 input{
-	/*width: 9em;*/
-	border-radius: 0.5em 0;
+	/*width: 9em;
+	border-radius: 0.5em 0;*/
+}
+input[type='date'] {
+	border-radius: 0.5em;
+	border: 1px solid gray;
 }
 select{
-	border-radius: 0.5em 0;
+	/*border-radius: 0.5em 0;*/
 }
 tr{
 	text-align: justify;
@@ -140,4 +144,7 @@ button:empty {
 }
 .dinero-disponible-container {
 	padding-top: 17em;
+}
+.input-heigt {
+	max-height: 1.88em;
 }
