@@ -23,7 +23,7 @@ fechaActual = new Date(fechaActual);
 if (ACTUALIZAR_INGRESO_GASTO_AUTO) {
 	document.getElementById('datePicker_agregarInfo').valueAsDate = fechaActual;
 	document.getElementById('datePicker_Bdesde').valueAsDate = new Date('2018-01-01');
-	document.getElementById('datePicker_Bhasta').valueAsDate = fechaActual;
+	document.getElementById('datePicker_Bhasta').value;//fechaActual;
 	document.getElementById('datePicker_Bpago').valueAsDate = fechaActual;
 }
 if (ACTUALIZAR_BUSQUEDA_AUTO){

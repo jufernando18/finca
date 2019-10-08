@@ -12,13 +12,13 @@
 	<body>
 		<div id="header-body">
 				<div id="login">
-						<strong class="d-block text-center" onclick="toogleIngreso()" >Ya estoy registrado: </strong>
+						<strong class="d-block text-center cursor-pointer" onclick="toogleIngreso()" >Ya estoy registrado: </strong>
 						<div class="row justify-content-center" id="form-ingreso">
 							<input type="text" value="" class="input-heigt login col-12 col-sm-5 col-md-3 col-l-2 col-xl-2 mx-2 text-center" placeholder="usuario">
 							<input type="password" value="" class="input-heigt login col-12 col-sm-5 col-md-3 col-l-2 col-xl-2 mx-2 text-center" placeholder="contraseña">
 							<input type="button" value="ingresar" class="col-12 col-sm-5 col-md-2 mx-2 btn btn-primary input-heigt" onclick="login.ingresar('Agenda/ingresar.php')">
 						</div>
-						<strong class="d-block text-center mt-3" onclick="toogleRegistro()">Aún no estoy registrado: </strong>
+						<strong class="d-block text-center cursor-pointer mt-3" onclick="toogleRegistro()">Aún no estoy registrado: </strong>
 						<div class="row justify-content-center" id="form-registro">
 							<input type="text" value="" class="input-heigt registro col-12 col-sm-6 col-md-6 col-lg-2 col-xl-2 mx-2 text-center" placeholder="nombre">
 							<input type="text" value="" class="input-heigt registro col-12 col-sm-6 col-md-6 col-lg-2 col-xl-2 mx-2 text-center" placeholder="usuario">
@@ -42,7 +42,7 @@
 								</div>
 						</div>
 						<div>
-							<strong class="d-block" onclick="toogleIngresoInfo()">Información: </strong>
+							<strong class="d-block cursor-pointer" onclick="toogleIngresoInfo()">Información: </strong>
 							<div class="row justify-content-between" id="form-ingreso-info">
 								<input type="text" class="input-heigt agregarInfo nombre col-12 col-sm-5 col-md-3 col-l-2 col-xl-1 mx-2 text-center" placeholder="nombre" :title=datosGenerales.nombreI list="nombreI">
 								<datalist id="nombreI">
@@ -67,7 +67,7 @@
 								<h4 class="ocultar" id="agregarInfoAgregado">{{datosGenerales.agregado}}</h4>
 						</div>		
 						<div>		
-							<strong class="d-block" onclick="toogleBuscar()">Busqueda: </strong>
+							<strong class="d-block cursor-pointer" onclick="toogleBuscar()">Busqueda: </strong>
 							<div class="row justify-content-between" id="form-buscar-1">
 								<input type="text" class="input-heigt busqueda" placeholder="id" style="width: 4em; display: none">
 								<input type="text" class="input-heigt busqueda nombre col-12 col-sm-5 col-md-3 col-l-2 col-xl-1 mx-2 text-center" placeholder="nombre" :title=datosGenerales.nombreB list="nombres">

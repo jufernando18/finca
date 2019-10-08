@@ -147,4 +147,8 @@ button:empty {
 }
 .input-heigt {
 	max-height: 1.88em;
+	line-height: 0.88em;
+}
+.cursor-pointer {
+	cursor: pointer;
 }
