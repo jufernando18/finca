@@ -22,7 +22,14 @@ fechaActual = new Date().toLocaleString("en-US", {timeZone: Intl.DateTimeFormat(
 fechaActual = new Date(fechaActual);
 if (ACTUALIZAR_INGRESO_GASTO_AUTO) {
 	document.getElementById('datePicker_agregarInfo').valueAsDate = fechaActual;
-	document.getElementById('datePicker_Bdesde').valueAsDate = new Date('2018-01-01');
+	const fechaActualForRange =  new Date(fechaActual);
+	if ((fechaActualForRange.getDate()-15) < 0) {
+		fechaActualForRange.setDate(15);
+		fechaActualForRange.setMonth(fechaActualForRange.getMonth()-1);
+	} else {
+		fechaActualForRange.setDate(15);
+	}
+	document.getElementById('datePicker_Bdesde').valueAsDate = fechaActualForRange;
 	document.getElementById('datePicker_Bhasta').value;//fechaActual;
 	document.getElementById('datePicker_Bpago').valueAsDate = fechaActual;
 }
