@@ -28,7 +28,7 @@ table{
 	box-shadow: 6px 6px 6px #888;
 }
 h2{
-	padding-top: 7em;
+	/*padding-top: 7em;*/
 	text-align: center;
 }
 h3{
@@ -52,19 +52,19 @@ h4{
 	margin-bottom: 0.2em;
 }
 div>p{
-	width: 10em;
+	/*width: 10em;*/
 	margin: 0;
 }
 input{
-	width: 9em;
-	border-radius: 0.5em 0;
+	/*width: 9em;
+	border-radius: 0.5em 0;*/
 }
-input[type='checkbox'] {
-	width: auto;
-	display: none;
+input[type='date'] {
+	border-radius: 0.5em;
+	border: 1px solid gray;
 }
 select{
-	border-radius: 0.5em 0;
+	/*border-radius: 0.5em 0;*/
 }
 tr{
 	text-align: justify;
@@ -73,7 +73,7 @@ tr:nth-child(even) {
   background-color: #dadada;
 }
 th {
-    width: 15%;
+    /*width: 15%;*/
 }			
 a{
 	color: blue;
@@ -93,7 +93,7 @@ footer{
 	position: sticky;
 	bottom: 0;
 	background-color: black;
-	height: 2em;
+	/*height: 2em;*/
 	padding-top: 1em;
 }
 footer>div{
@@ -141,4 +141,14 @@ button:empty {
 }
 .menu-results:hover {
 	overflow: visible;
+}
+.dinero-disponible-container {
+	padding-top: 17em;
+}
+.input-heigt {
+	max-height: 1.88em;
+	line-height: 0.88em;
+}
+.cursor-pointer {
+	cursor: pointer;
 }

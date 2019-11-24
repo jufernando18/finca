@@ -99,7 +99,8 @@ class Crud{
 		            		totalIngresos+=parseInt(resultado[i].costo);
 		            	}
 		            }
-		            document.getElementById("ingreso").innerHTML="Ingresos: "+totalIngresos.toLocaleString()+" | Deuda: "+totalIngresosDeudas.toLocaleString();
+								document.getElementById("ingreso").innerHTML="Ingresos: $"+totalIngresos.toLocaleString()+",00 | Deuda: $"+totalIngresosDeudas.toLocaleString()+',00';
+								document.getElementById('dinero-disponible').innerHTML = totalIngresos - totalGastos;
 		        }
 		    });
 	    }	
@@ -121,7 +122,8 @@ class Crud{
 										totalGastos+=parseInt(resultado[i].costo);
 									}
 								}
-								document.getElementById("gasto").innerHTML="Gastos: "+totalGastos.toLocaleString()+" | Deuda: "+totalGastosDeudas.toLocaleString();	            
+								document.getElementById("gasto").innerHTML="Gastos: $"+totalGastos.toLocaleString()+",00 | Deuda: $"+totalGastosDeudas.toLocaleString()+',00';	            
+								document.getElementById('dinero-disponible').innerHTML = totalIngresos - totalGastos;
 						}
 				});			    
 	    } 
@@ -201,24 +203,24 @@ class Crud{
 					if (typeof resultado.nombreIngreso === "undefined" && typeof resultado.nombreGasto === "undefined"){
 					}else if (typeof resultado.nombreIngreso === "undefined" || typeof resultado.nombreGasto === "undefined"){
 						if (typeof resultado.nombreIngreso !== "undefined"){
-							v_entrada.datos.nombreIG = resultado.nombreIngreso;
+							v_entrada.datosGenerales.nombreIG = resultado.nombreIngreso;
 						}
 						if (typeof resultado.nombreGasto !== "undefined"){
-							v_entrada.datos.nombreIG = resultado.nombreGasto;
+							v_entrada.datosGenerales.nombreIG = resultado.nombreGasto;
 						}
 					}else{
-						v_entrada.datos.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
+						v_entrada.datosGenerales.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
 					}
 					if (typeof resultado.descripcionIngreso === "undefined" && typeof resultado.descripcionGasto === "undefined"){
 					}else if (typeof resultado.descripcionIngreso === "undefined" || typeof resultado.descripcionGasto === "undefined"){
 						if (typeof resultado.descripcionIngreso !== "undefined"){
-							v_entrada.datos.descripcionIG = resultado.descripcionIngreso;
+							v_entrada.datosGenerales.descripcionIG = resultado.descripcionIngreso;
 						}
 						if (typeof resultado.descripcionGasto !== "undefined"){
-							v_entrada.datos.descripcionIG = resultado.descripcionGasto;
+							v_entrada.datosGenerales.descripcionIG = resultado.descripcionGasto;
 						}
 					}else{ 
-						v_entrada.datos.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);
+						v_entrada.datosGenerales.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);
 					}        	          	
 				}
 		});	
@@ -303,8 +305,8 @@ class Login{
 			success: function (resultado){
 				if (resultado.valid) {
 					input[1].value = "";
-					if(TITULO)v_entrada.datos.titulo = resultado.titulo;
-					v_entrada.datos.nombre = resultado.nombre;
+					if(TITULO)v_entrada.datosGenerales.titulo = resultado.titulo;
+					v_entrada.datosGenerales.nombre = resultado.nombre;
 					token = resultado.token;
 
 					document.getElementById('salir').style.display = 'block';
@@ -371,3 +373,16 @@ class Login{
 		window.open("index.html?"+token, "_blank");
 	}
 }
+Vue.filter('currency', function (value) {
+	let valueSplited = [];
+	if(!isNaN(value)) {
+		valueSplited.push('');
+	} else {
+		valueSplited = value.split("|");
+		value = valueSplited[1];
+		valueSplited[0] = valueSplited[0] + "|";
+	}
+
+	let val = (value/1).toFixed(2).replace('.', ',')
+	return valueSplited[0] + '$' + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+});
