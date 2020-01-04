@@ -99,7 +99,7 @@ class Crud{
 		            		totalIngresos+=parseInt(resultado[i].costo);
 		            	}
 		            }
-								document.getElementById("ingreso").innerHTML="Ingresos: $"+totalIngresos.toLocaleString()+",00 | Deuda: $"+totalIngresosDeudas.toLocaleString()+',00';
+								document.getElementById("ingreso").innerHTML="Ingresos: $"+totalIngresos.toLocaleString()+" | Deuda: $"+totalIngresosDeudas.toLocaleString();
 								document.getElementById('dinero-disponible').innerHTML = totalIngresos - totalGastos;
 		        }
 		    });
@@ -122,7 +122,7 @@ class Crud{
 										totalGastos+=parseInt(resultado[i].costo);
 									}
 								}
-								document.getElementById("gasto").innerHTML="Gastos: $"+totalGastos.toLocaleString()+",00 | Deuda: $"+totalGastosDeudas.toLocaleString()+',00';	            
+								document.getElementById("gasto").innerHTML="Gastos: $"+totalGastos.toLocaleString()+" | Deuda: $"+totalGastosDeudas.toLocaleString();	            
 								document.getElementById('dinero-disponible').innerHTML = totalIngresos - totalGastos;
 						}
 				});			    
@@ -383,6 +383,6 @@ Vue.filter('currency', function (value) {
 		valueSplited[0] = valueSplited[0] + "|";
 	}
 
-	let val = (value/1).toFixed(2).replace('.', ',')
+	let val = (value/1).toFixed(0).replace('.', ',')
 	return valueSplited[0] + '$' + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 });
