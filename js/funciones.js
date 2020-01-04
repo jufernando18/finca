@@ -100,7 +100,7 @@ class Crud{
 		            	}
 		            }
 								document.getElementById("ingreso").innerHTML="Ingresos: $"+totalIngresos.toLocaleString()+" | Deuda: $"+totalIngresosDeudas.toLocaleString();
-								document.getElementById('dinero-disponible').innerHTML = totalIngresos - totalGastos;
+								document.getElementById('dinero-disponible').innerHTML = "$"+filterCurrency(totalIngresos - totalGastos);
 		        }
 		    });
 	    }	
@@ -123,7 +123,7 @@ class Crud{
 									}
 								}
 								document.getElementById("gasto").innerHTML="Gastos: $"+totalGastos.toLocaleString()+" | Deuda: $"+totalGastosDeudas.toLocaleString();	            
-								document.getElementById('dinero-disponible').innerHTML = totalIngresos - totalGastos;
+								document.getElementById('dinero-disponible').innerHTML = filterCurrency(totalIngresos - totalGastos);
 						}
 				});			    
 	    } 
@@ -373,7 +373,8 @@ class Login{
 		window.open("index.html?"+token, "_blank");
 	}
 }
-Vue.filter('currency', function (value) {
+Vue.filter('currency', filterCurrency);
+function filterCurrency(value) {
 	let valueSplited = [];
 	if(!isNaN(value)) {
 		valueSplited.push('');
@@ -385,4 +386,4 @@ Vue.filter('currency', function (value) {
 
 	let val = (value/1).toFixed(0).replace('.', ',')
 	return valueSplited[0] + '$' + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-});
+}
