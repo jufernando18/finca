@@ -209,7 +209,7 @@ class Crud{
 							v_entrada.datosGenerales.nombreIG = resultado.nombreGasto;
 						}
 					}else{
-						v_entrada.datosGenerales.nombreIG = resultado.nombreIngreso.concat(resultado.nombreGasto);
+						v_entrada.datosGenerales.nombreIG = [...new Set([...resultado.nombreIngreso, ...resultado.nombreGasto])];
 					}
 					if (typeof resultado.descripcionIngreso === "undefined" && typeof resultado.descripcionGasto === "undefined"){
 					}else if (typeof resultado.descripcionIngreso === "undefined" || typeof resultado.descripcionGasto === "undefined"){
@@ -220,7 +220,7 @@ class Crud{
 							v_entrada.datosGenerales.descripcionIG = resultado.descripcionGasto;
 						}
 					}else{ 
-						v_entrada.datosGenerales.descripcionIG = resultado.descripcionIngreso.concat(resultado.descripcionGasto);
+						v_entrada.datosGenerales.descripcionIG = [...new Set([...resultado.descripcionIngreso, ...resultado.descripcionGasto])];
 					}        	          	
 				}
 		});	
