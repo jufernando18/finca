@@ -199,6 +199,7 @@ class Crud{
 				url:DataBase,
 				dataType: "json",
 				success: function (resultado){   
+					let arreglo = new Array;arreglo
 					if(!_this.validar(resultado))return;
 					if (typeof resultado.nombreIngreso === "undefined" && typeof resultado.nombreGasto === "undefined"){
 					}else if (typeof resultado.nombreIngreso === "undefined" || typeof resultado.nombreGasto === "undefined"){
@@ -209,7 +210,7 @@ class Crud{
 							v_entrada.datosGenerales.nombreIG = resultado.nombreGasto;
 						}
 					}else{
-						v_entrada.datosGenerales.nombreIG = [...new Set([...resultado.nombreIngreso, ...resultado.nombreGasto])];
+						v_entrada.datosGenerales.nombreIG = [...resultado.nombreIngreso, ...resultado.nombreGasto].filter(_this.distinct);
 					}
 					if (typeof resultado.descripcionIngreso === "undefined" && typeof resultado.descripcionGasto === "undefined"){
 					}else if (typeof resultado.descripcionIngreso === "undefined" || typeof resultado.descripcionGasto === "undefined"){
@@ -220,7 +221,7 @@ class Crud{
 							v_entrada.datosGenerales.descripcionIG = resultado.descripcionGasto;
 						}
 					}else{ 
-						v_entrada.datosGenerales.descripcionIG = [...new Set([...resultado.descripcionIngreso, ...resultado.descripcionGasto])];
+						v_entrada.datosGenerales.descripcionIG = [...resultado.descripcionIngreso, ...resultado.descripcionGasto].filter(_this.distinct);
 					}        	          	
 				}
 		});	
@@ -253,6 +254,9 @@ class Crud{
 			return false;
 		} 
 		return true;
+	}
+	distinct(value, index, self) { 
+		return self.indexOf(value) === index;
 	}
 	pedirIngreso() {
 		document.getElementById('salir').style.display = 'none';
