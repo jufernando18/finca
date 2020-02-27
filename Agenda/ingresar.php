@@ -3,7 +3,7 @@ require_once('db_connect.php');
 
     $busqueda = "WHERE token=? AND sesion = true";
     $sql = "SELECT nombre, titulo FROM $TABLA_USUARIOS $busqueda order by creado desc;";
-    $stmt = $con->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $token);
     $stmt->execute();
     $stmt->store_result();
@@ -19,7 +19,7 @@ require_once('db_connect.php');
 
         echo json_encode($resultado_enviar);
         $stmt->close();
-        mysqli_close($con);
+        mysqli_close($conexion);
         exit();
     }      
 
@@ -30,7 +30,7 @@ require_once('db_connect.php');
     $sql = "SELECT nombre, titulo FROM $TABLA_USUARIOS $busqueda order by creado desc;";
 
 
-    $stmt = $con->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ss", $usuario, $contrasena);
     $stmt->execute();
     $stmt->store_result();
@@ -40,7 +40,7 @@ require_once('db_connect.php');
     while ($row = $stmt->fetch()) {
         $token = sha1 ("".time());
         $sql = "UPDATE $TABLA_USUARIOS SET token = '$token', sesion = true $busqueda_unsecure;";
-        mysqli_query($con,$sql);
+        mysqli_query($conexion,$sql);
 
         $resultado_enviar['valid'] =true;
         $resultado_enviar['titulo']=$titulo;
@@ -50,5 +50,5 @@ require_once('db_connect.php');
 
     echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);
+    mysqli_close($conexion);
 ?>

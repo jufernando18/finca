@@ -2,7 +2,7 @@
 require_once('db_connect.php');
 
     $sql = "SELECT id FROM $TABLA_USUARIOS WHERE usuario=? AND contrasena=?;";
-    $stmt = $con->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ss", $usuario, $contrasena);
     $stmt->execute();
     $stmt->store_result();
@@ -12,11 +12,11 @@ require_once('db_connect.php');
         $resultado_enviar['estadoUsuario']='El usuario ya existe';
         echo json_encode($resultado_enviar);
         $stmt->close();
-        mysqli_close($con);        
+        mysqli_close($conexion);        
     }
 
     $sql = "INSERT INTO $TABLA_USUARIOS (nombre, usuario, contrasena, titulo, creado) VALUES (?,?,?,?,now())";
-    $stmt = $con->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ssss", $nombre, $usuario, $contrasena, $titulo);
 
     if($stmt->execute()){
@@ -27,5 +27,5 @@ require_once('db_connect.php');
 
     echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);
+    mysqli_close($conexion);
 ?>

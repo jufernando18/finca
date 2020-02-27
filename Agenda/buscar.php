@@ -69,23 +69,25 @@
     foreach($queryDataArray as $queryData)array_push($bind_param_data, $queryData);  
     $sql = "SELECT id, nombre, descripcion, costo, fecha, modificado, tipo FROM $tablaQuery $busqueda order by fecha desc;";
 
-    $stmt = $con->prepare($sql);  
+    $stmt = $conexion->prepare($sql);  
     call_user_func_array(array($stmt, 'bind_param'), $bind_param_data);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($id, $nombre, $descripcion, $costo, $fecha, $modificado, $tipo);  
 
     while ($row = $stmt->fetch()) {
-        $dato['id']=$id;
-        $dato['nombre']=$nombre;
-        $dato['descripcion']=$descripcion;
-        $dato['costo']=$costo;
-        $dato['fecha']=$fecha;
-        $dato['modificado']=$modificado;
-        $dato['tipo']=$tipo;
+        $dato = [
+            'id'            =>$id,
+            'nombre'        =>$nombre,
+            'descripcion'   =>$descripcion,
+            'costo'         =>$costo,
+            'fecha'         =>$fecha,
+            'modificado'    =>$modificado,
+            'tipo'          =>$tipo
+        ];
         array_push($resultado_enviar, $dato);
     }     
     echo json_encode($resultado_enviar);    
     $stmt->close();
-    mysqli_close($con);
+    mysqli_close($conexion);
 ?>

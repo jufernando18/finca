@@ -9,7 +9,7 @@
     }    
 
     $sql = "DELETE FROM $tablaQuery WHERE id=? AND idUsuario = $idUsuario;";
-    $stmt = $con->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("i", $id);
     if(!$stmt->execute()){
         $resultado_enviar['error']='No se pudo hacer el registro';
@@ -17,5 +17,5 @@
 
     echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);
+    mysqli_close($conexion);
 ?>

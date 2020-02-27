@@ -8,7 +8,7 @@
         $tablaQuery = $TABLA_GASTOS;
     } 
     $sql = "SELECT id, costo FROM $tablaQuery WHERE id=? AND idUsuario=$idUsuario;";
-    $stmt = $con->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->store_result();
@@ -17,24 +17,24 @@
     if($stmt->num_rows != 1) {
         echo json_encode($resultado_enviar);
         $stmt->close();
-        mysqli_close($con);
+        mysqli_close($conexion);
         exit();    
     }
 
     if (!(is_numeric(intval($costo)) && intval($costo) < 0)) {
         echo json_encode($resultado_enviar);
         $stmt->close();
-        mysqli_close($con);
+        mysqli_close($conexion);
         exit();            
     }
     $costo = explode('-', $costo)[1];
     $pago = "P$pago|$costo";
     $sql = "UPDATE $tablaQuery SET costo=?, modificado=now() WHERE id=$id AND idUsuario = $idUsuario;";  
-    $stmt = $con->prepare($sql);
+    $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $pago);
     $stmt->execute();
 
     echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);
+    mysqli_close($conexion);
 ?>

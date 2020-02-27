@@ -34,5 +34,5 @@ $desde = $_POST['desde'];
 $hasta = $_POST['hasta'];
 $pago = $_POST['pago'];
 
-$con = mysqli_connect(DB_SERVER, DB_USER,DB_PASSWORD,DB_DATABASE) or die ('Unable to Connect');
+$conexion = mysqli_connect(DB_SERVER, DB_USER,DB_PASSWORD,DB_DATABASE) or die ('Unable to Connect');
 ?>

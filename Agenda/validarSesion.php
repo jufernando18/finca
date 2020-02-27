@@ -3,7 +3,7 @@
 
   $busqueda = "WHERE token=? AND sesion = true";
   $sql = "SELECT id FROM $TABLA_USUARIOS $busqueda;";
-  $stmt = $con->prepare($sql);
+  $stmt = $conexion->prepare($sql);
   $stmt->bind_param("s", $token);
   $stmt->execute();
   $stmt->store_result();
@@ -13,7 +13,7 @@
     $resultado_enviar['valid']=false;
     echo json_encode($resultado_enviar);
     $stmt->close();
-    mysqli_close($con);
+    mysqli_close($conexion);
     exit();    
   }
   $stmt->fetch();
