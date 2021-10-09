@@ -15,9 +15,10 @@ require_once('db_connect.php');
         mysqli_close($con);        
     }
 
-    $sql = "INSERT INTO $TABLA_USUARIOS (nombre, usuario, contrasena, titulo, creado) VALUES (?,?,?,?,now())";
+    $sql = "INSERT INTO $TABLA_USUARIOS (nombre, usuario, contrasena, titulo, creado, token, sesion) VALUES (?,?,?,?,now(),?,false)";
     $stmt = $con->prepare($sql);
-    $stmt->bind_param("ssss", $nombre, $usuario, $contrasena, $titulo);
+    $token = sha1 ("".time());
+    $stmt->bind_param("sssss", $nombre, $usuario, $contrasena, $titulo, $token);
 
     if($stmt->execute()){
         $resultado_enviar['estadoUsuario']='OK';
