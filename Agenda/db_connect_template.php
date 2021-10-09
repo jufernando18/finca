@@ -5,10 +5,11 @@ header('Access-Control-Allow-Methods: POST, POST');
 header('Access-Control-Allow-Credentials: *');  
 $resultado_enviar = array();
 
-define('DB_USER',"root");
-define('DB_PASSWORD',"");
-define('DB_DATABASE',"");
-define('DB_SERVER',"localhost");
+define('DB_USER',getenv('DB_USER'));
+define('DB_PASSWORD',getenv('DB_PASS'));
+define('DB_DATABASE',getenv('DB_DATABASE'));
+define('DB_SERVER',getenv('DB_HOST'));
+define('DB_PORT', getenv('DB_PORT'));
 define('DB_TABLE_USUARIOS',"tablaUsuarios");
 define('DB_TABLE_INGRESOS',"tablaIngresos");
 define('DB_TABLE_GASTOS',"tablaGastos");
@@ -34,5 +35,5 @@ $desde = $_POST['desde'];
 $hasta = $_POST['hasta'];
 $pago = $_POST['pago'];
 
-$con = mysqli_connect(DB_SERVER, DB_USER,DB_PASSWORD,DB_DATABASE) or die ('Unable to Connect');
+$con = mysqli_connect(DB_SERVER, DB_USER,DB_PASSWORD,DB_DATABASE,DB_PORT) or die ('Unable to Connect');
 ?>
