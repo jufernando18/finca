@@ -64,17 +64,17 @@
         $tablaQuery = $TABLA_GASTOS;
     }    
 
-    $bind_param_data = array();
-    array_push($bind_param_data, implode("", $queryTypeArray));
-    foreach($queryDataArray as $queryData)array_push($bind_param_data, $queryData);  
+    $queryTypes = implode("", $queryTypeArray);
+    $bind_param_data = array_merge(array($queryTypes), $queryDataArray);
+    $bind_param_data_with_ref = array();
+    foreach($bind_param_data as $key => $value) $bind_param_data_with_ref[$key] = &$bind_param_data[$key];
     $sql = "SELECT id, nombre, descripcion, costo, fecha, modificado, tipo FROM $tablaQuery $busqueda order by fecha desc;";
 
     $stmt = $con->prepare($sql);  
-    call_user_func_array(array($stmt, 'bind_param'), $bind_param_data);
+    call_user_func_array(array($stmt, 'bind_param'), $bind_param_data_with_ref);
     $stmt->execute();
     $stmt->store_result();
     $stmt->bind_result($id, $nombre, $descripcion, $costo, $fecha, $modificado, $tipo);  
-
     while ($row = $stmt->fetch()) {
         $dato['id']=$id;
         $dato['nombre']=$nombre;
